@@ -1,4 +1,4 @@
-import "../Styling/Expenses.css";
+/* import "./Styling/Expenses.css"; */
 
 interface Activity {
   id: number;
@@ -14,7 +14,6 @@ interface Props {
 }
 
 const Expenses = ({ activities, onDelete }: Props) => {
-  if (activities.length === 0) return null;
   return (
     <table className="table">
       <thead>

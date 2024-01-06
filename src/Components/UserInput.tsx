@@ -6,23 +6,25 @@ const schema = z.object({
   activity: z
     .string()
     .min(1, { message: "Activity is required" })
-    .min(2, { message: "Activity name must contain at least 2 characters" }),
-  category: z
-    .string()
-    .min(1, { message: "Category is required" })
-    .min(4, { message: "Category name must contain at least 4 characters" }),
+    .min(2, { message: "Activity name must contain at least 2 characters" })
+    .refine(
+      (txt) => /^[a-zA-Z\s]*$/.test(txt),
+      "Activity should contain only letters or space"
+    ),
+  category: z.string().refine((value) => value !== "", {
+    message: "Valid category is needed",
+  }),
   amount: z
     .number()
-    .min(1, { message: "Currency is required and must be a valid number" }),
-  currency: z
-    .string()
-    .min(1, { message: "Currency is required" })
-    .min(0, "Currency is required and must be a valid number"),
+    .min(1, { message: "Amount is required and must be a valid number" }),
+  currency: z.string().refine((value) => value !== "", {
+    message: "Valid category is needed",
+  }),
 });
 
 type Data = z.infer<typeof schema>;
 
-const UserInput = () => {
+const UserInput = ({ onSubmituserInput }) => {
   const {
     register,
     handleSubmit,
@@ -36,7 +38,9 @@ const UserInput = () => {
       currency: "",
     },
   });
-  const onSubmitUserData = (userData: FieldValues) => console.log(userData);
+  const onSubmitUserData = (userData: FieldValues) => {
+    onSubmituserInput(userData);
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmitUserData)}>
@@ -54,12 +58,13 @@ const UserInput = () => {
       </div>
       <div>
         <label htmlFor="category">Category:</label>
-        <input
-          {...register("category")}
-          id="category"
-          type="text"
-          placeholder="Please type the category"
-        />
+        <select {...register("category")} id="category">
+          <option value="">Please select a category</option>
+          <option value="Free time">Free time</option>
+          <option value="Business">Business</option>
+          <option value="Household">Household</option>
+          <option value="Others">Others</option>
+        </select>
         {errors.category && <p>{errors.category.message}</p>}
       </div>
       <div>
@@ -74,15 +79,15 @@ const UserInput = () => {
       </div>
       <div>
         <label htmlFor="currency">Currency:</label>
-        <input
-          {...register("currency", { valueAsNumber: false })}
-          id="currency"
-          type="text"
-          placeholder="Please type the currency"
-        />
+        <select {...register("currency")} id="currency">
+          <option value="">Please select a category</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+          <option value="HUF">HUF</option>
+        </select>
         {errors.currency && <p>{errors.currency.message}</p>}
       </div>
-      <button type="submit">Submit your changes</button>
+      <button type="submit">Submit your activity</button>
     </form>
   );
 };
