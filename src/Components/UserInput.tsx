@@ -2,11 +2,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserInputType } from "../types/UserInput";
+import "../Styling/ErrorMessage.css";
 
 const schema = z.object({
   activity: z
     .string()
-    .min(1, { message: "Activity is required" })
+    .min(1, {
+      message: "Activity is required",
+    })
     .min(2, { message: "Activity name must contain at least 2 characters" })
     .refine(
       (txt) => /^[a-zA-Z\s]*$/.test(txt),
@@ -17,9 +20,25 @@ const schema = z.object({
   }),
   amount: z
     .number()
-    .min(1, { message: "Amount is required and must be a valid number" }),
+    .min(1, { message: "Amount is required and must be a valid number" })
+    .refine(
+      (value) => {
+        if (
+          typeof value !== "number" ||
+          isNaN(value) ||
+          value !== undefined ||
+          value !== null
+        ) {
+          return false;
+        }
+        return true;
+      },
+      {
+        message: "Valid amount is needed",
+      }
+    ),
   currency: z.string().refine((value) => value !== "", {
-    message: "Valid category is needed",
+    message: "Valid currency is needed",
   }),
 });
 
@@ -55,18 +74,22 @@ const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
           type="text"
           placeholder="Please type your activity"
         />
-        {errors.activity && <p>{errors.activity.message}</p>}
+        {errors.activity && (
+          <p className="ErrorMessage">{errors.activity.message}</p>
+        )}
       </div>
       <div>
         <label htmlFor="category">Category:</label>
         <select {...register("category")} id="category">
-          <option value="">Please select a category</option>
+          <option value="">Please select the category</option>
           <option value="Free time">Free time</option>
           <option value="Business">Business</option>
           <option value="Household">Household</option>
           <option value="Others">Others</option>
         </select>
-        {errors.category && <p>{errors.category.message}</p>}
+        {errors.category && (
+          <p className="ErrorMessage">{errors.category.message}</p>
+        )}
       </div>
       <div>
         <label htmlFor="amount">Amount:</label>
@@ -76,17 +99,21 @@ const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
           type="number"
           placeholder="Please type the amount of money"
         />
-        {errors.amount && <p>{errors.amount.message}</p>}
+        {errors.amount && (
+          <p className="ErrorMessage">{errors.amount.message}</p>
+        )}
       </div>
       <div>
         <label htmlFor="currency">Currency:</label>
         <select {...register("currency")} id="currency">
-          <option value="">Please select a category</option>
+          <option value="">Please select the currency</option>
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
           <option value="HUF">HUF</option>
         </select>
-        {errors.currency && <p>{errors.currency.message}</p>}
+        {errors.currency && (
+          <p className="ErrorMessage">{errors.currency.message}</p>
+        )}
       </div>
       <button className="submitButton" type="submit">
         Submit your activity

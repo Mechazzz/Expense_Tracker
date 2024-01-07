@@ -1,0 +1,8 @@
+.ErrorMessage {
+    color: red;
+}
+
+p::before {
+    display: inline;
+    content: "⚠ ";
+  }

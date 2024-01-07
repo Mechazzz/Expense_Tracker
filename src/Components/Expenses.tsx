@@ -75,7 +75,8 @@ const Expenses = ({ activities, onDelete }: Props) => {
       <tfoot>
         <tr>
           <td className="totalExpenses">Total Expenses</td>
-          <td>
+          <td> </td>
+          <td className="totalExpenses">
             {activities
               .filter(filterCategory)
               .filter(currencyCategory)
@@ -91,8 +92,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
               }, 0)
               .toFixed(2)}
           </td>
-          <td></td>
-          <td></td>
+          <td className="totalExpenses">HUF</td>
         </tr>
       </tfoot>
     </table>
