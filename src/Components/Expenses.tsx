@@ -1,4 +1,4 @@
-/* import "./Styling/Expenses.css"; */
+import "../Styling/Expenses.css";
 import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
 
@@ -74,7 +74,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
       </tbody>
       <tfoot>
         <tr>
-          <td>Total Expenses</td>
+          <td className="totalExpenses">Total Expenses</td>
           <td>
             {activities
               .filter(filterCategory)

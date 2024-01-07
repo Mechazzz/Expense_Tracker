@@ -27,9 +27,10 @@ type Data = z.infer<typeof schema>;
 
 interface Props {
   onSubmitUserInput: (userInput: UserInputType) => void;
+  toggleFunction: () => void;
 }
 
-const UserInput = ({ onSubmitUserInput }: Props) => {
+const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
   const {
     register,
     handleSubmit,
@@ -39,7 +40,7 @@ const UserInput = ({ onSubmitUserInput }: Props) => {
     defaultValues: {
       activity: "",
       category: "",
-      amount: 0,
+      amount: 1,
       currency: "",
     },
   });
@@ -49,9 +50,7 @@ const UserInput = ({ onSubmitUserInput }: Props) => {
       <div>
         <label htmlFor="activity">Activity:</label>
         <input
-          {...register("activity", {
-            pattern: /^[a-zA-Z]*$/,
-          })}
+          {...register("activity")}
           id="activity"
           type="text"
           placeholder="Please type your activity"
@@ -89,7 +88,18 @@ const UserInput = ({ onSubmitUserInput }: Props) => {
         </select>
         {errors.currency && <p>{errors.currency.message}</p>}
       </div>
-      <button type="submit">Submit your activity</button>
+      <button className="submitButton" type="submit">
+        Submit your activity
+      </button>
+      <button
+        className="closeButton"
+        onClick={(e) => {
+          e.preventDefault();
+          toggleFunction();
+        }}
+      >
+        Close
+      </button>
     </form>
   );
 };
