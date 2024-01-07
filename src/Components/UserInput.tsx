@@ -1,6 +1,7 @@
-import { useForm, FieldValues } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserInputType } from "../types/UserInput";
 
 const schema = z.object({
   activity: z
@@ -24,7 +25,11 @@ const schema = z.object({
 
 type Data = z.infer<typeof schema>;
 
-const UserInput = ({ onSubmituserInput }) => {
+interface Props {
+  onSubmitUserInput: (userInput: UserInputType) => void;
+}
+
+const UserInput = ({ onSubmitUserInput }: Props) => {
   const {
     register,
     handleSubmit,
@@ -38,12 +43,9 @@ const UserInput = ({ onSubmituserInput }) => {
       currency: "",
     },
   });
-  const onSubmitUserData = (userData: FieldValues) => {
-    onSubmituserInput(userData);
-  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitUserData)}>
+    <form onSubmit={handleSubmit(onSubmitUserInput)}>
       <div>
         <label htmlFor="activity">Activity:</label>
         <input

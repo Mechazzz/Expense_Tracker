@@ -1,51 +1,39 @@
-/* import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg' */
 import { useState } from "react";
 import "./App.css";
 import Expenses from "./Components/Expenses";
 import Modal from "./Components/Modal";
+import { UserInputType } from "./types/UserInput";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  type userInput = {
-    activity: string;
-    category: string;
-    amount: number;
-    currency: string;
-  };
+  const [localState, setLocalState] = useLocalStorage("activities", []);
+  const [activities, setActvities] = useState<UserInputType[]>(localState);
 
-  const [activities, setActvities] = useState([
-    {
-      id: 0,
-      activity: "",
-      category: "",
-      amount: 0,
-      currency: "",
-    },
-  ]);
-
-  //----------------------------------------------
-  const handleFormSubmit = (userInput: userInput) => {
+  const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
       id: activities.length + 1,
       ...userInput,
     };
 
-    setActvities((prevActivities) => [...prevActivities, newActivity]);
+    setActvities((prevActivities: UserInputType[]) => [
+      ...prevActivities,
+      newActivity,
+    ]);
+    setLocalState([...activities, newActivity]);
 
     console.log("New activity added:", newActivity);
   };
-  //------------------------------------
 
   return (
     <>
       <Expenses
         activities={activities}
-        onDelete={(id) =>
-          setActvities(activities.filter((item) => item.id !== id))
-        }
+        onDelete={(id) => {
+          setActvities(activities.filter((item) => item.id !== id));
+          setLocalState(activities.filter((item) => item.id !== id));
+        }}
       />
-      <Modal onSubmituserInput={handleFormSubmit} />
+      <Modal onSubmitFromApp={handleFormSubmit} />
       <br />
     </>
   );

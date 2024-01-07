@@ -1,15 +1,20 @@
 import { useState } from "react";
 import UserInput from "./UserInput";
+import { UserInputType } from "../types/UserInput";
 
-const Modal = ({ onSubmituserInput }) => {
+interface Props {
+  onSubmitFromApp: (userInput: UserInputType) => void;
+}
+
+const Modal = ({ onSubmitFromApp }: Props) => {
   const [modal, setModal] = useState(false);
 
   const toggleFunction = () => {
     setModal(!modal);
   };
 
-  const handleSubmitFormInModal = (userInput) => {
-    onSubmituserInput(userInput);
+  const handleSubmitFormInModal = (userInput: UserInputType) => {
+    onSubmitFromApp(userInput);
     toggleFunction();
   };
 
@@ -22,7 +27,7 @@ const Modal = ({ onSubmituserInput }) => {
           <div>
             <h2>Title</h2>
             <p>The Long Text</p>
-            <UserInput onSubmituserInput={handleSubmitFormInModal} />
+            <UserInput onSubmitUserInput={handleSubmitFormInModal} />
           </div>
         </div>
       )}
