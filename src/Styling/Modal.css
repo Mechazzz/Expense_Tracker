@@ -21,18 +21,21 @@
   }
 
   .modal-content {
-    background-color: #fff;
+    background: linear-gradient(#141e30, #243b55);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
     z-index: 1002;
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   }
 
   .modal-content h2 {
+    color: #fff;
     font-size: 1.5rem;
     margin-bottom: 10px;
+    margin-top: 2px;
   }
 
   .modal-content p {
@@ -40,8 +43,49 @@
     margin-bottom: 20px;
   }
 
+ .categoryLabel, .currencyLabel {
+    color: #fff;
+    padding-right: 10px;
+}
+
+.requestMessage {
+    color: #fff; 
+}
+
+.activityLabel{
+    color: #fff;
+    padding-right: 20px;
+}
+
+.amountLabel {
+    color: #fff;
+    padding-right: 17px;
+}
+
+.activityInput, .categoryInput, .amountInput, .currencyInput {
+ background-color:/*  rgb(20, 44, 82); */ #2d4a69;
+ border-radius: 5px;
+ margin-top: 8px;
+ color: #fff;
+ width: 170px;
+ box-sizing: border-box;
+}
+
+.currencyInput {
+    margin-bottom: 20px;
+}
+
+.activityInput::placeholder, .amountInput::placeholder {
+    color: #fff;
+}
+
+
+.input:focus {
+    border: 3px solid #555;
+}
+
   .submitButton, .openButton {
-    background-color: #007bff;
+    background-color: #2d4a69;
     color: #fff;
     padding: 10px 15px;
     border: none;
@@ -50,12 +94,12 @@
   }
 
  .submitButton:hover, .openButton:hover, .closeButton:hover {
-    background-color: #0056b3;
+    background-color: #1c426b;
   }
 
 .closeButton {
 margin-top: 10px;
-background-color: #007bff;
+background-color: #2d4a69;
 color: #fff;
 padding: 10px 15px;
 border: none;

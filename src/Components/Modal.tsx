@@ -1,7 +1,7 @@
 import { useState } from "react";
 import UserInput from "./UserInput";
 import { UserInputType } from "../types/UserInput";
-import "../Styling/Modal.css";
+import "../Styling/ModalX.css";
 
 interface Props {
   onSubmitFromApp: (userInput: UserInputType) => void;
@@ -30,7 +30,9 @@ const Modal = ({ onSubmitFromApp }: Props) => {
           <div className="overlay"></div>
           <div className="modal-content">
             <h2>New activity</h2>
-            <p>Please fill out carefully the below fields</p>
+            <p className="requestMessage">
+              Please fill out carefully the below fields
+            </p>
             <UserInput
               toggleFunction={toggleFunction}
               onSubmitUserInput={handleSubmitFormInModal}

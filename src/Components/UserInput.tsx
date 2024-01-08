@@ -3,6 +3,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserInputType } from "../types/UserInput";
 import "../Styling/ErrorMessage.css";
+import "../Styling/ModalX.css";
 
 const schema = z.object({
   activity: z
@@ -18,25 +19,9 @@ const schema = z.object({
   category: z.string().refine((value) => value !== "", {
     message: "Valid category is needed",
   }),
-  amount: z
+  amount: z.coerce
     .number()
-    .min(1, { message: "Amount is required and must be a valid number" })
-    .refine(
-      (value) => {
-        if (
-          typeof value !== "number" ||
-          isNaN(value) ||
-          value !== undefined ||
-          value !== null
-        ) {
-          return false;
-        }
-        return true;
-      },
-      {
-        message: "Valid amount is needed",
-      }
-    ),
+    .min(1, { message: "Amount is required and must be a valid number" }),
   currency: z.string().refine((value) => value !== "", {
     message: "Valid currency is needed",
   }),
@@ -67,20 +52,29 @@ const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
   return (
     <form onSubmit={handleSubmit(onSubmitUserInput)}>
       <div>
-        <label htmlFor="activity">Activity:</label>
+        <label htmlFor="activity" className="activityLabel">
+          Activity
+        </label>
         <input
           {...register("activity")}
           id="activity"
           type="text"
           placeholder="Please type your activity"
+          className="activityInput"
         />
         {errors.activity && (
           <p className="ErrorMessage">{errors.activity.message}</p>
         )}
       </div>
       <div>
-        <label htmlFor="category">Category:</label>
-        <select {...register("category")} id="category">
+        <label htmlFor="category" className="categoryLabel">
+          Category
+        </label>
+        <select
+          {...register("category")}
+          id="category"
+          className="categoryInput"
+        >
           <option value="">Please select the category</option>
           <option value="Free time">Free time</option>
           <option value="Business">Business</option>
@@ -92,20 +86,29 @@ const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
         )}
       </div>
       <div>
-        <label htmlFor="amount">Amount:</label>
+        <label htmlFor="amount" className="amountLabel">
+          Amount
+        </label>
         <input
-          {...register("amount", { valueAsNumber: true })}
+          {...register("amount")}
           id="amount"
           type="number"
-          placeholder="Please type the amount of money"
+          placeholder="Please type the amount"
+          className="amountInput"
         />
         {errors.amount && (
           <p className="ErrorMessage">{errors.amount.message}</p>
         )}
       </div>
       <div>
-        <label htmlFor="currency">Currency:</label>
-        <select {...register("currency")} id="currency">
+        <label htmlFor="currency" className="currencyLabel">
+          Currency
+        </label>
+        <select
+          {...register("currency")}
+          id="currency"
+          className="currencyInput"
+        >
           <option value="">Please select the currency</option>
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
