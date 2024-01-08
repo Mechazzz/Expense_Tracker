@@ -1,7 +1,7 @@
 import { useState } from "react";
 import UserInput from "./UserInput";
 import { UserInputType } from "../types/UserInput";
-import "../Styling/ModalX.css";
+import "../Styling/Modal.css";
 
 interface Props {
   onSubmitFromApp: (userInput: UserInputType) => void;

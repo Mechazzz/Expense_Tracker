@@ -3,7 +3,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserInputType } from "../types/UserInput";
 import "../Styling/ErrorMessage.css";
-import "../Styling/ModalX.css";
+import "../Styling/Modal.css";
 
 const schema = z.object({
   activity: z
