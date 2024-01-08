@@ -19,83 +19,87 @@ const Expenses = ({ activities, onDelete }: Props) => {
     currencyState ? activity.currency === currencyState : true;
 
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th>Activity description</th>
-          <th>Category</th>
-          <th>Amount of Money</th>
-          <th>Currency</th>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <select
-              value={categoryState}
-              onChange={(e) => setCategoryState(e.target.value)}
-            >
-              <option value="">All categories</option>
-              <option value="Free time">Free time</option>
-              <option value="Business">Business</option>
-              <option value="Household">Household</option>
-              <option value="Others">Others</option>
-            </select>
-          </td>
-          <td></td>
-          <td>
-            <select
-              value={currencyState}
-              onChange={(e) => setCurrencyState(e.target.value)}
-            >
-              <option value="">All currencies</option>
-              <option value="EUR">EUR</option>
-              <option value="USD">USD</option>
-              <option value="HUF">HUF</option>
-            </select>
-          </td>
-          <td></td>
-        </tr>
-      </thead>
-      <tbody>
-        {activities
-          .filter(filterCategory)
-          .filter(currencyCategory)
-          .map((activity) => (
-            <tr key={activity.id}>
-              <td>{activity.activity}</td>
-              <td>{activity.category}</td>
-              <td>{activity.amount}</td>
-              <td>{activity.currency}</td>
-              <td>
-                <button onClick={() => onDelete(activity.id!)}>Delete</button>
-              </td>
-            </tr>
-          ))}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td className="totalExpenses">Total Expenses</td>
-          <td> </td>
-          <td className="totalExpenses">
-            {activities
-              .filter(filterCategory)
-              .filter(currencyCategory)
-              .reduce((acc, activity) => {
-                switch (activity.currency) {
-                  case "USD":
-                    return activity.amount * USD + acc;
-                  case "EUR":
-                    return activity.amount * EUR + acc;
-                  default:
-                    return activity.amount + acc;
-                }
-              }, 0)
-              .toFixed(2)}
-          </td>
-          <td className="totalExpenses">HUF</td>
-        </tr>
-      </tfoot>
-    </table>
+    <>
+      <h1>Expense Tracker</h1>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Activity description</th>
+            <th>Category</th>
+            <th>Amount of Money</th>
+            <th>Currency</th>
+            <th>Deletion</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <select
+                value={categoryState}
+                onChange={(e) => setCategoryState(e.target.value)}
+              >
+                <option value="">All categories</option>
+                <option value="Free time">Free time</option>
+                <option value="Business">Business</option>
+                <option value="Household">Household</option>
+                <option value="Others">Others</option>
+              </select>
+            </td>
+            <td></td>
+            <td>
+              <select
+                value={currencyState}
+                onChange={(e) => setCurrencyState(e.target.value)}
+              >
+                <option value="">All currencies</option>
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="HUF">HUF</option>
+              </select>
+            </td>
+            <td></td>
+          </tr>
+        </thead>
+        <tbody>
+          {activities
+            .filter(filterCategory)
+            .filter(currencyCategory)
+            .map((activity) => (
+              <tr key={activity.id}>
+                <td>{activity.activity}</td>
+                <td>{activity.category}</td>
+                <td>{activity.amount}</td>
+                <td>{activity.currency}</td>
+                <td>
+                  <button onClick={() => onDelete(activity.id!)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td className="totalExpenses">Total Expenses</td>
+            <td> </td>
+            <td className="totalExpenses">
+              {activities
+                .filter(filterCategory)
+                .filter(currencyCategory)
+                .reduce((acc, activity) => {
+                  switch (activity.currency) {
+                    case "USD":
+                      return activity.amount * USD + acc;
+                    case "EUR":
+                      return activity.amount * EUR + acc;
+                    default:
+                      return activity.amount + acc;
+                  }
+                }, 0)
+                .toFixed(2)}
+            </td>
+            <td className="totalExpenses">HUF</td>
+          </tr>
+        </tfoot>
+      </table>
+    </>
   );
 };
 

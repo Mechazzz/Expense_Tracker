@@ -7,3 +7,15 @@
 font-weight: bold;
 }
 
+thead th { 
+    background-color: #f2f2f2; 
+    padding: 10px; 
+    text-align: left; 
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+} 
+
+thead td, tbody td, tfoot td {
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+

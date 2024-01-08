@@ -93,7 +93,7 @@ const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
           {...register("amount")}
           id="amount"
           type="number"
-          placeholder="Please type the amount"
+          placeholder="Please type the spent amount"
           className="amountInput"
         />
         {errors.amount && (
