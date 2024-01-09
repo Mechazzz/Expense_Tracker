@@ -1,6 +1,8 @@
 import "../Styling/Expenses.css";
 import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
+import { EUR, USD } from "../hooks/Constants.tsx";
+/* import { calculatedAmount } from "../hooks/Constants.tsx"; */
 
 interface Props {
   activities: UserInputType[];
@@ -10,8 +12,6 @@ interface Props {
 const Expenses = ({ activities, onDelete }: Props) => {
   const [categoryState, setCategoryState] = useState("");
   const [currencyState, setCurrencyState] = useState("");
-  const EUR = 380;
-  const USD = 340;
   const filterCategory = (activity: UserInputType) =>
     categoryState ? activity.category === categoryState : true;
 
@@ -26,8 +26,9 @@ const Expenses = ({ activities, onDelete }: Props) => {
           <tr>
             <th>Activity description</th>
             <th>Category</th>
-            <th>Amount of Money</th>
+            <th>Amount of money</th>
             <th>Currency</th>
+            <th>Date and time</th>
             <th>Deletion</th>
           </tr>
           <tr>
@@ -69,6 +70,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
                 <td>{activity.category}</td>
                 <td>{activity.amount}</td>
                 <td>{activity.currency}</td>
+                {<td>{activity.date}</td>}
                 <td>
                   <button onClick={() => onDelete(activity.id!)}>Delete</button>
                 </td>
@@ -80,20 +82,25 @@ const Expenses = ({ activities, onDelete }: Props) => {
             <td className="totalExpenses">Total Expenses</td>
             <td> </td>
             <td className="totalExpenses">
-              {activities
-                .filter(filterCategory)
-                .filter(currencyCategory)
-                .reduce((acc, activity) => {
-                  switch (activity.currency) {
-                    case "USD":
-                      return activity.amount * USD + acc;
-                    case "EUR":
-                      return activity.amount * EUR + acc;
-                    default:
-                      return activity.amount + acc;
-                  }
-                }, 0)
-                .toFixed(2)}
+              {
+                /*   calculatedAmount(
+                  activities.filter(filterCategory).filter(currencyCategory)
+                ) */
+                activities
+                  .filter(filterCategory)
+                  .filter(currencyCategory)
+                  .reduce((acc, activity) => {
+                    switch (activity.currency) {
+                      case "USD":
+                        return activity.amount * USD + acc;
+                      case "EUR":
+                        return activity.amount * EUR + acc;
+                      default:
+                        return activity.amount + acc;
+                    }
+                  }, 0)
+                  .toFixed(2)
+              }
             </td>
             <td className="totalExpenses">HUF</td>
           </tr>

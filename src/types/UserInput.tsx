@@ -4,4 +4,5 @@ export type UserInputType = {
   category: string;
   amount: number;
   currency: string;
+  /*   date?: Date; */
 };

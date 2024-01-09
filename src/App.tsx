@@ -4,18 +4,22 @@ import Expenses from "./Components/Expenses";
 import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import Charts from "./Components/Charts";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
-  const [activities, setActvities] = useState<UserInputType[]>(localState);
+  const [activities, setActivities] = useState<UserInputType[]>(localState);
 
   const handleFormSubmit = (userInput: UserInputType) => {
+    const currentTime = new Date();
+    const dateOfExpense = currentTime.toLocaleString();
     const newActivity = {
       id: activities.length + 1,
+      date: dateOfExpense,
       ...userInput,
     };
 
-    setActvities((prevActivities: UserInputType[]) => [
+    setActivities((prevActivities: UserInputType[]) => [
       ...prevActivities,
       newActivity,
     ]);
@@ -29,12 +33,13 @@ function App() {
       <Expenses
         activities={activities}
         onDelete={(id) => {
-          setActvities(activities.filter((item) => item.id !== id));
+          setActivities(activities.filter((item) => item.id !== id));
           setLocalState(activities.filter((item) => item.id !== id));
         }}
       />
       <Modal onSubmitFromApp={handleFormSubmit} />
       <br />
+      <Charts activities={activities} />
     </>
   );
 }
