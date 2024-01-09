@@ -12,10 +12,9 @@ function App() {
 
   const handleFormSubmit = (userInput: UserInputType) => {
     const currentTime = new Date();
-    const dateOfExpense = currentTime.toLocaleString();
     const newActivity = {
       id: activities.length + 1,
-      date: dateOfExpense,
+      date: currentTime,
       ...userInput,
     };
 

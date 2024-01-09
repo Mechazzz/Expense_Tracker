@@ -13,14 +13,14 @@ import {
 } from "recharts";
 import "../Styling/Charts.css";
 import { UserInputType } from "../types/UserInput";
-import { EUR, USD } from "../hooks/Constants.tsx";
+import { calculatedAmount } from "../utils/utils.tsx";
 
 interface Props {
   activities: UserInputType[];
 }
 
 const Charts = ({ activities }: Props) => {
-  const getCategoryAmounts = (selectedCategory: string) => {
+  /*   const getCategoryAmounts = (selectedCategory: string) => {
     return activities
       .filter(
         (activity: UserInputType) => activity.category === selectedCategory
@@ -35,13 +35,41 @@ const Charts = ({ activities }: Props) => {
             return activity.amount + acc;
         }
       }, 0);
-  };
+  }; */
 
   const expensesData = [
-    { name: "Free time", expense: getCategoryAmounts("Free time") },
-    { name: "Business", expense: getCategoryAmounts("Business") },
-    { name: "Household", expense: getCategoryAmounts("Household") },
-    { name: "Others", expense: getCategoryAmounts("Others") },
+    {
+      name: "Free time",
+      expense: calculatedAmount(
+        activities.filter(
+          (activity: UserInputType) => activity.category === "Free time"
+        )
+      ),
+    },
+    {
+      name: "Business",
+      expense: calculatedAmount(
+        activities.filter(
+          (activity: UserInputType) => activity.category === "Business"
+        )
+      ),
+    },
+    {
+      name: "Household",
+      expense: calculatedAmount(
+        activities.filter(
+          (activity: UserInputType) => activity.category === "Household"
+        )
+      ),
+    },
+    {
+      name: "Others",
+      expense: calculatedAmount(
+        activities.filter(
+          (activity: UserInputType) => activity.category === "Others"
+        )
+      ),
+    },
   ];
   return (
     <>

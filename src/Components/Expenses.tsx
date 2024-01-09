@@ -1,8 +1,7 @@
 import "../Styling/Expenses.css";
 import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
-import { EUR, USD } from "../hooks/Constants.tsx";
-/* import { calculatedAmount } from "../hooks/Constants.tsx"; */
+import { calculatedAmount } from "../utils/utils.tsx";
 
 interface Props {
   activities: UserInputType[];
@@ -70,7 +69,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
                 <td>{activity.category}</td>
                 <td>{activity.amount}</td>
                 <td>{activity.currency}</td>
-                {<td>{activity.date}</td>}
+                {<td>{activity.date?.toLocaleString()}</td>}
                 <td>
                   <button onClick={() => onDelete(activity.id!)}>Delete</button>
                 </td>
@@ -82,25 +81,9 @@ const Expenses = ({ activities, onDelete }: Props) => {
             <td className="totalExpenses">Total Expenses</td>
             <td> </td>
             <td className="totalExpenses">
-              {
-                /*   calculatedAmount(
-                  activities.filter(filterCategory).filter(currencyCategory)
-                ) */
-                activities
-                  .filter(filterCategory)
-                  .filter(currencyCategory)
-                  .reduce((acc, activity) => {
-                    switch (activity.currency) {
-                      case "USD":
-                        return activity.amount * USD + acc;
-                      case "EUR":
-                        return activity.amount * EUR + acc;
-                      default:
-                        return activity.amount + acc;
-                    }
-                  }, 0)
-                  .toFixed(2)
-              }
+              {calculatedAmount(
+                activities.filter(filterCategory).filter(currencyCategory)
+              ).toFixed(2)}
             </td>
             <td className="totalExpenses">HUF</td>
           </tr>

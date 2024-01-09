@@ -1,9 +1,8 @@
-export const EUR = 380;
-export const USD = 340;
 import { UserInputType } from "../types/UserInput";
+import { EUR, USD } from "./constants";
 
 export const calculatedAmount = (amount: UserInputType[]) => {
-  amount.reduce((acc, activity) => {
+  return amount.reduce((acc, activity) => {
     switch (activity.currency) {
       case "USD":
         return activity.amount * USD + acc;
