@@ -20,23 +20,6 @@ interface Props {
 }
 
 const Charts = ({ activities }: Props) => {
-  /*   const getCategoryAmounts = (selectedCategory: string) => {
-    return activities
-      .filter(
-        (activity: UserInputType) => activity.category === selectedCategory
-      )
-      .reduce((acc, activity: UserInputType) => {
-        switch (activity.currency) {
-          case "USD":
-            return activity.amount * USD + acc;
-          case "EUR":
-            return activity.amount * EUR + acc;
-          default:
-            return activity.amount + acc;
-        }
-      }, 0);
-  }; */
-
   const expensesData = [
     {
       name: "Free time",

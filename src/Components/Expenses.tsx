@@ -85,7 +85,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
                 activities.filter(filterCategory).filter(currencyCategory)
               ).toFixed(2)}
             </td>
-            <td className="totalExpenses">HUF</td>
+            <td className="totalExpenses">USD</td>
           </tr>
         </tfoot>
       </table>

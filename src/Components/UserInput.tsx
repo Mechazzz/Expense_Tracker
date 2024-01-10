@@ -13,7 +13,7 @@ const schema = z.object({
     })
     .min(2, { message: "Activity name must contain at least 2 characters" })
     .refine(
-      (txt) => /^[a-zA-Z\s]*$/.test(txt),
+      (txt) => /^[A-Za-z\u00C0-\u00FF\s]+$/.test(txt),
       "Activity should contain only letters or space"
     ),
   category: z.string().refine((value) => value !== "", {

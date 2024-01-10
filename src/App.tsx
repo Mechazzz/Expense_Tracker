@@ -5,6 +5,8 @@ import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import Charts from "./Components/Charts";
+import { newDate } from "./utils/utils";
+import Navbar from "./Components/Navbar";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
@@ -12,9 +14,10 @@ function App() {
 
   const handleFormSubmit = (userInput: UserInputType) => {
     const currentTime = new Date();
+
     const newActivity = {
       id: activities.length + 1,
-      date: currentTime,
+      date: newDate(currentTime),
       ...userInput,
     };
 
@@ -29,6 +32,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <Expenses
         activities={activities}
         onDelete={(id) => {
