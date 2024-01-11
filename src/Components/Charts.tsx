@@ -13,12 +13,15 @@ import {
 import "../Styling/Charts.css";
 import { UserInputType } from "../types/UserInput";
 import { calculatedAmount } from "../utils/utils.tsx";
+import { v4 as uniqueId } from "uuid";
 
 interface Props {
   activities: UserInputType[];
 }
 
 const Charts = ({ activities }: Props) => {
+  const barChartId = uniqueId();
+  const pieChartId = uniqueId();
   const expensesData = [
     {
       name: "Free time",
@@ -57,7 +60,7 @@ const Charts = ({ activities }: Props) => {
     <>
       <div className="charts">
         <ResponsiveContainer width="100%" aspect={2}>
-          <PieChart width={400} height={400}>
+          <PieChart width={400} height={400} id={pieChartId}>
             <Pie
               dataKey="expense"
               isAnimationActive={true}
@@ -66,7 +69,7 @@ const Charts = ({ activities }: Props) => {
               cy="50%"
               outerRadius={80}
               fill="#2d4a69"
-              label
+              label /* ={(entry) => `${entry.name}: ${entry.value}`} */
             />
             <Tooltip />
           </PieChart>
@@ -82,13 +85,18 @@ const Charts = ({ activities }: Props) => {
               left: 20,
               bottom: 5,
             }}
+            id={barChartId}
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="name" tick={{ stroke: "#2d4a69" }} />
             <YAxis tick={{ stroke: "#2d4a69" }} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="expense" fill="#2d4a69" />
+            <Bar
+              dataKey="expense"
+              fill="#2d4a69"
+              /* label={(entry) => entry.value} */
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

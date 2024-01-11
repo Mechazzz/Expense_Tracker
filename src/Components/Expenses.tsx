@@ -9,9 +9,10 @@ import { newDate } from "../utils/utils.tsx";
 interface Props {
   activities: UserInputType[];
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
 }
 
-const Expenses = ({ activities, onDelete }: Props) => {
+const Expenses = ({ activities, onDelete, onEdit }: Props) => {
   const [categoryState, setCategoryState] = useState("");
   const [currencyState, setCurrencyState] = useState("");
   const filterCategory = (activity: UserInputType) =>
@@ -75,14 +76,17 @@ const Expenses = ({ activities, onDelete }: Props) => {
                 <td>{activity.currency}</td>
                 {<td>{newDate(activity.date!)}</td>}
                 <td className="changeExpense">
-                  <button className="changeButton">
+                  <button
+                    className="changeButton"
+                    onClick={() => onEdit(activity.id!)}
+                  >
                     <FontAwesomeIcon icon={faPen} className={"changeIcon"} />
                   </button>
                 </td>
                 <td className="deleteExpense">
                   <button
                     className="deleteButton"
-                    onClick={() => onDelete(activity.id!)}
+                    onClick={() => console.log(onDelete(activity.id!))}
                   >
                     <FontAwesomeIcon icon={faTrash} className={"trashIcon"} />
                   </button>

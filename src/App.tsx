@@ -10,6 +10,7 @@ import Navbar from "./Components/Navbar";
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
   const [activities, setActivities] = useState<UserInputType[]>(localState);
+  const [selectedActivity, setSelectedActivity] = useState<UserInputType>("");
 
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
@@ -35,6 +36,9 @@ function App() {
         onDelete={(id) => {
           setActivities(activities.filter((item) => item.id !== id));
           setLocalState(activities.filter((item) => item.id !== id));
+        }}
+        onEdit={(id) => {
+          setSelectedActivity(activities.filter((item) => item.id === id));
         }}
       />
       <Modal onSubmitFromApp={handleFormSubmit} />
