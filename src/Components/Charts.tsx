@@ -3,7 +3,6 @@ import {
   Pie,
   BarChart,
   Bar,
-  Rectangle,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -66,7 +65,7 @@ const Charts = ({ activities }: Props) => {
               cx="50%"
               cy="50%"
               outerRadius={80}
-              fill="#8884d8"
+              fill="#2d4a69"
               label
             />
             <Tooltip />
@@ -85,15 +84,11 @@ const Charts = ({ activities }: Props) => {
             }}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ stroke: "brown" }} />
-            <YAxis tick={{ stroke: "brown" }} />
+            <XAxis dataKey="name" tick={{ stroke: "#2d4a69" }} />
+            <YAxis tick={{ stroke: "#2d4a69" }} />
             <Tooltip />
             <Legend />
-            <Bar
-              dataKey="expense"
-              fill="#8884d8"
-              activeBar={<Rectangle fill="pink" stroke="blue" />}
-            />
+            <Bar dataKey="expense" fill="#2d4a69" />
           </BarChart>
         </ResponsiveContainer>
       </div>

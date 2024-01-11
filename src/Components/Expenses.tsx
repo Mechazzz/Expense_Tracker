@@ -2,6 +2,8 @@ import "../Styling/Expenses.css";
 import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
 import { calculatedAmount } from "../utils/utils.tsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   activities: UserInputType[];
@@ -19,7 +21,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
 
   return (
     <>
-      <h1>Expense Tracker</h1>
+      <h1>My Expenses</h1>
       <table className="table">
         <thead>
           <tr>
@@ -28,6 +30,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
             <th>Amount of money</th>
             <th>Currency</th>
             <th>Date and time</th>
+            <th>Change</th>
             <th>Deletion</th>
           </tr>
           <tr>
@@ -70,8 +73,18 @@ const Expenses = ({ activities, onDelete }: Props) => {
                 <td>{activity.amount}</td>
                 <td>{activity.currency}</td>
                 {<td>{activity.date?.toLocaleString()}</td>}
-                <td>
-                  <button onClick={() => onDelete(activity.id!)}>Delete</button>
+                <td className="changeExpense">
+                  <button className="changeButton">
+                    <FontAwesomeIcon icon={faPen} className={"changeIcon"} />
+                  </button>
+                </td>
+                <td className="deleteExpense">
+                  <button
+                    className="deleteButton"
+                    onClick={() => onDelete(activity.id!)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} className={"trashIcon"} />
+                  </button>
                 </td>
               </tr>
             ))}
