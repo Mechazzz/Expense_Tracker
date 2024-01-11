@@ -5,7 +5,6 @@ import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import Charts from "./Components/Charts";
-import { newDate } from "./utils/utils";
 import Navbar from "./Components/Navbar";
 
 function App() {
@@ -13,11 +12,9 @@ function App() {
   const [activities, setActivities] = useState<UserInputType[]>(localState);
 
   const handleFormSubmit = (userInput: UserInputType) => {
-    const currentTime = new Date();
-
     const newActivity = {
       id: activities.length + 1,
-      date: newDate(currentTime),
+      date: new Date(),
       ...userInput,
     };
 

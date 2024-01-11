@@ -4,6 +4,7 @@ import { UserInputType } from "../types/UserInput";
 import { calculatedAmount } from "../utils/utils.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import { newDate } from "../utils/utils.tsx";
 
 interface Props {
   activities: UserInputType[];
@@ -72,7 +73,7 @@ const Expenses = ({ activities, onDelete }: Props) => {
                 <td>{activity.category}</td>
                 <td>{activity.amount}</td>
                 <td>{activity.currency}</td>
-                {<td>{activity.date?.toLocaleString()}</td>}
+                {<td>{newDate(activity.date!)}</td>}
                 <td className="changeExpense">
                   <button className="changeButton">
                     <FontAwesomeIcon icon={faPen} className={"changeIcon"} />

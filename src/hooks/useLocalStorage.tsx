@@ -2,7 +2,15 @@ import * as React from "react";
 
 export const useLocalStorage = (key: string, fallbackState: []) => {
   const [value, setValue] = React.useState(
-    JSON.parse(localStorage.getItem(key) || "[]") ?? fallbackState
+    JSON.parse(
+      localStorage.getItem(key) || "[]",
+      (key: string, value: string) => {
+        if (key === "date") {
+          return new Date(value);
+        }
+        return value;
+      }
+    ) ?? fallbackState
   );
 
   React.useEffect(() => {
