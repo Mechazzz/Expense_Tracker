@@ -38,7 +38,7 @@ function App() {
           setLocalState(activities.filter((item) => item.id !== id));
         }}
         onEdit={(id) => {
-          setSelectedActivity(activities.filter((item) => item.id === id));
+          setSelectedActivity(activities.find((item) => item.id === id)!);
         }}
       />
       <Modal onSubmitFromApp={handleFormSubmit} />

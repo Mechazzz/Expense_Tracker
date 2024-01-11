@@ -78,7 +78,10 @@ const Expenses = ({ activities, onDelete, onEdit }: Props) => {
                 <td className="changeExpense">
                   <button
                     className="changeButton"
-                    onClick={() => onEdit(activity.id!)}
+                    onClick={() => {
+                      onEdit(activity.id!);
+                      console.log(activity.id!);
+                    }}
                   >
                     <FontAwesomeIcon icon={faPen} className={"changeIcon"} />
                   </button>
@@ -86,7 +89,7 @@ const Expenses = ({ activities, onDelete, onEdit }: Props) => {
                 <td className="deleteExpense">
                   <button
                     className="deleteButton"
-                    onClick={() => console.log(onDelete(activity.id!))}
+                    onClick={() => onDelete(activity.id!)}
                   >
                     <FontAwesomeIcon icon={faTrash} className={"trashIcon"} />
                   </button>
