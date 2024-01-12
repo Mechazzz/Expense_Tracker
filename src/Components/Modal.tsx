@@ -1,45 +1,17 @@
-import { useState } from "react";
-import UserInput from "./UserInput";
-import { UserInputType } from "../types/UserInput";
 import "../Styling/Modal.css";
 
 interface Props {
-  onSubmitFromApp: (userInput: UserInputType) => void;
-  selectedActivity: UserInputType;
+  children: React.ReactNode;
+  modal: boolean;
 }
 
-const Modal = ({ onSubmitFromApp, selectedActivity }: Props) => {
-  const [modal, setModal] = useState(false);
-
-  const toggleFunction = () => {
-    setModal(!modal);
-  };
-
-  const handleSubmitFormInModal = (userInput: UserInputType) => {
-    onSubmitFromApp(userInput);
-    toggleFunction();
-  };
-
+const Modal = ({ children, modal }: Props) => {
   return (
     <>
-      <button className="openButton" onClick={toggleFunction}>
-        Adding new Activity
-      </button>
-
       {modal && (
         <div className="modal">
           <div className="overlay"></div>
-          <div className="modal-content">
-            <h2>New activity</h2>
-            <p className="requestMessage">
-              Please fill out carefully the below fields
-            </p>
-            <UserInput
-              selectedActivity={selectedActivity}
-              toggleFunction={toggleFunction}
-              onSubmitUserInput={handleSubmitFormInModal}
-            />
-          </div>
+          <div className="modal-content">{children}</div>
         </div>
       )}
     </>

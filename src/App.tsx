@@ -6,11 +6,18 @@ import { UserInputType } from "./types/UserInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import Charts from "./Components/Charts";
 import Navbar from "./Components/Navbar";
+import UserInput from "./Components/UserInput";
+import { defaultValues } from "./utils/constants";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
   const [activities, setActivities] = useState<UserInputType[]>(localState);
   const [selectedActivity, setSelectedActivity] = useState<UserInputType>("");
+
+  const [modal, setModal] = useState(false);
+  const toggleFunction = () => {
+    setModal(!modal);
+  };
 
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
@@ -19,13 +26,26 @@ function App() {
       ...userInput,
     };
 
-    setActivities((prevActivities: UserInputType[]) => [
-      ...prevActivities,
-      newActivity,
-    ]);
+    setActivities((prevActivities: UserInputType[]) =>
+      selectedActivity
+        ? prevActivities.map((activity) =>
+            activity.id === selectedActivity.id
+              ? { ...activity, ...userInput }
+              : activity
+          )
+        : [...prevActivities, newActivity]
+    );
+
     setLocalState([...activities, newActivity]);
+    setSelectedActivity(defaultValues);
+    toggleFunction();
 
     console.log("New activity added:", newActivity);
+  };
+
+  const closeButtonFunction = () => {
+    toggleFunction();
+    setSelectedActivity(defaultValues);
   };
 
   return (
@@ -39,12 +59,24 @@ function App() {
         }}
         onEdit={(id) => {
           setSelectedActivity(activities.find((item) => item.id === id)!);
+          toggleFunction();
         }}
       />
-      <Modal
-        onSubmitFromApp={handleFormSubmit}
-        selectedActivity={selectedActivity}
-      />
+      <button className="openButton" onClick={toggleFunction}>
+        Adding new Activity
+      </button>
+      <Modal modal={modal}>
+        <h2>New activity</h2>
+        <p className="requestMessage">
+          Please fill out carefully the below fields
+        </p>
+        <UserInput
+          selectedActivity={selectedActivity}
+          toggleFunction={toggleFunction}
+          onSubmitUserInput={handleFormSubmit}
+          closeButtonFunction={closeButtonFunction}
+        />
+      </Modal>
       <br />
       <Charts activities={activities} />
     </>

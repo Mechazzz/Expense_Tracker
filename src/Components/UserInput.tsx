@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { UserInputType } from "../types/UserInput";
 import "../Styling/ErrorMessage.css";
 import "../Styling/Modal.css";
+import { defaultValues } from "../utils/constants";
 
 const schema = z.object({
   activity: z
@@ -33,12 +34,13 @@ interface Props {
   onSubmitUserInput: (userInput: UserInputType) => void;
   toggleFunction: () => void;
   selectedActivity: UserInputType;
+  closeButtonFunction: () => void;
 }
 
 const UserInput = ({
   onSubmitUserInput,
-  toggleFunction,
   selectedActivity,
+  closeButtonFunction,
 }: Props) => {
   const {
     register,
@@ -46,12 +48,7 @@ const UserInput = ({
     formState: { errors },
   } = useForm<Data>({
     resolver: zodResolver(schema),
-    defaultValues: selectedActivity || {
-      activity: "",
-      category: "",
-      amount: 1,
-      currency: "",
-    },
+    defaultValues: selectedActivity || defaultValues,
   });
 
   return (
@@ -130,7 +127,7 @@ const UserInput = ({
         className="closeButton"
         onClick={(e) => {
           e.preventDefault();
-          toggleFunction();
+          closeButtonFunction();
         }}
       >
         Close
