@@ -41,7 +41,10 @@ function App() {
           setSelectedActivity(activities.find((item) => item.id === id)!);
         }}
       />
-      <Modal onSubmitFromApp={handleFormSubmit} />
+      <Modal
+        onSubmitFromApp={handleFormSubmit}
+        selectedActivity={selectedActivity}
+      />
       <br />
       <Charts activities={activities} />
     </>

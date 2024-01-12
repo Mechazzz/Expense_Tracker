@@ -32,16 +32,21 @@ type Data = z.infer<typeof schema>;
 interface Props {
   onSubmitUserInput: (userInput: UserInputType) => void;
   toggleFunction: () => void;
+  selectedActivity: UserInputType;
 }
 
-const UserInput = ({ onSubmitUserInput, toggleFunction }: Props) => {
+const UserInput = ({
+  onSubmitUserInput,
+  toggleFunction,
+  selectedActivity,
+}: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Data>({
     resolver: zodResolver(schema),
-    defaultValues: {
+    defaultValues: selectedActivity || {
       activity: "",
       category: "",
       amount: 1,

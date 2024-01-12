@@ -5,9 +5,10 @@ import "../Styling/Modal.css";
 
 interface Props {
   onSubmitFromApp: (userInput: UserInputType) => void;
+  selectedActivity: UserInputType;
 }
 
-const Modal = ({ onSubmitFromApp }: Props) => {
+const Modal = ({ onSubmitFromApp, selectedActivity }: Props) => {
   const [modal, setModal] = useState(false);
 
   const toggleFunction = () => {
@@ -34,6 +35,7 @@ const Modal = ({ onSubmitFromApp }: Props) => {
               Please fill out carefully the below fields
             </p>
             <UserInput
+              selectedActivity={selectedActivity}
               toggleFunction={toggleFunction}
               onSubmitUserInput={handleSubmitFormInModal}
             />
