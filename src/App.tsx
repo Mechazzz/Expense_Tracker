@@ -62,6 +62,10 @@ function App() {
           setSelectedActivity(activities.find((item) => item.id === id)!);
           toggleFunction();
         }}
+        onCopy={(id) => {
+          const foundActivity = activities.find((item) => item.id === id)!;
+          setActivities([...activities, foundActivity]);
+        }}
       />
       <button className="openButton" onClick={toggleFunction}>
         Adding new Activity

@@ -20,11 +20,11 @@ tfoot td {
     font-weight: bold;
 }
 
-.deleteExpense, .changeExpense  {
+.deleteExpense, .changeExpense, .copyExpense {
     text-align:center;
 }
 
-.deleteButton, .changeButton {
+.deleteButton, .changeButton, .copyButton {
 background-color: transparent;
 padding: 7px 12px;
 border: none;
@@ -33,7 +33,7 @@ cursor: pointer;
 }
 
 
-.trashIcon, .changeIcon {
+.trashIcon, .changeIcon, .copyIcon {
     color: #2d4a69;
 }
 
@@ -45,4 +45,9 @@ cursor: pointer;
 .changeButton:hover .changeIcon,
 .changeButton:active .changeIcon {
     color: rgb(216, 130, 17);
+}
+
+.copyButton:hover .copyIcon,
+.copyButton:active .copyIcon {
+    color: rgb(17, 180, 30);
 }

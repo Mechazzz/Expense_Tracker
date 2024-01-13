@@ -3,16 +3,17 @@ import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
 import { calculatedAmount } from "../utils/utils.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { newDate } from "../utils/utils.tsx";
 
 interface Props {
   activities: UserInputType[];
   onDelete: (id: number) => void;
   onEdit: (id: number) => void;
+  onCopy: (id: number) => void;
 }
 
-const Expenses = ({ activities, onDelete, onEdit }: Props) => {
+const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
   const [categoryState, setCategoryState] = useState("");
   const [currencyState, setCurrencyState] = useState("");
   const filterCategory = (activity: UserInputType) =>
@@ -33,6 +34,7 @@ const Expenses = ({ activities, onDelete, onEdit }: Props) => {
             <th>Currency</th>
             <th>Date and time</th>
             <th>Change</th>
+            <th>Copy</th>
             <th>Deletion</th>
           </tr>
           <tr>
@@ -84,6 +86,14 @@ const Expenses = ({ activities, onDelete, onEdit }: Props) => {
                     }}
                   >
                     <FontAwesomeIcon icon={faPen} className={"changeIcon"} />
+                  </button>
+                </td>
+                <td className="copyExpense">
+                  <button
+                    className="copyButton"
+                    onClick={() => onCopy(activity.id!)}
+                  >
+                    <FontAwesomeIcon icon={faCopy} className={"copyIcon"} />
                   </button>
                 </td>
                 <td className="deleteExpense">
