@@ -35,7 +35,7 @@ const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
             <th>Date and time</th>
             <th>Change</th>
             <th>Copy</th>
-            <th>Deletion</th>
+            <th>Delete</th>
           </tr>
           <tr>
             <td></td>
