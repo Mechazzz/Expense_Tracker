@@ -12,7 +12,8 @@ import { defaultValues } from "./utils/constants";
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
   const [activities, setActivities] = useState<UserInputType[]>(localState);
-  const [selectedActivity, setSelectedActivity] = useState<UserInputType>("");
+  const [selectedActivity, setSelectedActivity] =
+    useState<UserInputType>(defaultValues);
 
   const [modal, setModal] = useState(false);
   const toggleFunction = () => {
