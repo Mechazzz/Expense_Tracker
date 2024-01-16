@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useState, useContext } from "react";
+import {
+  createContext,
+  ReactNode,
+  useState,
+  useContext,
+  useLayoutEffect,
+} from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface SettingsState {
   theme: "light" | "dark";
@@ -38,6 +45,7 @@ export const SettingsContext = createContext<SettingsContextProps>(
 );
 
 const SettingsProvider = ({ children }: { children: ReactNode }) => {
+  const [localState, setLocalState] = useLocalStorage("theme", "light");
   const [settings, setSettings] = useState<SettingsState>({
     theme: "light",
   });
@@ -48,6 +56,17 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
       theme: prevSettings.theme === "light" ? "dark" : "light",
     }));
   };
+
+  useLayoutEffect(() => {
+    setLocalState(settings.theme);
+    if (settings.theme === "light") {
+      document.documentElement.classList.remove("dark-mode");
+      document.documentElement.classList.add("light-mode");
+    } else {
+      document.documentElement.classList.remove("light-mode");
+      document.documentElement.classList.add("dark-mode");
+    }
+  }, [settings.theme, localState, setLocalState]);
 
   const contextValue: SettingsContextProps = {
     settings,

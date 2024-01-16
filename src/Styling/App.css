@@ -1,0 +1,11 @@
+
+.light-mode {
+    --font-color: #101212;
+    --bg-color: #ffffff;
+  }
+  
+  .dark-mode {
+    --font-color: #cccccc;
+    --bg-color: #101212;
+    --font-s: 10px;
+  }

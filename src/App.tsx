@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import "./Styling/App.css";
 import Expenses from "./Components/Expenses";
 import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
@@ -7,7 +7,6 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 import Charts from "./Components/Charts";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
-import Settings from "./Components/Settings";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
@@ -51,7 +50,6 @@ function App() {
 
   return (
     <>
-      <Settings />
       <Expenses
         activities={activities}
         onDelete={(id) => {
