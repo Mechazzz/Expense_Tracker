@@ -5,10 +5,8 @@ import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 import Charts from "./Components/Charts";
-import Navbar from "./Components/Navbar";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
-import SettingsProvider from "./Providers/SettingsProvider";
 import Settings from "./Components/Settings";
 
 function App() {
@@ -52,8 +50,7 @@ function App() {
   };
 
   return (
-    <SettingsProvider>
-      <Navbar />
+    <>
       <Settings />
       <Expenses
         activities={activities}
@@ -87,7 +84,7 @@ function App() {
       </Modal>
       <br />
       <Charts activities={activities} />
-    </SettingsProvider>
+    </>
   );
 }
 

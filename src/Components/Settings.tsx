@@ -1,4 +1,3 @@
-import Navbar from "./Navbar";
 import Switch from "react-switch";
 import {
   SettingsContextProps,
@@ -11,7 +10,6 @@ const Settings = () => {
     useSettings();
   return (
     <>
-      <Navbar />
       <div style={defaultThemeStyles[settings.theme]}>
         <h2>Settings</h2>
         <p>Current Theme: {settings.theme}</p>
