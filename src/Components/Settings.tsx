@@ -1,15 +1,14 @@
 import Navbar from "./Navbar";
 import Switch from "react-switch";
-import { useContext } from "react";
 import {
-  SettingsContext,
   SettingsContextProps,
+  useSettings,
 } from "../Providers/SettingsProvider";
 import "../Styling/Settings.css";
 
 const Settings = () => {
   const { settings, toggleTheme, defaultThemeStyles }: SettingsContextProps =
-    useContext(SettingsContext);
+    useSettings();
   return (
     <>
       <Navbar />

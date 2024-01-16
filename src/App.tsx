@@ -8,6 +8,8 @@ import Charts from "./Components/Charts";
 import Navbar from "./Components/Navbar";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
+import SettingsProvider from "./Providers/SettingsProvider";
+import Settings from "./Components/Settings";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage("activities", []);
@@ -50,8 +52,9 @@ function App() {
   };
 
   return (
-    <>
+    <SettingsProvider>
       <Navbar />
+      <Settings />
       <Expenses
         activities={activities}
         onDelete={(id) => {
@@ -84,7 +87,7 @@ function App() {
       </Modal>
       <br />
       <Charts activities={activities} />
-    </>
+    </SettingsProvider>
   );
 }
 
