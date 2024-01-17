@@ -3,20 +3,25 @@
     border-collapse: collapse;
 }
 
+
 thead th { 
-    background-color: #f2f2f2; 
+    background-color: var(--thead-tfoot-bg-color-light);
+    background-color: var(--td-bg-color);
     padding: 10px; 
     text-align: left; 
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-weight: bold;
+    color: var(--td-color)
 } 
 
 thead td, tbody td, tfoot td {
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color:var(--td-color);
+    background-color: var(--td-bg-color);
 }
 
 tfoot td {
-    background-color: #f2f2f2; 
+    background-color: var(--thead-tfoot-bg-color-light);
     font-weight: bold;
 }
 
@@ -34,7 +39,7 @@ cursor: pointer;
 
 
 .trashIcon, .changeIcon, .copyIcon {
-    color: #2d4a69;
+    color: var(--icon-color);
 }
 
 .deleteButton:hover .trashIcon,
@@ -50,4 +55,8 @@ cursor: pointer;
 .copyButton:hover .copyIcon,
 .copyButton:active .copyIcon {
     color: rgb(17, 180, 30);
+}
+
+h1 {
+    color:var(--td-color)
 }

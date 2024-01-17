@@ -1,9 +1,16 @@
 import * as React from "react";
 
-export const useLocalStorage = (key: string, fallbackState: []) => {
+interface ThemeSettings {
+  theme: "light" | "dark";
+}
+
+export const useLocalStorage = (
+  key: string,
+  fallbackState: [] | string | ThemeSettings
+) => {
   const [value, setValue] = React.useState(
     JSON.parse(
-      localStorage.getItem(key) || "[]",
+      localStorage.getItem(key) || "[]" || "",
       (key: string, value: string) => {
         if (key === "date") {
           return new Date(value);

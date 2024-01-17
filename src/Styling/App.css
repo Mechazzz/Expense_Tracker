@@ -2,10 +2,14 @@
 .light-mode {
     --font-color: #101212;
     --bg-color: #ffffff;
+    --thead-tfoot-bg-color-light:#f2f2f2; 
   }
   
   .dark-mode {
     --font-color: #cccccc;
     --bg-color: #101212;
-    --font-s: 10px;
+    --icon-color: #94a5b9;
+    --td-bg-color: #2d4a69;
+    --td-color:#d8d8d8;
+
   }

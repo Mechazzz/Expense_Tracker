@@ -64,6 +64,9 @@ const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
               </select>
             </td>
             <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </thead>
         <tbody>
@@ -117,6 +120,9 @@ const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
               ).toFixed(2)}
             </td>
             <td className="totalExpenses">USD</td>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tfoot>
       </table>

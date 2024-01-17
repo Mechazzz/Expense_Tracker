@@ -9,6 +9,7 @@ body {
 .navbar {
     background-color: /* #333; */  #2d4a69;
     color: white;
+    color: var(--td-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
