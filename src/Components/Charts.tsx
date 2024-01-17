@@ -57,6 +57,35 @@ const Charts = ({ activities }: Props) => {
     },
   ];
 
+  const introOfExpense = (label: string) => {
+    if (label === "Free time") {
+      return "Total Expense in case of Free Time Category";
+    }
+    if (label === "Business") {
+      return "Total Expense in case of Business Category";
+    }
+    if (label === "Household") {
+      return "Total Expense in case of Household Category";
+    }
+    if (label === "Others") {
+      return "Total Expense in case of Others Category";
+    }
+    return "";
+  };
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${label} : ${payload[0].value} USD`}</p>
+          <p className="intro">{introOfExpense(label)}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
       <div className="charts">
@@ -89,15 +118,18 @@ const Charts = ({ activities }: Props) => {
             id={barChartId}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ stroke: "var(--barChart-colors" }} />
-            <YAxis tick={{ stroke: "var(--barChart-colors" }} />
-            <Tooltip />
-            <Legend />
-            <Bar
-              dataKey="expense"
-              stroke="var(--barChart-colors"
-              fill="#2d4a69"
+            <XAxis dataKey="name" tick={{ stroke: "var(--barChart-colors)" }} />
+            <YAxis tick={{ stroke: "var(--barChart-colors)" }} />
+            <Tooltip
+              cursor={{ fill: "var(--toolTip-cursor-fill)" }}
+              content={<CustomTooltip />}
+              wrapperStyle={{
+                width: 300,
+                backgroundColor: "var(--barChart--ToolTop--background)",
+                color: "var(--primary-darkMode-font-color)",
+              }}
             />
+            <Bar dataKey="expense" fill="var(--primary-darkMode-color)" />
           </BarChart>
         </ResponsiveContainer>
       </div>
