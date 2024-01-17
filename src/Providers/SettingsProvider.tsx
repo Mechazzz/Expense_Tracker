@@ -45,9 +45,12 @@ export const SettingsContext = createContext<SettingsContextProps>(
 );
 
 const SettingsProvider = ({ children }: { children: ReactNode }) => {
-  const [localState, setLocalState] = useLocalStorage("settings", {
-    theme: "light",
-  });
+  const [localState, setLocalState] = useLocalStorage<SettingsState>(
+    "settings",
+    {
+      theme: "light",
+    }
+  );
   const [settings, setSettings] = useState<SettingsState>(localState);
 
   const toggleTheme = () => {
@@ -59,7 +62,6 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
 
   useLayoutEffect(() => {
     setLocalState(settings);
-    localStorage.setItem("theme", settings.theme);
     if (settings.theme === "light") {
       document.documentElement.classList.remove("dark-mode");
       document.documentElement.classList.add("light-mode");

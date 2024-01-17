@@ -69,7 +69,7 @@ const Charts = ({ activities }: Props) => {
               cy="50%"
               outerRadius={80}
               fill="#2d4a69"
-              label /* ={(entry) => `${entry.name}: ${entry.value}`} */
+              label
             />
             <Tooltip />
           </PieChart>

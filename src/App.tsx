@@ -9,7 +9,10 @@ import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 
 function App() {
-  const [localState, setLocalState] = useLocalStorage("activities", []);
+  const [localState, setLocalState] = useLocalStorage<UserInputType[]>(
+    "activities",
+    []
+  );
   const [activities, setActivities] = useState<UserInputType[]>(localState);
   const [selectedActivity, setSelectedActivity] =
     useState<UserInputType>(defaultValues);
@@ -26,17 +29,18 @@ function App() {
       ...userInput,
     };
 
-    setActivities((prevActivities: UserInputType[]) =>
-      selectedActivity
+    setActivities((prevActivities: UserInputType[]) => {
+      const result = selectedActivity.id
         ? prevActivities.map((activity) =>
             activity.id === selectedActivity.id
               ? { ...activity, ...userInput }
               : activity
           )
-        : [...prevActivities, newActivity]
-    );
+        : [...prevActivities, newActivity];
+      setLocalState(result);
+      return result;
+    });
 
-    setLocalState([...activities, newActivity]);
     setSelectedActivity(defaultValues);
     toggleFunction();
 
@@ -63,6 +67,7 @@ function App() {
         onCopy={(id) => {
           const foundActivity = activities.find((item) => item.id === id)!;
           setActivities([...activities, foundActivity]);
+          setLocalState([...activities, foundActivity]);
         }}
       />
       <button className="openButton" onClick={toggleFunction}>

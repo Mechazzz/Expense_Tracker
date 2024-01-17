@@ -87,6 +87,7 @@
   .submitButton, .openButton {
     background-color: #2d4a69;
     color: #fff;
+    color: var(--button-color);
     padding: 10px 15px;
     border: none;
     border-radius: 4px;

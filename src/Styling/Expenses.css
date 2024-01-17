@@ -23,6 +23,7 @@ thead td, tbody td, tfoot td {
 tfoot td {
     background-color: var(--thead-tfoot-bg-color-light);
     font-weight: bold;
+    background-color: var(--td-bg-color)
 }
 
 .deleteExpense, .changeExpense, .copyExpense {
@@ -59,4 +60,8 @@ cursor: pointer;
 
 h1 {
     color:var(--td-color)
+}
+
+thead td select {
+    background-color: var(--select-color);
 }

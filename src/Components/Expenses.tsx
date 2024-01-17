@@ -123,6 +123,7 @@ const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
             <td></td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
         </tfoot>
       </table>
