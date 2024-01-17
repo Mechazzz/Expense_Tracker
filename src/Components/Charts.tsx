@@ -56,6 +56,7 @@ const Charts = ({ activities }: Props) => {
       ),
     },
   ];
+
   return (
     <>
       <div className="charts">
@@ -88,14 +89,14 @@ const Charts = ({ activities }: Props) => {
             id={barChartId}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ stroke: "#2d4a69" }} />
-            <YAxis tick={{ stroke: "#2d4a69" }} />
+            <XAxis dataKey="name" tick={{ stroke: "var(--barChart-colors" }} />
+            <YAxis tick={{ stroke: "var(--barChart-colors" }} />
             <Tooltip />
             <Legend />
             <Bar
               dataKey="expense"
+              stroke="var(--barChart-colors"
               fill="#2d4a69"
-              /* label={(entry) => entry.value} */
             />
           </BarChart>
         </ResponsiveContainer>
