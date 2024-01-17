@@ -7,6 +7,7 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 import Charts from "./Components/Charts";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
+import { v4 as uniqueId } from "uuid";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage<UserInputType[]>(
@@ -24,7 +25,7 @@ function App() {
 
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
-      id: activities.length + 1,
+      id: uniqueId(),
       date: new Date(),
       ...userInput,
     };
@@ -66,8 +67,12 @@ function App() {
         }}
         onCopy={(id) => {
           const foundActivity = activities.find((item) => item.id === id)!;
-          setActivities([...activities, foundActivity]);
-          setLocalState([...activities, foundActivity]);
+          const newFoundActivity = {
+            ...foundActivity,
+            id: uniqueId(),
+          };
+          setActivities([...activities, newFoundActivity]);
+          setLocalState([...activities, newFoundActivity]);
         }}
       />
       <button className="openButton" onClick={toggleFunction}>

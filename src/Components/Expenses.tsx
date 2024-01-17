@@ -8,9 +8,9 @@ import { newDate } from "../utils/utils.tsx";
 
 interface Props {
   activities: UserInputType[];
-  onDelete: (id: number) => void;
-  onEdit: (id: number) => void;
-  onCopy: (id: number) => void;
+  onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
+  onCopy: (id: string) => void;
 }
 
 const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {

@@ -1,5 +1,5 @@
 export type UserInputType = {
-  id?: number;
+  id?: string;
   activity: string;
   category: string;
   amount: number;

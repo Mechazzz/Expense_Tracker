@@ -65,7 +65,9 @@ const UserInput = ({
           className="activityInput"
         />
         {errors.activity && (
-          <p className="ErrorMessage">{errors.activity.message}</p>
+          <div className="ErrorMessageDiv">
+            <p className="ErrorMessage">{`⚠ ${errors.activity.message}`}</p>
+          </div>
         )}
       </div>
       <div>
@@ -84,7 +86,9 @@ const UserInput = ({
           <option value="Others">Others</option>
         </select>
         {errors.category && (
-          <p className="ErrorMessage">{errors.category.message}</p>
+          <div className="ErrorMessageDiv">
+            <p className="ErrorMessage">{`⚠ ${errors.category.message}`}</p>
+          </div>
         )}
       </div>
       <div>
@@ -99,7 +103,9 @@ const UserInput = ({
           className="amountInput"
         />
         {errors.amount && (
-          <p className="ErrorMessage">{errors.amount.message}</p>
+          <div className="ErrorMessageDiv">
+            <p className="ErrorMessage">{`⚠ ${errors.amount.message}`}</p>
+          </div>
         )}
       </div>
       <div>
@@ -117,7 +123,9 @@ const UserInput = ({
           <option value="HUF">HUF</option>
         </select>
         {errors.currency && (
-          <p className="ErrorMessage">{errors.currency.message}</p>
+          <div className="ErrorMessageDiv">
+            <p className="ErrorMessage">{`⚠ ${errors.currency.message}`}</p>
+          </div>
         )}
       </div>
       <button className="submitButton" type="submit">
