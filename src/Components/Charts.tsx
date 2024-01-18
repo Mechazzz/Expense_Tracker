@@ -98,7 +98,7 @@ const Charts = ({ activities }: Props) => {
               cy="50%"
               outerRadius={80}
               fill="var(--charts-bar-fill)"
-              label={{ stroke: "var(--charts-primary-font-color)" }}
+              label={{ fill: "var(--charts-primary-font-color)" }}
             />
             <Tooltip
               wrapperStyle={{
@@ -124,9 +124,9 @@ const Charts = ({ activities }: Props) => {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis
               dataKey="name"
-              tick={{ stroke: "var(--charts-primary-font-color)" }}
+              tick={{ fill: "var(--charts-primary-font-color)" }}
             />
-            <YAxis tick={{ stroke: "var(--charts-primary-font-color)" }} />
+            <YAxis tick={{ fill: "var(--charts-primary-font-color)" }} />
             <Tooltip
               cursor={{ fill: "var(--charts-toolTip-cursor-fill)" }}
               content={<CustomTooltip />}
