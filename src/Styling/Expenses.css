@@ -5,25 +5,23 @@
 
 
 thead th { 
-    background-color: var(--thead-tfoot-bg-color-light);
-    background-color: var(--td-bg-color);
+    background-color: var(--thead-tfoot-background-color);
+    color: var(--primary-font-color);
     padding: 10px; 
     text-align: left; 
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     font-weight: bold;
-    color: var(--td-color)
 } 
 
 thead td, tbody td, tfoot td {
     font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color:var(--td-color);
-    background-color: var(--td-bg-color);
+    background-color: var(--primary-background-color);
+    color:var(--primary-font-color);
 }
 
 tfoot td {
-    background-color: var(--thead-tfoot-bg-color-light);
+    background-color: var(--thead-tfoot-background-color);
     font-weight: bold;
-    background-color: var(--td-bg-color)
 }
 
 .deleteExpense, .changeExpense, .copyExpense {
@@ -59,9 +57,10 @@ cursor: pointer;
 }
 
 h1 {
-    color:var(--td-color)
+    color:var(--primary-font-color)
 }
 
 thead td select {
-    background-color: var(--select-color);
+    background-color: var(--primary-background-color);
+    color: var(--primary-font-color)
 }

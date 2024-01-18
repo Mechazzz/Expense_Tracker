@@ -97,10 +97,15 @@ const Charts = ({ activities }: Props) => {
               cx="50%"
               cy="50%"
               outerRadius={80}
-              fill="#2d4a69"
-              label
+              fill="var(--charts-bar-fill)"
+              label={{ stroke: "var(--charts-primary-font-color)" }}
             />
-            <Tooltip />
+            <Tooltip
+              wrapperStyle={{
+                backgroundColor: "var(--charts-toolTip-background)",
+                color: "var(--primary-font-color)",
+              }}
+            />
           </PieChart>
         </ResponsiveContainer>
         <ResponsiveContainer width="100%" aspect={2}>
@@ -117,18 +122,21 @@ const Charts = ({ activities }: Props) => {
             id={barChartId}
           >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" tick={{ stroke: "var(--barChart-colors)" }} />
-            <YAxis tick={{ stroke: "var(--barChart-colors)" }} />
+            <XAxis
+              dataKey="name"
+              tick={{ stroke: "var(--charts-primary-font-color)" }}
+            />
+            <YAxis tick={{ stroke: "var(--charts-primary-font-color)" }} />
             <Tooltip
-              cursor={{ fill: "var(--toolTip-cursor-fill)" }}
+              cursor={{ fill: "var(--charts-toolTip-cursor-fill)" }}
               content={<CustomTooltip />}
               wrapperStyle={{
                 width: 300,
-                backgroundColor: "var(--barChart--ToolTop--background)",
-                color: "var(--primary-darkMode-font-color)",
+                backgroundColor: "var(--charts-toolTip-background)",
+                color: "var(--primary-font-color)",
               }}
             />
-            <Bar dataKey="expense" fill="var(--primary-darkMode-color)" />
+            <Bar dataKey="expense" fill="var(--charts-bar-fill)" />
           </BarChart>
         </ResponsiveContainer>
       </div>

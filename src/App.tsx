@@ -8,6 +8,7 @@ import Charts from "./Components/Charts";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
+import Settings from "./Components/Settings";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage<UserInputType[]>(
@@ -55,6 +56,7 @@ function App() {
 
   return (
     <>
+      <Settings />
       <Expenses
         activities={activities}
         onDelete={(id) => {
