@@ -78,7 +78,7 @@ function App() {
       <button className="openButton" onClick={toggleFunction}>
         Adding new Activity
       </button>
-      <Modal modal={modal}>
+      <Modal modal={modal} closeButtonFunction={closeButtonFunction}>
         <h2>New activity</h2>
         <p className="requestMessage">
           Please fill out carefully the below fields

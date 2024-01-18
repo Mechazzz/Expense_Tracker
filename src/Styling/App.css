@@ -3,6 +3,7 @@
     --font-color: #101212;
     --bg-color: #ffffff;
     --thead-tfoot-bg-color-light:#f2f2f2; 
+    --secondary-lightMode-font-color:#d8d8d8;
   }
   
   .dark-mode {
@@ -18,6 +19,4 @@
     --barChart--ToolTop--background:#3d658f;
     --toolTip-cursor-fill:#3e5c79;
     --primary-darkMode-color:#2d4a69;
-
-
   }

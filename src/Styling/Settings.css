@@ -2,10 +2,15 @@
     margin: 10px;
 }
 
-#light .switch label {
-    color: black
+.switchLabel {
+    color: var(--primary-darkMode-font-color)
+    
 }
 
-#dark .switch label {
-    color:white
+h2 {
+    color: var(--primary-darkMode-font-color)
+}
+
+.currentTheme {
+    color: var(--primary-darkMode-font-color)
 }

@@ -65,7 +65,7 @@ const UserInput = ({
           className="activityInput"
         />
         {errors.activity && (
-          <div className="ErrorMessageDiv">
+          <div>
             <p className="ErrorMessage">{`⚠ ${errors.activity.message}`}</p>
           </div>
         )}
@@ -86,7 +86,7 @@ const UserInput = ({
           <option value="Others">Others</option>
         </select>
         {errors.category && (
-          <div className="ErrorMessageDiv">
+          <div>
             <p className="ErrorMessage">{`⚠ ${errors.category.message}`}</p>
           </div>
         )}
@@ -103,7 +103,7 @@ const UserInput = ({
           className="amountInput"
         />
         {errors.amount && (
-          <div className="ErrorMessageDiv">
+          <div>
             <p className="ErrorMessage">{`⚠ ${errors.amount.message}`}</p>
           </div>
         )}
@@ -123,7 +123,7 @@ const UserInput = ({
           <option value="HUF">HUF</option>
         </select>
         {errors.currency && (
-          <div className="ErrorMessageDiv">
+          <div>
             <p className="ErrorMessage">{`⚠ ${errors.currency.message}`}</p>
           </div>
         )}

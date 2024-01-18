@@ -6,28 +6,11 @@ import {
   useLayoutEffect,
 } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
-interface SettingsState {
-  theme: "light" | "dark";
-}
-
-export interface SettingsContextProps {
-  settings: SettingsState;
-  setSettings: React.Dispatch<React.SetStateAction<SettingsState>>;
-  toggleTheme: () => void;
-  defaultThemeStyles: ThemeStyles;
-}
-
-interface ThemeStyles {
-  light: {
-    background: string;
-    color: string;
-  };
-  dark: {
-    background: string;
-    color: string;
-  };
-}
+import {
+  SettingsState,
+  SettingsContextProps,
+  ThemeStyles,
+} from "../types/SettingsProviderInterfaces";
 
 const defaultThemeStyles: ThemeStyles = {
   light: {
