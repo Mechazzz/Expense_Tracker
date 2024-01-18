@@ -7,8 +7,8 @@ body {
 }
 
 .navbar {
-    background-color: #2d4a69;
-    color: var(--primary-darkMode-font-color);
+    background-color: var(--thead-tfoot-background-color);
+    color: var(--primary-font-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,3 +36,4 @@ body {
     height: 100%;
     display: flex;
 }
+

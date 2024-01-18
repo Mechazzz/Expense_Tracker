@@ -2,15 +2,6 @@
     margin: 10px;
 }
 
-.switchLabel {
-    color: var(--primary-darkMode-font-color)
-    
-}
-
-h2 {
-    color: var(--primary-darkMode-font-color)
-}
-
-.currentTheme {
-    color: var(--primary-darkMode-font-color)
+h2, .switchLabel, .currentTheme {
+    color: var(--primary-font-color)
 }

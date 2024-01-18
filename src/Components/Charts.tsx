@@ -72,12 +72,29 @@ const Charts = ({ activities }: Props) => {
     return "";
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltipBarChart = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
+      const formattedValue = payload[0].value.toFixed(2);
       return (
         <div className="custom-tooltip">
-          <p className="label">{`${label} : ${payload[0].value} USD`}</p>
+          <p className="label">{`${label} : ${formattedValue} USD`}</p>
           <p className="intro">{introOfExpense(label)}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const CustomTooltipPieChart = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const { name, value } = payload[0];
+      const formattedValue = value.toFixed(2);
+
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${name} : ${formattedValue} USD`}</p>
+          <p className="intro">{introOfExpense(name)}</p>
         </div>
       );
     }
@@ -91,6 +108,7 @@ const Charts = ({ activities }: Props) => {
         <ResponsiveContainer width="100%" aspect={2}>
           <PieChart width={400} height={400} id={pieChartId}>
             <Pie
+              stroke="var(--primary-font-color)"
               dataKey="expense"
               isAnimationActive={true}
               data={expensesData}
@@ -98,9 +116,34 @@ const Charts = ({ activities }: Props) => {
               cy="50%"
               outerRadius={80}
               fill="var(--charts-bar-fill)"
-              label={{ fill: "var(--charts-primary-font-color)" }}
+              label={({
+                cx,
+                cy,
+                midAngle,
+                innerRadius,
+                outerRadius,
+                value,
+              }) => {
+                const RADIAN = Math.PI / 180;
+                const radius = 25 + innerRadius + (outerRadius - innerRadius);
+                const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    fill="var(--charts-primary-font-color)"
+                    textAnchor={x > cx ? "start" : "end"}
+                    dominantBaseline="central"
+                  >
+                    {`${value.toFixed(2)} USD`}
+                  </text>
+                );
+              }}
             />
             <Tooltip
+              content={<CustomTooltipPieChart />}
               wrapperStyle={{
                 backgroundColor: "var(--charts-toolTip-background)",
                 color: "var(--primary-font-color)",
@@ -129,14 +172,18 @@ const Charts = ({ activities }: Props) => {
             <YAxis tick={{ fill: "var(--charts-primary-font-color)" }} />
             <Tooltip
               cursor={{ fill: "var(--charts-toolTip-cursor-fill)" }}
-              content={<CustomTooltip />}
+              content={<CustomTooltipBarChart />}
               wrapperStyle={{
                 width: 300,
                 backgroundColor: "var(--charts-toolTip-background)",
                 color: "var(--primary-font-color)",
               }}
             />
-            <Bar dataKey="expense" fill="var(--charts-bar-fill)" />
+            <Bar
+              dataKey="expense"
+              fill="var(--charts-bar-fill)"
+              stroke="var(--primary-font-color)"
+            />
           </BarChart>
         </ResponsiveContainer>
       </div>

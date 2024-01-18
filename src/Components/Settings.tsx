@@ -1,8 +1,6 @@
 import Switch from "react-switch";
-import {
-  SettingsContextProps,
-  useSettings,
-} from "../Providers/SettingsProvider";
+import { useSettings } from "../Providers/SettingsProvider";
+import { SettingsContextProps } from "../types/SettingsProviderInterfaces";
 import "../Styling/Settings.css";
 
 const Settings = () => {
