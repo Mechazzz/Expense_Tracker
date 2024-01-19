@@ -4,19 +4,13 @@ interface IconInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: "change" | "delete" | "copy";
 }
 
-const Button = (props: IconInterface) => {
+const IconButton = ({ variant, ...props }: IconInterface) => {
   return (
     <button
       {...props}
-      className={
-        props.variant === "delete"
-          ? "deleteButton"
-          : props.variant === "change"
-          ? "changeButton"
-          : "copyButton"
-      }
+      className={["iconButton", `iconButton-${variant}`].join(" ")}
     />
   );
 };
 
-export default Button;
+export default IconButton;

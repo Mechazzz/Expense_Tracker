@@ -5,7 +5,7 @@ import { calculatedAmount } from "../utils/utils.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { newDate } from "../utils/utils.tsx";
-import Button from "./IconButton.tsx";
+import IconButton from "./IconButton.tsx";
 
 interface Props {
   activities: UserInputType[];
@@ -81,29 +81,32 @@ const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
                 <td>{activity.amount}</td>
                 <td>{activity.currency}</td>
                 {<td>{newDate(activity.date!)}</td>}
-                <td className="changeExpense">
-                  <Button
+                <td className="ExpenseDiv">
+                  <IconButton
                     variant="change"
                     onClick={() => {
                       onEdit(activity.id!);
                       console.log(activity.id!);
                     }}
                   >
-                    <FontAwesomeIcon icon={faPen} className={"changeIcon"} />
-                  </Button>
+                    <FontAwesomeIcon icon={faPen} />
+                  </IconButton>
                 </td>
-                <td className="copyExpense">
-                  <Button variant="copy" onClick={() => onCopy(activity.id!)}>
-                    <FontAwesomeIcon icon={faCopy} className={"copyIcon"} />
-                  </Button>
+                <td className="ExpenseDiv">
+                  <IconButton
+                    variant="copy"
+                    onClick={() => onCopy(activity.id!)}
+                  >
+                    <FontAwesomeIcon icon={faCopy} />
+                  </IconButton>
                 </td>
-                <td className="deleteExpense">
-                  <Button
+                <td className="ExpenseDiv">
+                  <IconButton
                     variant="delete"
                     onClick={() => onDelete(activity.id!)}
                   >
-                    <FontAwesomeIcon icon={faTrash} className={"trashIcon"} />
-                  </Button>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </IconButton>
                 </td>
               </tr>
             ))}

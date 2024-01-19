@@ -1,34 +1,42 @@
-.table, th, tr, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+.table,
+th,
+tr,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
 }
 
+thead th {
+  background-color: var(--thead-tfoot-background-color);
+  color: var(--primary-font-color);
+  padding: 10px;
+  text-align: left;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-weight: bold;
+}
 
-thead th { 
-    background-color: var(--thead-tfoot-background-color);
-    color: var(--primary-font-color);
-    padding: 10px; 
-    text-align: left; 
-    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    font-weight: bold;
-} 
-
-thead td, tbody td, tfoot td {
-    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    background-color: var(--primary-background-color);
-    color:var(--primary-font-color);
+thead td,
+tbody td,
+tfoot td {
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  background-color: var(--primary-background-color);
+  color: var(--primary-font-color);
 }
 
 tfoot td {
-    background-color: var(--thead-tfoot-background-color);
-    font-weight: bold;
+  background-color: var(--thead-tfoot-background-color);
+  font-weight: bold;
 }
 
 h1 {
-    color:var(--primary-font-color)
+  color: var(--primary-font-color);
 }
 
 thead td select {
-    background-color: var(--primary-background-color);
-    color: var(--primary-font-color)
+  background-color: var(--primary-background-color);
+  color: var(--primary-font-color);
+}
+
+.ExpenseDiv {
+  text-align: center;
 }
