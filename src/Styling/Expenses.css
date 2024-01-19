@@ -16,8 +16,7 @@ thead th {
 }
 
 thead td,
-tbody td,
-tfoot td {
+tbody td {
   font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   background-color: var(--primary-background-color);
   color: var(--primary-font-color);
@@ -26,6 +25,8 @@ tfoot td {
 tfoot td {
   background-color: var(--thead-tfoot-background-color);
   font-weight: bold;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: var(--primary-font-color);
 }
 
 h1 {

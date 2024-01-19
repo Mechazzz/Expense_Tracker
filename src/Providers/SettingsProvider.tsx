@@ -34,6 +34,7 @@ const SettingsProvider = ({ children }: { children: ReactNode }) => {
       theme: "light",
     }
   );
+
   const [settings, setSettings] = useState<SettingsState>(localState);
 
   const toggleTheme = () => {

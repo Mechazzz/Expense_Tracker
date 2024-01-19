@@ -1,26 +1,34 @@
-
 .light-mode {
-    --primary-background-color: #ffffff;
-    --button-hover-background-color:hsl(50, 6%, 79%);
-    --thead-tfoot-background-color:hsl(0, 0%, 91%);
-    --modal-background:hsl(0, 0%, 91%);
-    --primary-font-color: black;
-    --icon-color: #2d4a69;
-    --charts-primary-font-color: black;
-    --charts-toolTip-cursor-fill:hsl(0, 0%, 91%);
-    --charts-toolTip-background:rgb(214, 214, 206);
-    --charts-bar-fill: hsl(60, 5%, 78%);
-  }
-  
-  .dark-mode {
-    --primary-background-color: #2d4a69;
-    --button-hover-background-color:#1c426b;
-    --thead-tfoot-background-color: #203449;
-    --modal-background: linear-gradient(#141e30, #243b55);
-    --primary-font-color:#d8d8d8;
-    --icon-color:  #94a5b9;
-    --charts-primary-font-color: #5888bb;
-    --charts-toolTip-cursor-fill: #3e5c79;
-    --charts-toolTip-background:#3d658f;
-    --charts-bar-fill:#2d4a69;
-  }
+  --primary-background-color: #ffffff;
+  --secondary-background-color: #ffffff;
+  --button-hover-background-color: hsl(50, 6%, 79%);
+  --thead-tfoot-background-color: hsl(0, 0%, 91%);
+  --modal-background: hsl(0, 0%, 91%);
+  --primary-font-color: black;
+  --icon-color: #2d4a69;
+  --charts-primary-font-color: black;
+  --charts-toolTip-cursor-fill: hsl(0, 0%, 91%);
+  --charts-toolTip-background: rgb(214, 214, 206);
+  --charts-bar-fill: hsl(60, 5%, 78%);
+}
+
+.dark-mode {
+  --primary-background-color: #2d4a69;
+  --secondary-background-color: black;
+  --button-hover-background-color: #1c426b;
+  --thead-tfoot-background-color: #203449;
+  --modal-background: linear-gradient(#141e30, #243b55);
+  --primary-font-color: #d8d8d8;
+  --icon-color: #94a5b9;
+  --charts-primary-font-color: #5888bb;
+  --charts-toolTip-cursor-fill: #3e5c79;
+  --charts-toolTip-background: #3d658f;
+  --charts-bar-fill: #2d4a69;
+}
+
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  padding-right: 50px;
+  padding-left: 25px;
+}

@@ -8,7 +8,6 @@ import Charts from "./Components/Charts";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
-import Settings from "./Components/Settings";
 import Button from "./Components/Button";
 
 function App() {
@@ -56,40 +55,41 @@ function App() {
 
   return (
     <>
-      <Settings />
-      <Expenses
-        activities={activities}
-        onDelete={(id) => {
-          setActivities(activities.filter((item) => item.id !== id));
-        }}
-        onEdit={(id) => {
-          setSelectedActivity(activities.find((item) => item.id === id)!);
-          toggleFunction();
-        }}
-        onCopy={(id) => {
-          const foundActivity = activities.find((item) => item.id === id)!;
-          const newFoundActivity = {
-            ...foundActivity,
-            id: uniqueId(),
-          };
-          setActivities([...activities, newFoundActivity]);
-        }}
-      />
-      <Button onClick={toggleFunction}>Adding new Activity</Button>
-      <Modal modal={modal} closeButtonFunction={closeButtonFunction}>
-        <h2>New activity</h2>
-        <p className="requestMessage">
-          Please fill out carefully the below fields
-        </p>
-        <UserInput
-          selectedActivity={selectedActivity}
-          toggleFunction={toggleFunction}
-          onSubmitUserInput={handleFormSubmit}
-          closeButtonFunction={closeButtonFunction}
+      <div className="app-container">
+        <Expenses
+          activities={activities}
+          onDelete={(id) => {
+            setActivities(activities.filter((item) => item.id !== id));
+          }}
+          onEdit={(id) => {
+            setSelectedActivity(activities.find((item) => item.id === id)!);
+            toggleFunction();
+          }}
+          onCopy={(id) => {
+            const foundActivity = activities.find((item) => item.id === id)!;
+            const newFoundActivity = {
+              ...foundActivity,
+              id: uniqueId(),
+            };
+            setActivities([...activities, newFoundActivity]);
+          }}
         />
-      </Modal>
-      <br />
-      <Charts activities={activities} />
+        <Button onClick={toggleFunction}>Adding new Activity</Button>
+        <Modal modal={modal} closeButtonFunction={closeButtonFunction}>
+          <h2>New activity</h2>
+          <p className="requestMessage">
+            Please fill out carefully the below fields
+          </p>
+          <UserInput
+            selectedActivity={selectedActivity}
+            toggleFunction={toggleFunction}
+            onSubmitUserInput={handleFormSubmit}
+            closeButtonFunction={closeButtonFunction}
+          />
+        </Modal>
+        <br />
+        <Charts activities={activities} />
+      </div>
     </>
   );
 }

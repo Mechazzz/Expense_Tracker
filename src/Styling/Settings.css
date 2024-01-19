@@ -1,7 +1,15 @@
 .switch label {
-    margin: 10px;
+  margin: 10px;
 }
 
-h2, .switchLabel, .currentTheme {
-    color: var(--primary-font-color)
+h2,
+.switchLabel,
+.currentTheme {
+  color: var(--primary-font-color);
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding-left: 25px;
 }
