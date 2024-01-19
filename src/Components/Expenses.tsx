@@ -5,6 +5,7 @@ import { calculatedAmount } from "../utils/utils.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { newDate } from "../utils/utils.tsx";
+import Button from "./IconButton.tsx";
 
 interface Props {
   activities: UserInputType[];
@@ -81,31 +82,28 @@ const Expenses = ({ activities, onDelete, onEdit, onCopy }: Props) => {
                 <td>{activity.currency}</td>
                 {<td>{newDate(activity.date!)}</td>}
                 <td className="changeExpense">
-                  <button
-                    className="changeButton"
+                  <Button
+                    variant="change"
                     onClick={() => {
                       onEdit(activity.id!);
                       console.log(activity.id!);
                     }}
                   >
                     <FontAwesomeIcon icon={faPen} className={"changeIcon"} />
-                  </button>
+                  </Button>
                 </td>
                 <td className="copyExpense">
-                  <button
-                    className="copyButton"
-                    onClick={() => onCopy(activity.id!)}
-                  >
+                  <Button variant="copy" onClick={() => onCopy(activity.id!)}>
                     <FontAwesomeIcon icon={faCopy} className={"copyIcon"} />
-                  </button>
+                  </Button>
                 </td>
                 <td className="deleteExpense">
-                  <button
-                    className="deleteButton"
+                  <Button
+                    variant="delete"
                     onClick={() => onDelete(activity.id!)}
                   >
                     <FontAwesomeIcon icon={faTrash} className={"trashIcon"} />
-                  </button>
+                  </Button>
                 </td>
               </tr>
             ))}

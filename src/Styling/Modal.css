@@ -84,31 +84,3 @@
 .input:focus {
     border: 3px solid #555;
 }
-
-  .submitButton, .openButton {
-    background-color: var(--thead-tfoot-background-color);
-    color: var(--primary-font-color);
-    padding: 10px 15px;
-    border: 1px solid black;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
- .submitButton:hover, .openButton:hover, .closeButton:hover {
-    background-color: var(--button-hover-background-color);
-  }
-
-.closeButton {
-background-color: var(--thead-tfoot-background-color);
-color: var(--primary-font-color);
-margin-top: 10px;
-padding: 10px 15px;
-border: 1px solid black;
-border-radius: 4px;
-cursor: pointer;
-float: right;
-}
-
-.submitButton {
-margin-top: 10px;
-}

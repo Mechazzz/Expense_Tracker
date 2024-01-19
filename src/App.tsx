@@ -9,6 +9,7 @@ import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
 import Settings from "./Components/Settings";
+import Button from "./Components/Button";
 
 function App() {
   const [localState, setLocalState] = useLocalStorage<UserInputType[]>(
@@ -77,9 +78,7 @@ function App() {
           setLocalState([...activities, newFoundActivity]);
         }}
       />
-      <button className="openButton" onClick={toggleFunction}>
-        Adding new Activity
-      </button>
+      <Button onClick={toggleFunction}>Adding new Activity</Button>
       <Modal modal={modal} closeButtonFunction={closeButtonFunction}>
         <h2>New activity</h2>
         <p className="requestMessage">

@@ -5,6 +5,7 @@ import { UserInputType } from "../types/UserInput";
 import "../Styling/ErrorMessage.css";
 import "../Styling/Modal.css";
 import { defaultValues } from "../utils/constants";
+import Button from "./Button";
 
 const schema = z.object({
   activity: z
@@ -128,18 +129,19 @@ const UserInput = ({
           </div>
         )}
       </div>
-      <button className="submitButton" type="submit">
+      <Button className="submitButton" type="submit">
         Submit your activity
-      </button>
-      <button
+      </Button>
+      <Button
         className="closeButton"
+        style={{ float: "right" }}
         onClick={(e) => {
           e.preventDefault();
           closeButtonFunction();
         }}
       >
         Close
-      </button>
+      </Button>
     </form>
   );
 };

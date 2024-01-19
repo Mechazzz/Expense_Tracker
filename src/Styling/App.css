@@ -1,7 +1,7 @@
 
 .light-mode {
     --primary-background-color: #ffffff;
-    --button-background-color:#e6ecec;
+    --button-hover-background-color:hsl(50, 6%, 79%);
     --thead-tfoot-background-color:hsl(0, 0%, 91%);
     --modal-background:hsl(0, 0%, 91%);
     --primary-font-color: black;
