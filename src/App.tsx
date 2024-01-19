@@ -12,11 +12,11 @@ import Settings from "./Components/Settings";
 import Button from "./Components/Button";
 
 function App() {
-  const [localState, setLocalState] = useLocalStorage<UserInputType[]>(
+  const [activities, setActivities] = useLocalStorage<UserInputType[]>(
     "activities",
     []
   );
-  const [activities, setActivities] = useState<UserInputType[]>(localState);
+
   const [selectedActivity, setSelectedActivity] =
     useState<UserInputType>(defaultValues);
 
@@ -40,7 +40,6 @@ function App() {
               : activity
           )
         : [...prevActivities, newActivity];
-      setLocalState(result);
       return result;
     });
 
@@ -62,7 +61,6 @@ function App() {
         activities={activities}
         onDelete={(id) => {
           setActivities(activities.filter((item) => item.id !== id));
-          setLocalState(activities.filter((item) => item.id !== id));
         }}
         onEdit={(id) => {
           setSelectedActivity(activities.find((item) => item.id === id)!);
@@ -75,7 +73,6 @@ function App() {
             id: uniqueId(),
           };
           setActivities([...activities, newFoundActivity]);
-          setLocalState([...activities, newFoundActivity]);
         }}
       />
       <Button onClick={toggleFunction}>Adding new Activity</Button>
