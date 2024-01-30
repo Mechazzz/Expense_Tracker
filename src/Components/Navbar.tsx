@@ -22,10 +22,13 @@ const Navbar = () => {
       </a>
       <ul>
         <li className="website">
-          <a href="/settings">Settings</a>
+          <a href="/">App</a>
+        </li>
+        <li className="dashboard">
+          <a href="/dashboard">Dashboard</a>
         </li>
         <li className="website">
-          <a href="/app">App</a>
+          <a href="/settings">Settings</a>
         </li>
         <li>
           <div>{currentDateAndTime}</div>

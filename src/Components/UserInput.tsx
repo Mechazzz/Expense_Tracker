@@ -33,7 +33,6 @@ type Data = z.infer<typeof schema>;
 
 interface Props {
   onSubmitUserInput: (userInput: UserInputType) => void;
-  toggleFunction: () => void;
   selectedActivity: UserInputType;
   closeButtonFunction: () => void;
 }

@@ -28,7 +28,16 @@
 
 .app-container {
   width: 100%;
-  min-height: 100vh;
   padding-right: 50px;
   padding-left: 25px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+html,
+body,
+#root {
+  height: 100%;
 }

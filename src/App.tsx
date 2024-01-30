@@ -4,11 +4,9 @@ import Expenses from "./Components/Expenses";
 import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import Charts from "./Components/Charts";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
-import Button from "./Components/Button";
 
 function App() {
   const [activities, setActivities] = useLocalStorage<UserInputType[]>(
@@ -57,6 +55,7 @@ function App() {
     <>
       <div className="app-container">
         <Expenses
+          toggleFunction={toggleFunction}
           activities={activities}
           onDelete={(id) => {
             setActivities(activities.filter((item) => item.id !== id));
@@ -74,7 +73,6 @@ function App() {
             setActivities([...activities, newFoundActivity]);
           }}
         />
-        <Button onClick={toggleFunction}>Adding new Activity</Button>
         <Modal modal={modal} closeButtonFunction={closeButtonFunction}>
           <h2>New activity</h2>
           <p className="requestMessage">
@@ -82,13 +80,12 @@ function App() {
           </p>
           <UserInput
             selectedActivity={selectedActivity}
-            toggleFunction={toggleFunction}
             onSubmitUserInput={handleFormSubmit}
             closeButtonFunction={closeButtonFunction}
           />
         </Modal>
         <br />
-        <Charts activities={activities} />
+        {/*         <Charts activities={activities} /> */}
       </div>
     </>
   );

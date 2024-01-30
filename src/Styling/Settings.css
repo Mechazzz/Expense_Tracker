@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100%;
+}
+
 .switch label {
   margin: 10px;
 }
@@ -10,6 +15,6 @@ h2,
 
 .container {
   width: 100%;
-  min-height: 100vh;
   padding-left: 25px;
+  box-sizing: border-box;
 }

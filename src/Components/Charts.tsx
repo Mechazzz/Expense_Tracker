@@ -1,3 +1,4 @@
+import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 import {
   PieChart,
   Pie,
@@ -14,11 +15,9 @@ import { UserInputType } from "../types/UserInput";
 import { calculatedAmount } from "../utils/utils.tsx";
 import { v4 as uniqueId } from "uuid";
 
-interface Props {
-  activities: UserInputType[];
-}
+const Charts = () => {
+  const [activities] = useLocalStorage<UserInputType[]>("activities", []);
 
-const Charts = ({ activities }: Props) => {
   const barChartId = uniqueId();
   const pieChartId = uniqueId();
   const expensesData = [
