@@ -2,7 +2,6 @@ import Charts from "./Charts";
 import "../Styling/Dashboard.css";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserInputType } from "../types/UserInput";
-/* import Datepicker from "./Datepicker"; */
 
 const Dashboard = () => {
   const [activities] = useLocalStorage<UserInputType[]>("activities", []);
@@ -43,9 +42,7 @@ const Dashboard = () => {
         <div>
           <Charts />
         </div>
-        {/*         <div>
-          <Datepicker />
-        </div> */}
+        <div></div>
       </div>
     </>
   );

@@ -6,6 +6,8 @@ import "../Styling/ErrorMessage.css";
 import "../Styling/Modal.css";
 import { defaultValues } from "../utils/constants";
 import Button from "./Button";
+import Datepicker from "./Datepicker";
+import { useState } from "react";
 
 const schema = z.object({
   activity: z
@@ -26,15 +28,6 @@ const schema = z.object({
     .min(1, { message: "Amount is required and must be a valid number" }),
   currency: z.string().refine((value) => value !== "", {
     message: "Valid currency is needed",
-  }),
-  year: z.string().refine((value) => value !== "", {
-    message: "Valid category is needed",
-  }),
-  month: z.string().refine((value) => value !== "", {
-    message: "Valid category is needed",
-  }),
-  day: z.string().refine((value) => value !== "", {
-    message: "Valid category is needed",
   }),
 });
 
@@ -60,8 +53,17 @@ const UserInput = ({
     defaultValues: selectedActivity || defaultValues,
   });
 
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const handleSelect = (date: Date) => {
+    setSelectedDate(date);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmitUserInput)}>
+    <form
+      onSubmit={handleSubmit((userInput) =>
+        onSubmitUserInput({ ...userInput, date: selectedDate })
+      )}
+    >
       <div>
         <label htmlFor="activity" className="activityLabel">
           Activity
@@ -137,6 +139,7 @@ const UserInput = ({
           </div>
         )}
       </div>
+      <Datepicker selectedDate={selectedDate} onDateChange={handleSelect} />
       <Button className="submitButton" type="submit">
         Submit your activity
       </Button>

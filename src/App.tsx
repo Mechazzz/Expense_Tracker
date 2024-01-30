@@ -25,7 +25,7 @@ function App() {
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
       id: uniqueId(),
-      date: new Date(),
+      /*       date: new Date(), */
       ...userInput,
     };
 
@@ -85,7 +85,6 @@ function App() {
           />
         </Modal>
         <br />
-        {/*         <Charts activities={activities} /> */}
       </div>
     </>
   );
