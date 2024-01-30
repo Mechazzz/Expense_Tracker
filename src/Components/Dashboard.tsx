@@ -2,7 +2,7 @@ import Charts from "./Charts";
 import "../Styling/Dashboard.css";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserInputType } from "../types/UserInput";
-import { useState } from "react";
+/* import Datepicker from "./Datepicker"; */
 
 const Dashboard = () => {
   const [activities] = useLocalStorage<UserInputType[]>("activities", []);
@@ -18,29 +18,34 @@ const Dashboard = () => {
       .reduce((acc, entry) => acc + entry.amount, 0);
   };
 
-  const handleYearChange = (event) => {
+  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const year = parseInt(event.target.value, 10);
     setSelectedYear(year);
   };
 
   return (
     <>
-      <div>
-        <label>Select year:</label>
-        <select value={selectedYear} onChange={handleYearChange}>
-          <option value={2020}>2020</option>
-          <option value={2021}>2021</option>
-          <option value={2022}>2022</option>
-          <option value={2023}>2023</option>
-          <option value={2024}>2024</option>
-          <option value={2025}>2025</option>
-        </select>
-        <p>
-          Sum for {selectedYear}: {totalAmountPerYear(selectedYear)}
-        </p>
-      </div>
-      <div>
-        <Charts />
+      <div className="main_container">
+        <div>
+          <label>Select year:</label>
+          <select value={selectedYear} onChange={handleYearChange}>
+            <option value={2020}>2020</option>
+            <option value={2021}>2021</option>
+            <option value={2022}>2022</option>
+            <option value={2023}>2023</option>
+            <option value={2024}>2024</option>
+            <option value={2025}>2025</option>
+          </select>
+          <p>
+            Sum for {selectedYear}: {totalAmountPerYear(selectedYear)}
+          </p>
+        </div>
+        <div>
+          <Charts />
+        </div>
+        {/*         <div>
+          <Datepicker />
+        </div> */}
       </div>
     </>
   );

@@ -5,4 +5,7 @@ export type UserInputType = {
   amount: number;
   currency: string;
   date?: Date;
+  year?: string;
+  month?: string;
+  day?: string;
 };

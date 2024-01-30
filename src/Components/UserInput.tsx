@@ -27,6 +27,15 @@ const schema = z.object({
   currency: z.string().refine((value) => value !== "", {
     message: "Valid currency is needed",
   }),
+  year: z.string().refine((value) => value !== "", {
+    message: "Valid category is needed",
+  }),
+  month: z.string().refine((value) => value !== "", {
+    message: "Valid category is needed",
+  }),
+  day: z.string().refine((value) => value !== "", {
+    message: "Valid category is needed",
+  }),
 });
 
 type Data = z.infer<typeof schema>;
