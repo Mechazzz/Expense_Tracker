@@ -1,5 +1,5 @@
-export const EUR = 0.91;
-export const HUF = 345;
+export const EUR = 1.08; // 1 eur = 1,08 dollar
+export const HUF = 354; //  1 dollár = kb 354 Ft
 
 export const defaultValues = {
   activity: "",

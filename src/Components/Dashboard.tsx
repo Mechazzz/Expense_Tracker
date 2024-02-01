@@ -2,7 +2,9 @@ import Charts from "./Charts";
 import "../Styling/Dashboard.css";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserInputType } from "../types/UserInput";
-import { newDate } from "../utils/utils";
+import { calculatedAmount, newDate } from "../utils/utils";
+import { EUR, HUF } from "../utils/constants";
+import Button from "./Button";
 
 const Dashboard = () => {
   const [activities] = useLocalStorage<UserInputType[]>("activities", []);
@@ -25,12 +27,20 @@ const Dashboard = () => {
   const totalAmountPerYear = (year: number) => {
     const filteredYears = yearFilteringFunction(year);
     if (filteredYears === null) {
-      return null;
+      const totalAmountNull = 0;
+      return totalAmountNull;
     } else {
-      const totalAmount = filteredYears.reduce(
-        (acc, entry) => acc + entry.amount,
-        0
-      );
+      let totalAmount = filteredYears.reduce((acc, entry) => {
+        switch (entry.currency) {
+          case "HUF":
+            return acc + entry.amount / HUF;
+          case "EUR":
+            return acc + entry.amount * EUR;
+          default:
+            return acc + entry.amount;
+        }
+      }, 0);
+      totalAmount = parseFloat(totalAmount.toFixed(2));
       return totalAmount;
     }
   };
@@ -49,51 +59,49 @@ const Dashboard = () => {
 
   const mostExpensiveActivity = mostExpensiveActivityOfTheYear(selectedYear);
 
-  const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const year = parseInt(event.target.value, 10);
-    setSelectedYear(year);
+  const prevButtonFunction = () => {
+    setSelectedYear((prevYear) => prevYear - 1);
   };
 
-  const startYear = 1950;
-  const endYear = 2100;
-
-  const years = Array.from(
-    { length: endYear - startYear + 1 },
-    (_, index) => startYear + index
-  );
+  const nextButtonFunction = () => {
+    setSelectedYear((prevYear) => prevYear + 1);
+  };
 
   return (
     <>
       <div className="main_container">
-        <div>
-          <label>Select year:</label>
-          <select value={selectedYear} onChange={handleYearChange}>
-            {years.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-          <p>
-            Total expense amount in {selectedYear}:
-            {totalAmountPerYear(selectedYear)}
-          </p>
-        </div>
-        <div>
-          <label>
-            {mostExpensiveActivity ? (
-              <>
-                Most expensive activity of {selectedYear} : <br />
-                Activity: {mostExpensiveActivity.activity} <br />
-                Category: {mostExpensiveActivity.category} <br />
-                Amount: {mostExpensiveActivity.amount} <br />
-                Currency: {mostExpensiveActivity.currency} <br />
-                Date: {newDate(mostExpensiveActivity.date!)} <br />
-              </>
-            ) : (
-              "No available data for the selected year"
-            )}
-          </label>
+        <div className="yearSelector_outer">
+          <div className="yearSelector_select">
+            <Button className="yearButton" onClick={prevButtonFunction}>
+              Previous year
+            </Button>
+            <label className="theYear">{selectedYear}</label>
+            <Button className="yearButton" onClick={nextButtonFunction}>
+              Next year
+            </Button>
+          </div>
+          <div className="totalExpense">
+            <p>
+              Total expense amount in {selectedYear}: <br />
+              {totalAmountPerYear(selectedYear)} USD
+            </p>
+          </div>
+          <div className="mostExpensive">
+            <label>
+              {mostExpensiveActivity ? (
+                <>
+                  Most expensive activity of {selectedYear} : <br />
+                  Activity: {mostExpensiveActivity.activity} <br />
+                  Category: {mostExpensiveActivity.category} <br />
+                  Amount: {mostExpensiveActivity.amount}{" "}
+                  {mostExpensiveActivity.currency} <br />
+                  Date: {newDate(mostExpensiveActivity.date!)} <br />
+                </>
+              ) : (
+                "No available data for the selected year"
+              )}
+            </label>
+          </div>
         </div>
         <div>
           <Charts />
