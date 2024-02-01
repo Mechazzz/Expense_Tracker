@@ -2,7 +2,7 @@ import Charts from "./Charts";
 import "../Styling/Dashboard.css";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { UserInputType } from "../types/UserInput";
-import { calculatedAmount, newDate } from "../utils/utils";
+import { newDate, currencyChanger } from "../utils/utils";
 import { EUR, HUF } from "../utils/constants";
 import Button from "./Button";
 
@@ -52,7 +52,9 @@ const Dashboard = () => {
     }
     const expensiveActivity = yearFilteringFunction(year)!.reduce(
       (maxEntry, currentEntry) =>
-        currentEntry.amount > maxEntry.amount ? currentEntry : maxEntry
+        currencyChanger(currentEntry) > currencyChanger(maxEntry)
+          ? currentEntry
+          : maxEntry
     );
     return expensiveActivity;
   };
@@ -69,8 +71,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="main_container">
-        <div className="yearSelector_outer">
+      <div className="layout">
+        <div className="sidebar_container">
           <div className="yearSelector_select">
             <Button className="yearButton" onClick={prevButtonFunction}>
               Previous year
@@ -93,8 +95,8 @@ const Dashboard = () => {
                   Most expensive activity of {selectedYear} : <br />
                   Activity: {mostExpensiveActivity.activity} <br />
                   Category: {mostExpensiveActivity.category} <br />
-                  Amount: {mostExpensiveActivity.amount}{" "}
-                  {mostExpensiveActivity.currency} <br />
+                  Amount: {currencyChanger(mostExpensiveActivity).toFixed(2)}
+                  USD <br />
                   Date: {newDate(mostExpensiveActivity.date!)} <br />
                 </>
               ) : (
@@ -103,8 +105,18 @@ const Dashboard = () => {
             </label>
           </div>
         </div>
-        <div>
-          <Charts />
+        <div className="main_container">
+          <div className="firstCard">First</div>
+          <div className="secondCard">Second</div>
+          <div className="thirdCard">Third</div>
+          <div className="fourthCard">Fourth</div>
+          <div className="charts_card">
+            <Charts activities={yearFilteringFunction(selectedYear)} />
+          </div>
+          <div className="fifthCard">Fice</div>
+          <div className="sixthCard">Six</div>
+          <div className="seventhCard">Seven</div>
+          <div className="eightCard">Eight</div>
         </div>
         <div></div>
       </div>

@@ -1,6 +1,8 @@
-.main_container {
+.layout {
   display: flex;
   flex-direction: row;
+  height: 100%;
+  width: 100%;
 }
 
 .yearSelector_select {
@@ -9,15 +11,89 @@
   flex-wrap: nowrap;
   justify-content: space-around;
   padding: 20px 15px;
-}
-
-.theYear {
-  padding: 10px 15px;
-  margin-top: 10px;
+  align-items: center;
+  gap: 15px;
 }
 
 .totalExpense,
 .mostExpensive {
   padding-left: 18px;
   padding-right: 18px;
+}
+
+.main_container {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar_container {
+  width: 16%;
+  padding-left: 20px;
+  background-color: darkblue;
+}
+
+.main_container {
+  padding-top: 20px;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+/* ez itt a dashboardban */
+.charts_card {
+  display: flex;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+  width: 69%;
+  height: 35%;
+  background-color: aliceblue;
+  margin: 20px;
+}
+
+/* ez itt a cartsnal */
+.charts_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.fifthCard {
+  margin: 20px;
+  width: 20%;
+  background-color: aliceblue;
+  height: 35%;
+}
+
+.firstCard,
+.secondCard,
+.thirdCard,
+.fourthCard {
+  margin: 20px;
+  width: 20%;
+  background-color: aliceblue;
+  height: 15%;
+}
+
+.sixthCard {
+  margin: 20px;
+  width: 45%;
+  background-color: aliceblue;
+  height: 23%;
+}
+
+.seventhCard,
+.eightCard {
+  margin: 20px;
+  width: 20%;
+  height: 23%;
+  background-color: aliceblue;
 }

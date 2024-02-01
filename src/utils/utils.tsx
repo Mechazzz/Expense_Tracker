@@ -14,6 +14,17 @@ export const calculatedAmount = (amount: UserInputType[]) => {
   }, 0);
 };
 
+export const currencyChanger = (entry: UserInputType) => {
+  switch (entry.currency) {
+    case "HUF":
+      return entry.amount / HUF;
+    case "EUR":
+      return entry.amount * EUR;
+    default:
+      return entry.amount;
+  }
+};
+
 export const newDate = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");

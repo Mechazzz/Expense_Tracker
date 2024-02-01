@@ -1,4 +1,3 @@
-import { useLocalStorage } from "../hooks/useLocalStorage.ts";
 import {
   PieChart,
   Pie,
@@ -14,9 +13,17 @@ import "../Styling/Charts.css";
 import { UserInputType } from "../types/UserInput";
 import { calculatedAmount } from "../utils/utils.tsx";
 import { v4 as uniqueId } from "uuid";
+import "../Styling/Dashboard.css";
 
-const Charts = () => {
-  const [activities] = useLocalStorage<UserInputType[]>("activities", []);
+interface Props {
+  activities: UserInputType[];
+}
+
+const Charts = ({ activities }: Props) => {
+  /*   const [activitiesOriginal] = useLocalStorage<UserInputType[]>(
+    "activities",
+    []
+  ); */
 
   const barChartId = uniqueId();
   const pieChartId = uniqueId();
@@ -103,9 +110,9 @@ const Charts = () => {
 
   return (
     <>
-      <div className="charts">
-        <ResponsiveContainer width="100%" aspect={2}>
-          <PieChart width={400} height={400} id={pieChartId}>
+      <div className="charts_container">
+        <ResponsiveContainer width="100%" aspect={3}>
+          <PieChart width={300} height={400} id={pieChartId}>
             <Pie
               stroke="var(--primary-font-color)"
               dataKey="expense"
@@ -150,10 +157,10 @@ const Charts = () => {
             />
           </PieChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" aspect={2}>
+        <ResponsiveContainer width="100%" aspect={3.5}>
           <BarChart
-            width={500}
-            height={300}
+            width={200}
+            height={400}
             data={expensesData}
             margin={{
               top: 5,
