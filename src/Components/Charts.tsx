@@ -111,7 +111,7 @@ const Charts = ({ activities }: Props) => {
   return (
     <>
       <div className="charts_container">
-        <ResponsiveContainer width="100%" aspect={3}>
+        <ResponsiveContainer width="100%" height="100%" aspect={2}>
           <PieChart width={300} height={400} id={pieChartId}>
             <Pie
               stroke="var(--primary-font-color)"
@@ -157,7 +157,7 @@ const Charts = ({ activities }: Props) => {
             />
           </PieChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" aspect={3.5}>
+        <ResponsiveContainer width="100%" height="100%" aspect={2}>
           <BarChart
             width={200}
             height={400}

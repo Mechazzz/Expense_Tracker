@@ -33,9 +33,12 @@ const Dashboard = () => {
         </Card>
       </div>
       <Card>First</Card>
+      <div className="secondGraph">
+        <Card>First</Card>
+      </div>
       <Card>First</Card>
       <Card>First</Card>
-      <Card>First</Card>
+      {/*       <Card>Last card</Card> */}
     </div>
   );
 };
