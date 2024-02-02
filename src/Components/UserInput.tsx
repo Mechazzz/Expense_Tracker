@@ -8,7 +8,6 @@ import { defaultValues } from "../utils/constants";
 import Button from "./Button";
 import Datepicker from "./Datepicker";
 import { useState } from "react";
-/* import { useLocalStorage } from "../hooks/useLocalStorage"; */
 
 const schema = z.object({
   activity: z
@@ -54,17 +53,9 @@ const UserInput = ({
     defaultValues: selectedActivity || defaultValues,
   });
 
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  /*   const [selectedDate, setSelectedDate] = useLocalStorage<Date>(
-    selectedActivity.date!,
-    new Date()
-  ); */
-  /*   const [selectedDate, setSelectedDate] = useLocalStorage<Date>(new Date(), ""); */
-
-  /* const [selectedDate, setSelectedDate] = useLocalStorage<Date[]>(
-  [new Date()],
-  ""
-); */
+  const [selectedDate, setSelectedDate] = useState<Date>(
+    selectedActivity.date || new Date()
+  );
 
   const handleSelect = (date: Date) => {
     setSelectedDate(date);

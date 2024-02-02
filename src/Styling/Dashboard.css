@@ -1,61 +1,27 @@
 .layout {
-  display: flex;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 20% 45% 35%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-areas:
+    "sidebar card card card card"
+    "sidebar card card card card"
+    "sidebar card card card card";
 }
 
-.yearSelector_select {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-around;
-  padding: 20px 15px;
-  align-items: center;
-  gap: 15px;
+DashboardControls {
+  grid-area: card;
+  background-color: red;
 }
 
-.totalExpense,
-.mostExpensive {
-  padding-left: 18px;
-  padding-right: 18px;
-}
+/* .sidebar_container {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  background-color: bisque;
+} */
 
-.main_container {
-  width: 100%;
-  height: 100%;
-}
-
-.sidebar_container {
-  width: 16%;
-  padding-left: 20px;
-  background-color: darkblue;
-}
-
-.main_container {
-  padding-top: 20px;
-  padding-left: 20px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-  justify-content: space-evenly;
-}
-
-/* ez itt a dashboardban */
-.charts_card {
-  display: flex;
-  text-align: center;
-  justify-content: space-around;
-  align-items: center;
-  justify-content: space-between;
-  width: 69%;
-  height: 35%;
-  background-color: aliceblue;
-  margin: 20px;
-}
-
-/* ez itt a cartsnal */
 .charts_container {
   display: flex;
   flex-direction: row;
@@ -64,36 +30,4 @@
   height: 50%;
   margin-top: 5px;
   margin-bottom: 5px;
-}
-
-.fifthCard {
-  margin: 20px;
-  width: 20%;
-  background-color: aliceblue;
-  height: 35%;
-}
-
-.firstCard,
-.secondCard,
-.thirdCard,
-.fourthCard {
-  margin: 20px;
-  width: 20%;
-  background-color: aliceblue;
-  height: 15%;
-}
-
-.sixthCard {
-  margin: 20px;
-  width: 45%;
-  background-color: aliceblue;
-  height: 23%;
-}
-
-.seventhCard,
-.eightCard {
-  margin: 20px;
-  width: 20%;
-  height: 23%;
-  background-color: aliceblue;
 }
