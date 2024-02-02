@@ -5,22 +5,21 @@
   grid-template-columns: 20% 20% 20% 20% 20%;
   grid-template-areas:
     "sidebar card card card card"
-    "sidebar card card card card"
+    "sidebar charts charts charts card"
     "sidebar card card card card";
 }
 
-DashboardControls {
+.card {
   grid-area: card;
-  background-color: red;
 }
 
-/* .sidebar_container {
-  grid-row-start: 1;
-  grid-row-end: 3;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  background-color: bisque;
-} */
+.dashboardControls {
+  grid-area: sidebar;
+}
+
+.charts_card {
+  grid-area: charts;
+}
 
 .charts_container {
   display: flex;

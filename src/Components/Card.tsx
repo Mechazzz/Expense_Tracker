@@ -1,9 +1,11 @@
+import "../Styling/Card.css";
+
 interface Props {
   children: React.ReactNode;
 }
 
 const Card = ({ children }: Props) => {
-  return <div>{children}</div>;
+  return <div className="card">{children}</div>;
 };
 
 export default Card;
