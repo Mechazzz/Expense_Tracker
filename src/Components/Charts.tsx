@@ -111,7 +111,7 @@ const Charts = ({ activities }: Props) => {
   return (
     <>
       <div className="charts_container">
-        <ResponsiveContainer width="100%" height="100%" aspect={2}>
+        <ResponsiveContainer width="95%" height="70%" aspect={2}>
           <PieChart width={300} height={400} id={pieChartId}>
             <Pie
               stroke="var(--primary-font-color)"
@@ -157,13 +157,13 @@ const Charts = ({ activities }: Props) => {
             />
           </PieChart>
         </ResponsiveContainer>
-        <ResponsiveContainer width="100%" height="100%" aspect={2}>
+        <ResponsiveContainer width="95%" height="70%" aspect={2}>
           <BarChart
             width={200}
             height={400}
             data={expensesData}
             margin={{
-              top: 5,
+              top: 30,
               right: 30,
               left: 20,
               bottom: 5,

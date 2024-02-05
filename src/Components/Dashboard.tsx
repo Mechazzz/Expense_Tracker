@@ -21,7 +21,13 @@ const Dashboard = () => {
         setSelectedYear={setSelectedYear}
         activities={activities}
       />
-      <Card>First</Card>
+      <Card>
+        First
+        <p>
+          Total expense amount in {selectedYear}: <br />
+          {totalAmountPerYear(selectedYear)} USD
+        </p>
+      </Card>
       <Card>First</Card>
       <Card>First</Card>
       <Card>First</Card>

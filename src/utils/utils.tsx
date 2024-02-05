@@ -30,6 +30,22 @@ export const filterActivitiesByYear = (
   year: number
 ) => activities.filter((entry) => new Date(entry.date!).getFullYear() === year);
 
+const totalAmountPerYear = (array: UserInputType[], year: number) => {
+  const filteredYears = filterActivitiesByYear(array, year);
+  let totalAmount = filteredYears.reduce((acc, entry) => {
+    switch (entry.currency) {
+      case "HUF":
+        return acc + entry.amount / HUF;
+      case "EUR":
+        return acc + entry.amount * EUR;
+      default:
+        return acc + entry.amount;
+    }
+  }, 0);
+  totalAmount = parseFloat(totalAmount.toFixed(2));
+  return totalAmount;
+};
+
 export const newDate = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
