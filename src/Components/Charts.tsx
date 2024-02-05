@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import "../Styling/Charts.css";
 import { UserInputType } from "../types/UserInput";
-import { calculatedAmount } from "../utils/utils.tsx";
+import { expenseAmountInUSD } from "../utils/utils.tsx";
 import { v4 as uniqueId } from "uuid";
 import "../Styling/Dashboard.css";
 
@@ -30,7 +30,7 @@ const Charts = ({ activities }: Props) => {
   const expensesData = [
     {
       name: "Free time",
-      expense: calculatedAmount(
+      expense: expenseAmountInUSD(
         activities.filter(
           (activity: UserInputType) => activity.category === "Free time"
         )
@@ -38,7 +38,7 @@ const Charts = ({ activities }: Props) => {
     },
     {
       name: "Business",
-      expense: calculatedAmount(
+      expense: expenseAmountInUSD(
         activities.filter(
           (activity: UserInputType) => activity.category === "Business"
         )
@@ -46,7 +46,7 @@ const Charts = ({ activities }: Props) => {
     },
     {
       name: "Household",
-      expense: calculatedAmount(
+      expense: expenseAmountInUSD(
         activities.filter(
           (activity: UserInputType) => activity.category === "Household"
         )
@@ -54,7 +54,7 @@ const Charts = ({ activities }: Props) => {
     },
     {
       name: "Others",
-      expense: calculatedAmount(
+      expense: expenseAmountInUSD(
         activities.filter(
           (activity: UserInputType) => activity.category === "Others"
         )

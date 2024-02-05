@@ -1,8 +1,8 @@
 import { UserInputType } from "../types/UserInput";
 import { EUR, HUF } from "./constants";
 
-export const calculatedAmount = (amount: UserInputType[]) => {
-  return amount.reduce((acc, activity) => {
+export const expenseAmountInUSD = (activities: UserInputType[]) => {
+  return activities.reduce((acc, activity) => {
     switch (activity.currency) {
       case "HUF":
         return activity.amount / HUF + acc;
@@ -30,20 +30,32 @@ export const filterActivitiesByYear = (
   year: number
 ) => activities.filter((entry) => new Date(entry.date!).getFullYear() === year);
 
-const totalAmountPerYear = (array: UserInputType[], year: number) => {
+export const totalAmountPerYear = (array: UserInputType[], year: number) => {
   const filteredYears = filterActivitiesByYear(array, year);
-  let totalAmount = filteredYears.reduce((acc, entry) => {
-    switch (entry.currency) {
-      case "HUF":
-        return acc + entry.amount / HUF;
-      case "EUR":
-        return acc + entry.amount * EUR;
-      default:
-        return acc + entry.amount;
-    }
-  }, 0);
+  let totalAmount = expenseAmountInUSD(filteredYears);
   totalAmount = parseFloat(totalAmount.toFixed(2));
   return totalAmount;
+};
+
+export const mostExpensiveActivityOfTheYear = (
+  array: UserInputType[],
+  year: number
+) => {
+  const filteredActivities = filterActivitiesByYear(array, year);
+  const expensiveActivity: UserInputType = filteredActivities.reduce(
+    (maxEntry, currentEntry) => {
+      if (
+        maxEntry === null ||
+        currencyChanger(currentEntry) > currencyChanger(maxEntry)
+      ) {
+        return currentEntry;
+      } else {
+        return maxEntry;
+      }
+    },
+    filteredActivities[0]
+  );
+  return expensiveActivity;
 };
 
 export const newDate = (date: Date) => {

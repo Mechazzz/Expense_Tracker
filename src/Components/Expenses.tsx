@@ -1,7 +1,7 @@
 import "../Styling/Expenses.css";
 import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
-import { calculatedAmount } from "../utils/utils.tsx";
+import { expenseAmountInUSD } from "../utils/utils.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { newDate } from "../utils/utils.tsx";
@@ -121,7 +121,7 @@ const Expenses = ({
                 <td className="totalExpensesTfootTD">Total Expenses</td>
                 <td className="emptyTfootTd"> </td>
                 <td className="totalExpensesTfootAmount">
-                  {calculatedAmount(
+                  {expenseAmountInUSD(
                     activities.filter(filterCategory).filter(currencyCategory)
                   ).toFixed(2)}
                 </td>
