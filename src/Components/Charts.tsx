@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import "../Styling/Charts.css";
 import { UserInputType } from "../types/UserInput";
-import { expenseAmountInUSD } from "../utils/utils.tsx";
+import { expenseAmountInUSD } from "../utils/utils.ts";
 import { v4 as uniqueId } from "uuid";
 import "../Styling/Dashboard.css";
 

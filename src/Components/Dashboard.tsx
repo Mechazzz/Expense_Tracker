@@ -10,7 +10,8 @@ import {
   mostExpensiveActivityOfTheYear,
   currencyChanger,
   newDate,
-} from "../utils/utils.tsx";
+  totalExpensePerCategory,
+} from "../utils/utils.ts";
 
 const Dashboard = () => {
   const [activities] = useLocalStorage<UserInputType[]>("activities", []);
@@ -23,6 +24,26 @@ const Dashboard = () => {
   const mostExpensiveActivity = mostExpensiveActivityOfTheYear(
     activities,
     selectedYear
+  );
+
+  const totalExpenseOfFreeTimePerYear = totalExpensePerCategory(
+    filterActivitiesByYear(activities, selectedYear),
+    "Free time"
+  );
+
+  const totalExpenseOfBusinessPerYear = totalExpensePerCategory(
+    filterActivitiesByYear(activities, selectedYear),
+    "Business"
+  );
+
+  const totalExpenseOfHouseholdPerYear = totalExpensePerCategory(
+    filterActivitiesByYear(activities, selectedYear),
+    "Household"
+  );
+
+  const totalExpenseOfOthersPerYear = totalExpensePerCategory(
+    filterActivitiesByYear(activities, selectedYear),
+    "Others"
   );
 
   return (
@@ -46,14 +67,13 @@ const Dashboard = () => {
         </Card>
       </div>
       <Card>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <div>
+          <p>All expenses by categories in {selectedYear} :</p>
+          <p>Free time: {totalExpenseOfFreeTimePerYear} USD</p>
+          <p>Business: {totalExpenseOfBusinessPerYear} USD</p>
+          <p>Household: {totalExpenseOfHouseholdPerYear} USD</p>
+          <p>Others: {totalExpenseOfOthersPerYear} USD</p>
+        </div>
       </Card>
       <div className="secondGraph">
         <Card>First</Card>

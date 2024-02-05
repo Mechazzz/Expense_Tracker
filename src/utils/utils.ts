@@ -1,6 +1,12 @@
 import { UserInputType } from "../types/UserInput";
 import { EUR, HUF } from "./constants";
 
+export const filterCategory = (state: string, activity: UserInputType) =>
+  state ? activity.category === state : true;
+
+export const currencyCategory = (state: string, activity: UserInputType) =>
+  state ? activity.currency === state : true;
+
 export const expenseAmountInUSD = (activities: UserInputType[]) => {
   return activities.reduce((acc, activity) => {
     switch (activity.currency) {
@@ -14,7 +20,16 @@ export const expenseAmountInUSD = (activities: UserInputType[]) => {
   }, 0);
 };
 
-export const currencyChanger = (entry: UserInputType) => {
+export const totalExpensePerCategory = (
+  activities: UserInputType[],
+  category: string
+) => {
+  return expenseAmountInUSD(
+    activities.filter((activity) => activity.category === category)
+  ).toFixed(2);
+};
+
+export const currencyChanger = (entry: UserInputType): number => {
   switch (entry.currency) {
     case "HUF":
       return entry.amount / HUF;

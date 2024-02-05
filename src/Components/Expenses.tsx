@@ -1,10 +1,9 @@
 import "../Styling/Expenses.css";
 import { useState } from "react";
 import { UserInputType } from "../types/UserInput";
-import { expenseAmountInUSD } from "../utils/utils.tsx";
+import { expenseAmountInUSD, newDate } from "../utils/utils.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
-import { newDate } from "../utils/utils.tsx";
 import IconButton from "./IconButton.tsx";
 import Button from "./Button.tsx";
 
