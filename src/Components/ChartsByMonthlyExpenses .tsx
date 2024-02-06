@@ -19,7 +19,7 @@ interface Props {
   activities: UserInputType[];
 }
 
-const Charts2 = ({ activities }: Props) => {
+const ChartsByMonthlyExpenses = ({ activities }: Props) => {
   const barChartId = uniqueId();
   const pieChartId = uniqueId();
   const expensesData = [
@@ -192,4 +192,4 @@ const Charts2 = ({ activities }: Props) => {
   );
 };
 
-export default Charts2;
+export default ChartsByMonthlyExpenses;

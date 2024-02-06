@@ -7,7 +7,6 @@ import {
   faCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
-import { monthsList, getMonthName } from "../utils/utils";
 
 interface Props {
   selectedDate: moment.Moment;
@@ -16,23 +15,23 @@ interface Props {
 
 const DashboardControls = ({ selectedDate, setSelectedDate }: Props) => {
   const prevButtonFunctionForYearsSubtract = () => {
-    setSelectedDate((oldDate) => oldDate.subtract(1, "y"));
+    setSelectedDate((oldDate) => oldDate.clone().subtract(1, "y"));
   };
 
   const prevButtonFunctionForMonthsSubtract = () => {
-    setSelectedDate((oldDate) => oldDate.subtract(1, "m"));
+    setSelectedDate((oldDate) => oldDate.clone().subtract(1, "months"));
   };
 
   const nextButtonFunctionForYearsAdd = () => {
-    setSelectedDate((oldDate) => oldDate.add(1, "y"));
+    setSelectedDate((oldDate) => oldDate.clone().add(1, "y"));
   };
 
   const nextButtonFunctionForMonthsAdd = () => {
-    setSelectedDate((oldDate) => oldDate.add(1, "m"));
+    setSelectedDate((oldDate) => oldDate.clone().add(1, "months"));
   };
 
   const momentYear = selectedDate.year();
-  const momentMonth = getMonthName(monthsList, selectedDate.month());
+  const momentMonth = selectedDate.format("MMMM");
 
   return (
     <>

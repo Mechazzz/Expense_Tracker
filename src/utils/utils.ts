@@ -1,23 +1,6 @@
 import { UserInputType } from "../types/UserInput";
 import { EUR, HUF } from "./constants";
 
-export const monthsList = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-export const getMonthName = (array: string[], index: number) => array[index];
-
 export const filterCategory = (state: string, activity: UserInputType) =>
   state ? activity.category === state : true;
 

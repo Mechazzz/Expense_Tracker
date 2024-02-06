@@ -1,5 +1,5 @@
 import Charts from "./ChartsByYearlyExpenses.tsx";
-import Charts2 from "./ChartsByMonthlyExpenses .tsx";
+import ChartsByMonthlyExpenses from "./ChartsByMonthlyExpenses .tsx";
 import "../Styling/Dashboard.css";
 import DashboardControls from "./DashboardControls";
 import Card from "./Card";
@@ -13,8 +13,6 @@ import {
   currencyChanger,
   newDate,
   totalExpensePerCategory,
-  monthsList,
-  getMonthName,
 } from "../utils/utils.ts";
 import { useState } from "react";
 import moment from "moment";
@@ -22,18 +20,15 @@ import moment from "moment";
 const Dashboard = () => {
   const [activities] = useLocalStorage<UserInputType[]>("activities", []);
 
-  const [selectedYear, setSelectedYear] = useLocalStorage<number>(
-    "selectedYear",
-    2024
-  );
-
-  const [selectedMonth, setSelectedMonth] = useState<number>(0);
-
   const [selectedDate, setSelectedDate] = useState(moment());
+
+  const momentYear = selectedDate.year();
+  const momentMonthAsWord = selectedDate.format("MMMM");
+  const momentMonthAsNumber = selectedDate.month();
 
   const mostExpensiveActivity = mostExpensiveActivityOfTheYear(
     activities,
-    selectedYear
+    momentYear
   );
 
   return (
@@ -43,26 +38,24 @@ const Dashboard = () => {
         setSelectedDate={setSelectedDate}
       />
       <Card>
-        Total expense amount in {selectedYear}: <br />
-        {totalAmountPerYear(activities, selectedYear)} USD
+        Total expense amount in {selectedDate.year()}: <br />
+        {totalAmountPerYear(activities, momentYear)} USD
       </Card>
       <Card>First</Card>
       <Card>First</Card>
       <Card>First</Card>
       <div className="charts_card">
         <Card>
-          <Charts
-            activities={filterActivitiesByYear(activities, selectedYear)}
-          />
+          <Charts activities={filterActivitiesByYear(activities, momentYear)} />
         </Card>
       </div>
       <Card>
         <div>
-          <p>All expenses by categories in {selectedYear} :</p>
+          <p>All expenses by categories in {momentYear} :</p>
           <p>
             Free time:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByYear(activities, selectedYear),
+              filterActivitiesByYear(activities, momentYear),
               "Free time"
             )}{" "}
             USD
@@ -70,7 +63,7 @@ const Dashboard = () => {
           <p>
             Business:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByYear(activities, selectedYear),
+              filterActivitiesByYear(activities, momentYear),
               "Business"
             )}{" "}
             USD
@@ -78,7 +71,7 @@ const Dashboard = () => {
           <p>
             Household:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByYear(activities, selectedYear),
+              filterActivitiesByYear(activities, momentYear),
               "Household"
             )}{" "}
             USD
@@ -86,7 +79,7 @@ const Dashboard = () => {
           <p>
             Others:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByYear(activities, selectedYear),
+              filterActivitiesByYear(activities, momentYear),
               "Others"
             )}{" "}
             USD
@@ -95,11 +88,11 @@ const Dashboard = () => {
       </Card>
       <div className="secondGraph">
         <Card>
-          <Charts2
+          <ChartsByMonthlyExpenses
             activities={filterActivitiesByMonth(
               activities,
-              selectedYear,
-              selectedMonth
+              momentYear,
+              momentMonthAsNumber
             )}
           />
         </Card>
@@ -107,13 +100,16 @@ const Dashboard = () => {
       <Card>
         <div>
           <p>
-            All expenses by categories in{" "}
-            {getMonthName(monthsList, selectedMonth)} in {selectedYear}
+            All expenses by categories in {momentMonthAsWord} in {momentYear}
           </p>
           <p>
             Free time:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByMonth(activities, selectedYear, selectedMonth),
+              filterActivitiesByMonth(
+                activities,
+                momentYear,
+                momentMonthAsNumber
+              ),
               "Free time"
             )}{" "}
             USD
@@ -122,7 +118,11 @@ const Dashboard = () => {
             {" "}
             Business:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByMonth(activities, selectedYear, selectedMonth),
+              filterActivitiesByMonth(
+                activities,
+                momentYear,
+                momentMonthAsNumber
+              ),
               "Business"
             )}{" "}
             USD
@@ -131,7 +131,11 @@ const Dashboard = () => {
             {" "}
             Household:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByMonth(activities, selectedYear, selectedMonth),
+              filterActivitiesByMonth(
+                activities,
+                momentYear,
+                momentMonthAsNumber
+              ),
               "Household"
             )}{" "}
             USD
@@ -140,7 +144,11 @@ const Dashboard = () => {
             {" "}
             Others:{" "}
             {totalExpensePerCategory(
-              filterActivitiesByMonth(activities, selectedYear, selectedMonth),
+              filterActivitiesByMonth(
+                activities,
+                momentYear,
+                momentMonthAsNumber
+              ),
               "Others"
             )}{" "}
             USD
@@ -150,7 +158,7 @@ const Dashboard = () => {
       <Card>
         {mostExpensiveActivity ? (
           <div>
-            <p>Most expensive activity of {selectedYear} :</p>
+            <p>Most expensive activity of {momentYear} :</p>
             <p> Activity: {mostExpensiveActivity.activity} </p>
             <p>Category: {mostExpensiveActivity.category} </p>
             <p>
