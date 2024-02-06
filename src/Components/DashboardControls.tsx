@@ -7,6 +7,7 @@ import {
   faCaretRight,
 } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
+import "../Styling/DashboardControls.css"
 
 interface Props {
   selectedDate: moment.Moment;

@@ -1,8 +1,8 @@
 .layout {
   height: calc(100% - 40px);
   display: grid;
-  grid-template-rows: 2fr 5fr 4fr;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 2 fr 2fr 5fr 4fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 50px;
   width: 100%;
   padding: 30px;
@@ -10,11 +10,14 @@
 }
 
 .dashboardControls {
-  grid-row: 1 / span 3;
+  grid-column: 1 / span 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .charts_card {
-  grid-column: 2 / span 3;
+  grid-column: 1 / span 3;
   background-color: white;
   border-radius: 10px;
   width: 100%;
@@ -22,7 +25,7 @@
 }
 
 .secondGraph {
-  grid-column: 2 / span 2;
+  grid-column: 1 / span 2;
   border-radius: 10px;
   background-color: white;
 }
