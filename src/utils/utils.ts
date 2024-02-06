@@ -1,6 +1,23 @@
 import { UserInputType } from "../types/UserInput";
 import { EUR, HUF } from "./constants";
 
+export const monthsList = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+export const getMonthName = (array: string[], index: number) => array[index];
+
 export const filterCategory = (state: string, activity: UserInputType) =>
   state ? activity.category === state : true;
 
@@ -44,6 +61,15 @@ export const filterActivitiesByYear = (
   activities: UserInputType[],
   year: number
 ) => activities.filter((entry) => new Date(entry.date!).getFullYear() === year);
+
+export const filterActivitiesByMonth = (
+  activities: UserInputType[],
+  year: number,
+  month: number
+) =>
+  activities
+    .filter((entry) => new Date(entry.date!).getFullYear() === year)
+    .filter((entry) => new Date(entry.date!).getMonth() === month);
 
 export const totalAmountPerYear = (array: UserInputType[], year: number) => {
   const filteredYears = filterActivitiesByYear(array, year);
