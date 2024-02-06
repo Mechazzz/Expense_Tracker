@@ -1,7 +1,7 @@
 import "../Styling/Button.css";
 
 interface IconInterface extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: "change" | "delete" | "copy";
+  variant: "change" | "delete" | "copy" | "";
 }
 
 const IconButton = ({ variant, ...props }: IconInterface) => {

@@ -1,5 +1,5 @@
-import Charts from "./Charts";
-import Charts2 from "./Charts2.tsx";
+import Charts from "./ChartsByYearlyExpenses.tsx";
+import Charts2 from "./ChartsByMonthlyExpenses .tsx";
 import "../Styling/Dashboard.css";
 import DashboardControls from "./DashboardControls";
 import Card from "./Card";
@@ -17,6 +17,7 @@ import {
   getMonthName,
 } from "../utils/utils.ts";
 import { useState } from "react";
+import moment from "moment";
 
 const Dashboard = () => {
   const [activities] = useLocalStorage<UserInputType[]>("activities", []);
@@ -28,6 +29,8 @@ const Dashboard = () => {
 
   const [selectedMonth, setSelectedMonth] = useState<number>(0);
 
+  const [selectedDate, setSelectedDate] = useState(moment());
+
   const mostExpensiveActivity = mostExpensiveActivityOfTheYear(
     activities,
     selectedYear
@@ -36,10 +39,8 @@ const Dashboard = () => {
   return (
     <div className="layout">
       <DashboardControls
-        selectedYear={selectedYear}
-        setSelectedYear={setSelectedYear}
-        selectedMonth={selectedMonth}
-        setSelectedMonth={setSelectedMonth}
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
       />
       <Card>
         Total expense amount in {selectedYear}: <br />
