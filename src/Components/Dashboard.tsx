@@ -13,6 +13,8 @@ import {
   currencyChanger,
   newDate,
   totalExpensePerCategory,
+  mostExpensiveCategoryByYear,
+  cheapestCategoryByYear,
 } from "../utils/utils.ts";
 import { useState } from "react";
 import moment from "moment";
@@ -38,11 +40,21 @@ const Dashboard = () => {
         setSelectedDate={setSelectedDate}
       />
       <Card>
-        Total expense amount in {selectedDate.year()}: <br />
-        {totalAmountPerYear(activities, momentYear)} USD
+        <div>
+          <p>Total expense amount in {momentYear}: </p>
+          <p> {totalAmountPerYear(activities, momentYear)} USD </p>
+        </div>
       </Card>
-      <Card>First</Card>
-      <Card>First</Card>
+      <Card>
+        <div>
+          <p>Highest expense category in {momentYear}</p>
+          <p>{mostExpensiveCategoryByYear(activities, momentYear)} USD</p>
+        </div>
+      </Card>
+      <Card>
+        <p>Cheapest expense category in {momentYear}</p>
+        <p>{cheapestCategoryByYear(activities, momentYear)} USD</p>
+      </Card>
       <Card>First</Card>
       <div className="charts_card">
         <Card>
@@ -158,7 +170,7 @@ const Dashboard = () => {
       <Card>
         {mostExpensiveActivity ? (
           <div>
-            <p>Most expensive activity of {momentYear} :</p>
+            <p>Most expensive activity in {momentYear} :</p>
             <p> Activity: {mostExpensiveActivity.activity} </p>
             <p>Category: {mostExpensiveActivity.category} </p>
             <p>
