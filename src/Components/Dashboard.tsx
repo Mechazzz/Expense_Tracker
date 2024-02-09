@@ -15,6 +15,8 @@ import {
   totalExpensePerCategory,
   mostExpensiveCategoryByYear,
   cheapestCategoryByYear,
+  expenseAmountDifferenceByPrevYearAndCurrentYear,
+  expenseAmountDifferenceByCurrentYearAndNextYear,
 } from "../utils/utils.ts";
 import { useState } from "react";
 import moment from "moment";
@@ -33,6 +35,22 @@ const Dashboard = () => {
     momentYear
   );
 
+  const highestExpenseCategory = mostExpensiveCategoryByYear(
+    activities,
+    momentYear
+  );
+
+  const cheapestExpenseCategory = cheapestCategoryByYear(
+    activities,
+    momentYear
+  );
+
+  const expenseDifferenceByPreviousAndCurrentYear =
+    expenseAmountDifferenceByPrevYearAndCurrentYear(activities, momentYear);
+
+  const expenseDifferenceByCurrentAndYextYear =
+    expenseAmountDifferenceByCurrentYearAndNextYear(activities, momentYear);
+
   return (
     <div className="layout">
       <DashboardControls
@@ -46,16 +64,42 @@ const Dashboard = () => {
         </div>
       </Card>
       <Card>
-        <div>
-          <p>Highest expense category in {momentYear}</p>
-          <p>{mostExpensiveCategoryByYear(activities, momentYear)} USD</p>
-        </div>
+        {highestExpenseCategory ? (
+          <div>
+            <p>Highest expense category in {momentYear}</p>
+            <p>{highestExpenseCategory} USD</p>
+          </div>
+        ) : (
+          "No available data for the selected year"
+        )}
       </Card>
       <Card>
-        <p>Cheapest expense category in {momentYear}</p>
-        <p>{cheapestCategoryByYear(activities, momentYear)} USD</p>
+        {cheapestExpenseCategory ? (
+          <div>
+            <p>Cheapest expense category in {momentYear}</p>
+            <p>{cheapestExpenseCategory} USD</p>
+          </div>
+        ) : (
+          "No available data for the selected year"
+        )}
       </Card>
-      <Card>First</Card>
+      <Card>
+        <div>
+          {expenseDifferenceByPreviousAndCurrentYear ? (
+            <div>{expenseDifferenceByPreviousAndCurrentYear}</div>
+          ) : (
+            "No available data for the selected year"
+          )}
+        </div>
+        <br />
+        <div>
+          {expenseDifferenceByCurrentAndYextYear ? (
+            <div>{expenseDifferenceByCurrentAndYextYear}</div>
+          ) : (
+            "No available data for the selected year"
+          )}
+        </div>
+      </Card>
       <div className="charts_card">
         <Card>
           <Charts activities={filterActivitiesByYear(activities, momentYear)} />

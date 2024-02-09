@@ -7,6 +7,43 @@ export const filterCategory = (state: string, activity: UserInputType) =>
 export const currencyCategory = (state: string, activity: UserInputType) =>
   state ? activity.currency === state : true;
 
+export const totalExpenseByYear = (activities: UserInputType[], year: number) =>
+  expenseAmountInUSD(
+    activities.filter((entry) => new Date(entry.date!).getFullYear() === year)
+  );
+
+export const expenseAmountDifferenceByPrevYearAndCurrentYear = (
+  activities: UserInputType[],
+  momentYear: number
+) => {
+  let total =
+    +totalExpenseByYear(activities, momentYear).toFixed(2) -
+    +totalExpenseByYear(activities, momentYear - 1).toFixed(2);
+  if (total > 0) {
+    return `${total} USD more expense than last year`;
+  }
+  if (total < 0) {
+    total = total * -1;
+    return `${total} USD less expense than last year`;
+  }
+};
+
+export const expenseAmountDifferenceByCurrentYearAndNextYear = (
+  activities: UserInputType[],
+  momentYear: number
+) => {
+  let total =
+    +totalExpenseByYear(activities, momentYear).toFixed(2) -
+    +totalExpenseByYear(activities, momentYear + 1).toFixed(2);
+  if (total > 0) {
+    return `${total} USD more expense than next year`;
+  }
+  if (total < 0) {
+    total = total * -1;
+    return `${total} USD less expense than next year`;
+  }
+};
+
 export const expenseAmountInUSD = (activities: UserInputType[]) => {
   return activities.reduce((acc, activity) => {
     switch (activity.currency) {
@@ -80,11 +117,15 @@ export const mostExpensiveCategoryByYear = (
   const expenseAmountsByCategoryArray = Object.entries(
     filteredActivitiesByYearWIthTotalAmounts(activities, year)
   );
-  const sortedCategoriesWithAmounts = expenseAmountsByCategoryArray.sort(
-    (a, b) => b[1] - a[1]
-  );
-  const highestAmount = sortedCategoriesWithAmounts[0];
-  return `${highestAmount[0]}: ${highestAmount[1].toFixed(2)}`;
+  if (expenseAmountsByCategoryArray.length === 0) {
+    return 0;
+  } else {
+    const sortedCategoriesWithAmounts = expenseAmountsByCategoryArray.sort(
+      (a, b) => b[1] - a[1]
+    );
+    const highestAmount = sortedCategoriesWithAmounts[0];
+    return `${highestAmount[0]}: ${highestAmount[1].toFixed(2)}`;
+  }
 };
 
 export const cheapestCategoryByYear = (
@@ -94,11 +135,15 @@ export const cheapestCategoryByYear = (
   const expenseAmountsByCategoryArray = Object.entries(
     filteredActivitiesByYearWIthTotalAmounts(activities, year)
   );
-  const sortedCategoriesWithAmounts = expenseAmountsByCategoryArray.sort(
-    (a, b) => a[1] - b[1]
-  );
-  const highestAmount = sortedCategoriesWithAmounts[0];
-  return `${highestAmount[0]}: ${highestAmount[1].toFixed(2)}`;
+  if (expenseAmountsByCategoryArray.length === 0) {
+    return 0;
+  } else {
+    const sortedCategoriesWithAmounts = expenseAmountsByCategoryArray.sort(
+      (a, b) => a[1] - b[1]
+    );
+    const highestAmount = sortedCategoriesWithAmounts[0];
+    return `${highestAmount[0]}: ${highestAmount[1].toFixed(2)}`;
+  }
 };
 
 export const totalAmountPerYear = (array: UserInputType[], year: number) => {
