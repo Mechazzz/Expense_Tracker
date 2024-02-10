@@ -9,3 +9,11 @@
   align-items: center;
   text-align: center;
 }
+
+div > span.amount {
+  font-size: 2rem;
+}
+
+div > span.amountText {
+  font-size: 1rem;
+}

@@ -111,53 +111,55 @@ const Charts = ({ activities }: Props) => {
   return (
     <>
       <div className="charts_container">
-        <ResponsiveContainer width="95%" height="70%" aspect={2}>
-          <PieChart width={300} height={400} id={pieChartId}>
-            <Pie
-              stroke="var(--primary-font-color)"
-              dataKey="expense"
-              isAnimationActive={true}
-              data={expensesData}
-              cx="50%"
-              cy="50%"
-              outerRadius={80}
-              fill="var(--charts-bar-fill)"
-              label={({
-                cx,
-                cy,
-                midAngle,
-                innerRadius,
-                outerRadius,
-                value,
-              }) => {
-                const RADIAN = Math.PI / 180;
-                const radius = 25 + innerRadius + (outerRadius - innerRadius);
-                const x = cx + radius * Math.cos(-midAngle * RADIAN);
-                const y = cy + radius * Math.sin(-midAngle * RADIAN);
+        <ResponsiveContainer width="100%" height="100%" aspect={1}>
+          <div className="charts_wrapper">
+            <PieChart width={650} height={340} id={pieChartId}>
+              <Pie
+                stroke="var(--primary-font-color)"
+                dataKey="expense"
+                isAnimationActive={true}
+                data={expensesData}
+                /*                               cx="50%"
+                cy="50%"  */
+                outerRadius={130}
+                fill="var(--charts-bar-fill)"
+                label={({
+                  cx,
+                  cy,
+                  midAngle,
+                  innerRadius,
+                  outerRadius,
+                  value,
+                }) => {
+                  const RADIAN = Math.PI / 180;
+                  const radius = 25 + innerRadius + (outerRadius - innerRadius);
+                  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-                return (
-                  <text
-                    x={x}
-                    y={y}
-                    fill="var(--charts-primary-font-color)"
-                    textAnchor={x > cx ? "start" : "end"}
-                    dominantBaseline="central"
-                  >
-                    {`${value.toFixed(2)} USD`}
-                  </text>
-                );
-              }}
-            />
-            <Tooltip
-              content={<CustomTooltipPieChart />}
-              wrapperStyle={{
-                backgroundColor: "var(--charts-toolTip-background)",
-                color: "var(--primary-font-color)",
-              }}
-            />
-          </PieChart>
+                  return (
+                    <text
+                      x={x}
+                      y={y}
+                      fill="var(--charts-primary-font-color)"
+                      textAnchor={x > cx ? "start" : "end"}
+                      dominantBaseline="central"
+                    >
+                      {`${value.toFixed(2)} USD`}
+                    </text>
+                  );
+                }}
+              />
+              <Tooltip
+                content={<CustomTooltipPieChart />}
+                wrapperStyle={{
+                  backgroundColor: "var(--charts-toolTip-background)",
+                  color: "var(--primary-font-color)",
+                }}
+              />
+            </PieChart>
+          </div>
         </ResponsiveContainer>
-        <ResponsiveContainer width="95%" height="70%" aspect={2}>
+        <ResponsiveContainer width="100%" height="95%" aspect={2}>
           <BarChart
             width={200}
             height={400}

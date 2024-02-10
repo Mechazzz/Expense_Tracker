@@ -115,7 +115,7 @@ const ChartsByMonthlyExpenses = ({ activities }: Props) => {
               data={expensesData}
               cx="50%"
               cy="50%"
-              outerRadius={80}
+              outerRadius={110}
               fill="var(--charts-bar-fill)"
               label={({
                 cx,

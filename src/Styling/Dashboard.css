@@ -3,10 +3,12 @@
   display: grid;
   grid-template-rows: 2 fr 2fr 5fr 4fr;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 50px;
+  grid-gap: 40px;
   width: 100%;
-  padding: 30px;
-  margin: 0;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .dashboardControls {
@@ -18,7 +20,6 @@
 
 .charts_card {
   grid-column: 1 / span 3;
-  background-color: white;
   border-radius: 10px;
   width: 100%;
   height: 100%;
@@ -27,7 +28,6 @@
 .secondGraph {
   grid-column: 1 / span 2;
   border-radius: 10px;
-  background-color: white;
 }
 
 .charts_container {
@@ -38,7 +38,18 @@
   width: 100%;
 }
 
+.chart_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 html,
 body {
   height: 100%;
+}
+
+.firstRow {
+  padding: 17px;
 }

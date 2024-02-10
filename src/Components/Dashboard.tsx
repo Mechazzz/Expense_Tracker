@@ -15,8 +15,7 @@ import {
   totalExpensePerCategory,
   mostExpensiveCategoryByYear,
   cheapestCategoryByYear,
-  expenseAmountDifferenceByPrevYearAndCurrentYear,
-  expenseAmountDifferenceByCurrentYearAndNextYear,
+  expenseAmountDifferenceByPrevYearAndCurrentYearText,
 } from "../utils/utils.ts";
 import { useState } from "react";
 import moment from "moment";
@@ -46,10 +45,7 @@ const Dashboard = () => {
   );
 
   const expenseDifferenceByPreviousAndCurrentYear =
-    expenseAmountDifferenceByPrevYearAndCurrentYear(activities, momentYear);
-
-  const expenseDifferenceByCurrentAndYextYear =
-    expenseAmountDifferenceByCurrentYearAndNextYear(activities, momentYear);
+    expenseAmountDifferenceByPrevYearAndCurrentYearText(activities, momentYear);
 
   return (
     <div className="layout">
@@ -58,16 +54,21 @@ const Dashboard = () => {
         setSelectedDate={setSelectedDate}
       />
       <Card>
-        <div>
-          <p>Total expense amount in {momentYear}: </p>
-          <p> {totalAmountPerYear(activities, momentYear)} USD </p>
+        <div className="firstRow">
+          <span className="amountText">Total expense: </span>
+          <br />
+          <span className="amount">
+            {" "}
+            {totalAmountPerYear(activities, momentYear)} USD{" "}
+          </span>
         </div>
       </Card>
       <Card>
         {highestExpenseCategory ? (
-          <div>
-            <p>Highest expense category in {momentYear}</p>
-            <p>{highestExpenseCategory} USD</p>
+          <div className="firstRow">
+            <span className="amountText">Highest expense category:</span>
+            <br />
+            <span className="amount">{highestExpenseCategory} USD</span>
           </div>
         ) : (
           "No available data for the selected year"
@@ -75,30 +76,26 @@ const Dashboard = () => {
       </Card>
       <Card>
         {cheapestExpenseCategory ? (
-          <div>
-            <p>Cheapest expense category in {momentYear}</p>
-            <p>{cheapestExpenseCategory} USD</p>
+          <div className="firstRow">
+            <span className="amountText">Cheapest expense category:</span>
+            <br />
+            <span className="amount">{cheapestExpenseCategory} USD</span>
           </div>
         ) : (
           "No available data for the selected year"
         )}
       </Card>
       <Card>
-        <div>
-          {expenseDifferenceByPreviousAndCurrentYear ? (
-            <div>{expenseDifferenceByPreviousAndCurrentYear}</div>
-          ) : (
-            "No available data for the selected year"
-          )}
-        </div>
-        <br />
-        <div>
-          {expenseDifferenceByCurrentAndYextYear ? (
-            <div>{expenseDifferenceByCurrentAndYextYear}</div>
-          ) : (
-            "No available data for the selected year"
-          )}
-        </div>
+        {expenseDifferenceByPreviousAndCurrentYear ? (
+          <div className="firstRow">
+            <span>Expense amount compared the current and last year:</span>
+            <span className="amount">
+              {expenseDifferenceByPreviousAndCurrentYear} USD
+            </span>
+          </div>
+        ) : (
+          "No available data for the selected year"
+        )}
       </Card>
       <div className="charts_card">
         <Card>
@@ -107,39 +104,43 @@ const Dashboard = () => {
       </div>
       <Card>
         <div>
-          <p>All expenses by categories in {momentYear} :</p>
-          <p>
-            Free time:{" "}
+          <span>All expenses by categories:</span>
+          <br />
+          Free time:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByYear(activities, momentYear),
               "Free time"
             )}{" "}
             USD
-          </p>
-          <p>
-            Business:{" "}
+          </span>
+          <br />
+          Business:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByYear(activities, momentYear),
               "Business"
             )}{" "}
             USD
-          </p>
-          <p>
-            Household:{" "}
+          </span>
+          <br />
+          Household:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByYear(activities, momentYear),
               "Household"
             )}{" "}
             USD
-          </p>
-          <p>
-            Others:{" "}
+          </span>
+          <br />
+          Others:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByYear(activities, momentYear),
               "Others"
             )}{" "}
             USD
-          </p>
+          </span>
         </div>
       </Card>
       <div className="secondGraph">
@@ -155,11 +156,10 @@ const Dashboard = () => {
       </div>
       <Card>
         <div>
-          <p>
-            All expenses by categories in {momentMonthAsWord} in {momentYear}
-          </p>
-          <p>
-            Free time:{" "}
+          <span>All expenses by categories in {momentMonthAsWord}:</span>
+          <br />
+          Free time:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByMonth(
                 activities,
@@ -169,10 +169,9 @@ const Dashboard = () => {
               "Free time"
             )}{" "}
             USD
-          </p>
-          <p>
-            {" "}
-            Business:{" "}
+          </span>
+          <br /> Business:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByMonth(
                 activities,
@@ -182,10 +181,9 @@ const Dashboard = () => {
               "Business"
             )}{" "}
             USD
-          </p>
-          <p>
-            {" "}
-            Household:{" "}
+          </span>
+          <br /> Household:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByMonth(
                 activities,
@@ -195,10 +193,9 @@ const Dashboard = () => {
               "Household"
             )}{" "}
             USD
-          </p>
-          <p>
-            {" "}
-            Others:{" "}
+          </span>
+          <br /> Others:{" "}
+          <span className="amount">
             {totalExpensePerCategory(
               filterActivitiesByMonth(
                 activities,
@@ -208,19 +205,30 @@ const Dashboard = () => {
               "Others"
             )}{" "}
             USD
-          </p>
+          </span>
         </div>
       </Card>
       <Card>
         {mostExpensiveActivity ? (
           <div>
-            <p>Most expensive activity in {momentYear} :</p>
-            <p> Activity: {mostExpensiveActivity.activity} </p>
-            <p>Category: {mostExpensiveActivity.category} </p>
-            <p>
-              Amount: {currencyChanger(mostExpensiveActivity).toFixed(2)} USD
-            </p>
-            <p> Date: {newDate(mostExpensiveActivity.date!)} </p>
+            <span>Most expensive yearly activity:</span>
+            <br /> Activity:{" "}
+            <span className="amount">
+              {mostExpensiveActivity.activity}
+            </span>{" "}
+            <br />
+            Category:{" "}
+            <span className="amount">{mostExpensiveActivity.category} </span>
+            <br />
+            Amount:{" "}
+            <span className="amount">
+              {currencyChanger(mostExpensiveActivity).toFixed(2)} USD
+            </span>
+            <br />
+            Date:{" "}
+            <span className="amount">
+              {newDate(mostExpensiveActivity.date!)}{" "}
+            </span>
           </div>
         ) : (
           "No available data for the selected year"

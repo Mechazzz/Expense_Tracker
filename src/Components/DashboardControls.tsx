@@ -36,25 +36,21 @@ const DashboardControls = ({ selectedDate, setSelectedDate }: Props) => {
   return (
     <>
       <div className="dashboardControls">
-        <div className="yearSelector_select">
-          <IconButton onClick={prevButtonFunctionForYearsSubtract} variant="">
-            <FontAwesomeIcon icon={faBackward} />
-          </IconButton>
-          <IconButton onClick={prevButtonFunctionForMonthsSubtract} variant="">
-            <FontAwesomeIcon icon={faCaretLeft} />
-          </IconButton>
-          <label className="theYear">
-            {momentMonth} {momentYear}
-          </label>
-          <IconButton onClick={nextButtonFunctionForMonthsAdd} variant="">
-            <FontAwesomeIcon icon={faCaretRight} />
-          </IconButton>
-          <IconButton onClick={nextButtonFunctionForYearsAdd} variant="">
-            <FontAwesomeIcon icon={faForward} />
-          </IconButton>
-        </div>
-        <div className="totalExpense"></div>
-        <div className="mostExpensive"></div>
+        <IconButton onClick={prevButtonFunctionForYearsSubtract} variant="">
+          <FontAwesomeIcon icon={faBackward} />
+        </IconButton>
+        <IconButton onClick={prevButtonFunctionForMonthsSubtract} variant="">
+          <FontAwesomeIcon icon={faCaretLeft} />
+        </IconButton>
+        <label className="theYear">
+          {momentMonth} {momentYear}
+        </label>
+        <IconButton onClick={nextButtonFunctionForMonthsAdd} variant="">
+          <FontAwesomeIcon icon={faCaretRight} />
+        </IconButton>
+        <IconButton onClick={nextButtonFunctionForYearsAdd} variant="">
+          <FontAwesomeIcon icon={faForward} />
+        </IconButton>
       </div>
     </>
   );
