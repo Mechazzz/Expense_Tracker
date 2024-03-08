@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import fs from "fs/promises";
 import { expense, ExpensesType } from "../../common/types/expense";
-import { z } from "zod";
+/* import { z } from "zod"; */
 
 const server = express();
 
@@ -49,14 +49,12 @@ server.post("/api/expenseData", async (req, res) => {
 
 server.delete("/api/expenseData/:id", async (req, res) => {
   console.log("adat");
-  const result = z.string().safeParse(req.params.id);
-  console.log(result);
-  if (!result.success) return res.status(400).json(result.error.issues);
-  const id = result.data;
+  const decodedID = decodeURIComponent(req.params.id);
+  console.log(decodedID);
+  const id = decodedID;
   console.log(id);
   const allExpenses = await loadDB("data");
   console.log(allExpenses);
-
   if (!allExpenses) return res.sendStatus(500);
   const selectedItem = allExpenses.find((expense) => expense.id === id);
   const isSuccessful = await saveDB(

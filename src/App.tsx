@@ -12,9 +12,10 @@ import { expense } from "../common/types/expense";
 
 export const deleteData = async (id: string) => {
   console.log("sajt");
+  const encodedID = encodeURIComponent(id);
   await safeFetch(
     "DELETE",
-    `http://localhost:5000/api/expenseData/${id}`,
+    `http://localhost:5000/api/expenseData/${encodedID}`,
     expense
   );
 };
