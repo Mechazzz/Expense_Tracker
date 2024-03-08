@@ -138,7 +138,7 @@ const Charts = ({ activities }: Props) => {
         width={48}
         height={48}
         viewBox="0 0 1024 1024"
-        fill="#666"
+        fill="var(--charts-bar-fill)"
       >
         <path d={path} />
       </svg>
@@ -155,22 +155,6 @@ const Charts = ({ activities }: Props) => {
         dy={-6}
       ></text>
     );
-  };
-
-  const getPath = (x, y, width, height) =>
-    `M${x},${y + height}
-     C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${
-      x + width / 2
-    }, ${y}
-     C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
-      x + width
-    }, ${y + height}
-     Z`;
-
-  const TriangleBar = (props) => {
-    const { fill, x, y, width, height } = props;
-
-    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
   };
 
   return (
@@ -250,7 +234,6 @@ const Charts = ({ activities }: Props) => {
               }}
             />
             <Bar
-              shape={TriangleBar}
               dataKey="expense"
               fill="var(--charts-bar-fill)"
               stroke="var(--primary-font-color)"

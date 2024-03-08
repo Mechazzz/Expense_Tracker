@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "./IconButton.tsx";
 import Button from "./Button.tsx";
+import { deleteData } from "../App.tsx";
 
 interface Props {
   activities: UserInputType[];
@@ -17,7 +18,7 @@ interface Props {
 
 const Expenses = ({
   activities,
-  onDelete,
+  /*   onDelete, */
   onEdit,
   onCopy,
   toggleFunction,
@@ -107,7 +108,7 @@ const Expenses = ({
                       </IconButton>
                       <IconButton
                         variant="delete"
-                        onClick={() => onDelete(activity.id!)}
+                        onClick={() => deleteData(activity.id!)}
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </IconButton>

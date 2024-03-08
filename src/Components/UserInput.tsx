@@ -31,6 +31,8 @@ const schema = z.object({
   }),
 });
 
+export type UserSchema = z.infer<typeof schema>;
+
 type Data = z.infer<typeof schema>;
 
 interface Props {

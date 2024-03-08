@@ -7,6 +7,17 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
+import { safeFetch } from "./Components/safeFetch";
+import { expense } from "../common/types/expense";
+
+export const deleteData = async (id: string) => {
+  console.log("sajt");
+  await safeFetch(
+    "DELETE",
+    `http://localhost:5000/api/expenseData/${id}`,
+    expense
+  );
+};
 
 function App() {
   const [activities, setActivities] = useLocalStorage<UserInputType[]>(
@@ -22,10 +33,20 @@ function App() {
     setModal(!modal);
   };
 
+  const postData = async (newActivity: UserInputType) => {
+    console.log(newActivity);
+    const response = await safeFetch(
+      "POST",
+      `http://localhost:5000/api/expenseData`,
+      expense,
+      newActivity
+    );
+    return response;
+  };
+
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
       id: uniqueId(),
-      /*       date: new Date(), */
       ...userInput,
     };
 
@@ -39,7 +60,7 @@ function App() {
         : [...prevActivities, newActivity];
       return result;
     });
-
+    postData(newActivity);
     setSelectedActivity(defaultValues);
     toggleFunction();
 
