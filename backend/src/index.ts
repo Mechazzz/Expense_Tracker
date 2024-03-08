@@ -35,7 +35,7 @@ const saveDB = async (filename: string, data: ExpensesType[]) => {
   }
 };
 
-server.post("/api/expenseData", async (req, res) => {
+/* server.post("/api/expenseData", async (req, res) => {
   const result = expense.safeParse(req.body);
   if (!result.success) return res.status(400).json(result.error);
   const newExpense = result.data;
@@ -45,7 +45,7 @@ server.post("/api/expenseData", async (req, res) => {
   const isSuccessful = await saveDB("data", [...allExpenses, newExpense]);
   if (!isSuccessful) return res.sendStatus(500);
   res.json(newExpense);
-});
+}); */
 
 server.delete("/api/expenseData/:id", async (req, res) => {
   console.log("adat");

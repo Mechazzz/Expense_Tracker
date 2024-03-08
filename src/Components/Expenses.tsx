@@ -6,7 +6,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "./IconButton.tsx";
 import Button from "./Button.tsx";
-import { deleteData } from "../App.tsx";
+import { safeFetch } from "./safeFetch.ts";
+import { expense } from "../../common/types/expense.ts";
+
+const deleteData = async (/* id: string */) => {
+  console.log("sajt");
+  const encodedID = /* encodeURIComponent(id); */ "1";
+  console.log(encodedID);
+  console.log("sajt2");
+  const response = await safeFetch(
+    "DELETE",
+    `http://localhost:5000/api/expenseData/${encodedID}`,
+    expense
+  );
+  console.log("sajt3");
+  return response;
+};
 
 interface Props {
   activities: UserInputType[];

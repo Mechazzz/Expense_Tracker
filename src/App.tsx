@@ -10,7 +10,7 @@ import { v4 as uniqueId } from "uuid";
 import { safeFetch } from "./Components/safeFetch";
 import { expense } from "../common/types/expense";
 
-export const deleteData = async (id: string) => {
+/* export const deleteData = async (id: string) => {
   console.log("sajt");
   const encodedID = encodeURIComponent(id);
   await safeFetch(
@@ -18,7 +18,7 @@ export const deleteData = async (id: string) => {
     `http://localhost:5000/api/expenseData/${encodedID}`,
     expense
   );
-};
+}; */
 
 function App() {
   const [activities, setActivities] = useLocalStorage<UserInputType[]>(
@@ -36,13 +36,12 @@ function App() {
 
   const postData = async (newActivity: UserInputType) => {
     console.log(newActivity);
-    const response = await safeFetch(
+    await safeFetch(
       "POST",
       `http://localhost:5000/api/expenseData`,
       expense,
       newActivity
     );
-    return response;
   };
 
   const handleFormSubmit = (userInput: UserInputType) => {
