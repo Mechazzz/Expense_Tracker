@@ -9,26 +9,13 @@ import Button from "./Button.tsx";
 import { safeFetch } from "./safeFetch.ts";
 import { expense } from "../../common/types/expense.ts";
 
-const deleteData = async (/* id: string */) => {
-  console.log("sajt");
-  const encodedID = /* encodeURIComponent(id); */ "1";
-  console.log(encodedID);
-  console.log("sajt2");
-  const response = await safeFetch(
-    "DELETE",
-    `http://localhost:5000/api/expenseData/${encodedID}`,
-    expense
-  );
-  console.log("sajt3");
-  return response;
-};
-
 interface Props {
   activities: UserInputType[];
-  onDelete: (id: string) => void;
+  /*   onDelete: (id: string) => void; */
   onEdit: (id: string) => void;
   onCopy: (id: string) => void;
   toggleFunction: () => void;
+  getTheDataFunction: () => void;
 }
 
 const Expenses = ({
@@ -37,7 +24,22 @@ const Expenses = ({
   onEdit,
   onCopy,
   toggleFunction,
+  getTheDataFunction,
 }: Props) => {
+  const deleteData = async (id: string) => {
+    try {
+      const encodedID = encodeURIComponent(id);
+      await safeFetch(
+        "DELETE",
+        `http://localhost:5000/api/expenseData/${encodedID}`,
+        expense
+      );
+      getTheDataFunction();
+    } catch (error) {
+      console.log("Fatal error at deleteData");
+    }
+  };
+
   const [categoryState, setCategoryState] = useState("");
   const [currencyState, setCurrencyState] = useState("");
   const filterCategory = (activity: UserInputType) =>
@@ -110,7 +112,6 @@ const Expenses = ({
                         variant="change"
                         onClick={() => {
                           onEdit(activity.id!);
-                          console.log(activity.id!);
                         }}
                       >
                         <FontAwesomeIcon icon={faPen} />
@@ -123,7 +124,9 @@ const Expenses = ({
                       </IconButton>
                       <IconButton
                         variant="delete"
-                        onClick={() => deleteData(activity.id!)}
+                        onClick={() => {
+                          deleteData(activity.id!);
+                        }}
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </IconButton>

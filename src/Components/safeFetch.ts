@@ -15,15 +15,6 @@ type Response<Type> =
 
 type Methods = "GET" | "POST" | "PATCH" | "DELETE";
 
-/* export const safeFetch = async <Schema extends z.ZodTypeAny>(
-  method: Methods,
-  url: string,
-  schema?: Schema,
-  payload?: UserSchema
-): Promise<
-  Response<Schema extends z.ZodTypeAny ? z.infer<Schema> : unknown>
-> => { */
-
 export const safeFetch = async <Schema extends z.ZodTypeAny>(
   method: Methods,
   url: string,
@@ -44,7 +35,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
     });
     console.log("third");
     const data = await response.json();
-    console.log("fourth");
+    console.log(data);
     if (response.status >= 400)
       return {
         success: false,
@@ -53,6 +44,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
       };
     const result = schema.safeParse(data);
     console.log("fifth");
+    console.log(result);
     if (!result.success)
       return {
         success: false,
@@ -65,53 +57,3 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
     return { success: false, status: null, error: "Network error" };
   }
 };
-
-/* export const safeFetch = async <Schema extends z.ZodTypeAny>(
-  method: Methods,
-  url: string,
-  schema?: Schema,
-  payload?: UserSchema
-): Promise<
-  Response<Schema extends z.ZodTypeAny ? z.infer<Schema> : unknown>
-> => {
-  console.log("alma");
-  try {
-    const response = await fetch(url, {
-      method,
-      headers: payload
-        ? {
-            "Content-Type": "application/JSON",
-          }
-        : {},
-      body: payload ? JSON.stringify(payload) : undefined,
-    });
-
-    const data = await response.json();
-    console.log("korte");
-    if (response.status >= 400)
-      return {
-        success: false,
-        status: response.status,
-        error: data,
-      };
-
-    if (schema) {
-      console.log("barack");
-      const result = schema.safeParse(data);
-      if (!result.success)
-        return {
-          success: false,
-          status: response.status,
-          error: await response.json(),
-        };
-
-      return { data: result.data, success: true, status: response.status };
-    }
-
-    // If schema is not provided, return the raw data
-    return { data, success: true, status: response.status };
-  } catch (error) {
-    return { success: false, status: null, error: "Network error" };
-  }
-};
- */

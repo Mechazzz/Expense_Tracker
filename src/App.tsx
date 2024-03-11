@@ -3,28 +3,53 @@ import "./Styling/App.css";
 import Expenses from "./Components/Expenses";
 import Modal from "./Components/Modal";
 import { UserInputType } from "./types/UserInput";
-import { useLocalStorage } from "./hooks/useLocalStorage";
+/* import { useLocalStorage } from "./hooks/useLocalStorage"; */
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
 import { safeFetch } from "./Components/safeFetch";
 import { expense } from "../common/types/expense";
-
-/* export const deleteData = async (id: string) => {
-  console.log("sajt");
-  const encodedID = encodeURIComponent(id);
-  await safeFetch(
-    "DELETE",
-    `http://localhost:5000/api/expenseData/${encodedID}`,
-    expense
-  );
-}; */
+import { useEffect } from "react";
 
 function App() {
-  const [activities, setActivities] = useLocalStorage<UserInputType[]>(
-    "activities",
-    []
-  );
+  const [activities, setActivities] = useState<UserInputType[]>([]);
+
+  const modifyData = async (id: string, activity: UserInputType) => {
+    try {
+      const encodedID = encodeURIComponent(id);
+      await safeFetch(
+        "PATCH",
+        `http://localhost:4003/api/modifyExpense/${encodedID}`,
+        expense,
+        activity
+      );
+      getTheDataFunction();
+    } catch (error) {
+      console.log("Fatal error at modifyData");
+    }
+  };
+
+  const getData = async () => {
+    const response = await safeFetch(
+      "GET",
+      `http://localhost:5000/api/allExpenseData`,
+      expense.array()
+    );
+    if (response.success) {
+      return response;
+    }
+    throw Error();
+  };
+
+  const getTheDataFunction = () => {
+    getData()
+      .then((res) => setActivities(res.data))
+      .catch((err) => console.log("Fatal error", err));
+  };
+
+  useEffect(() => {
+    getTheDataFunction();
+  }, []);
 
   const [selectedActivity, setSelectedActivity] =
     useState<UserInputType>(defaultValues);
@@ -60,6 +85,16 @@ function App() {
         : [...prevActivities, newActivity];
       return result;
     });
+    /*     setActivities((prevActivities: UserInputType[]) => {
+      const result = selectedActivity.id
+        ? prevActivities.map((activity) =>
+            activity.id === selectedActivity.id
+              ? { ...activity, ...userInput }
+              : activity
+          )
+        : [...prevActivities, newActivity];
+      return result;
+    }); */
     postData(newActivity);
     setSelectedActivity(defaultValues);
     toggleFunction();
@@ -76,11 +111,12 @@ function App() {
     <>
       <div className="app-container">
         <Expenses
+          getTheDataFunction={getTheDataFunction}
           toggleFunction={toggleFunction}
           activities={activities}
-          onDelete={(id) => {
+          /*           onDelete={(id) => {
             setActivities(activities.filter((item) => item.id !== id));
-          }}
+          }} */
           onEdit={(id) => {
             setSelectedActivity(activities.find((item) => item.id === id)!);
             toggleFunction();
