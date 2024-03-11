@@ -19,7 +19,7 @@ function App() {
       const encodedID = encodeURIComponent(id);
       await safeFetch(
         "PATCH",
-        `http://localhost:4003/api/modifyExpense/${encodedID}`,
+        `http://localhost:5000/api/modifyExpense/${encodedID}`,
         expense,
         activity
       );
@@ -44,7 +44,7 @@ function App() {
   const getTheDataFunction = () => {
     getData()
       .then((res) => setActivities(res.data))
-      .catch((err) => console.log("Fatal error", err));
+      .catch((err) => console.log("Fatal error at getData", err));
   };
 
   useEffect(() => {
@@ -60,32 +60,47 @@ function App() {
   };
 
   const postData = async (newActivity: UserInputType) => {
-    console.log(newActivity);
-    await safeFetch(
-      "POST",
-      `http://localhost:5000/api/expenseData`,
-      expense,
-      newActivity
-    );
+    try {
+      console.log(newActivity);
+      await safeFetch(
+        "POST",
+        `http://localhost:5000/api/expenseData`,
+        expense,
+        newActivity
+      );
+      getTheDataFunction();
+    } catch (error) {
+      console.log("Fatal error at modifyData");
+    }
   };
 
+  //------------------------------
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
       id: uniqueId(),
       ...userInput,
     };
 
-    setActivities((prevActivities: UserInputType[]) => {
-      const result = selectedActivity.id
-        ? prevActivities.map((activity) =>
-            activity.id === selectedActivity.id
-              ? { ...activity, ...userInput }
-              : activity
-          )
-        : [...prevActivities, newActivity];
-      return result;
-    });
-    /*     setActivities((prevActivities: UserInputType[]) => {
+    if (selectedActivity.id) {
+      modifyData(selectedActivity.id!, userInput);
+    } else {
+      postData(newActivity);
+    }
+    setSelectedActivity(defaultValues);
+    toggleFunction();
+    console.log("New activity added:", newActivity);
+  };
+
+  //------------------------------
+
+  /*   const handleFormSubmit = (userInput: UserInputType) => {
+    const newActivity = {
+      id: uniqueId(),
+      ...userInput,
+    }; */
+
+  /*     setActivities((prevActivities: UserInputType[]) => {
+      const selectedID = selectedActivity.id;
       const result = selectedActivity.id
         ? prevActivities.map((activity) =>
             activity.id === selectedActivity.id
@@ -95,12 +110,16 @@ function App() {
         : [...prevActivities, newActivity];
       return result;
     }); */
+
+  /*     modifyData(selectedActivity.id!, userInput);
     postData(newActivity);
     setSelectedActivity(defaultValues);
     toggleFunction();
 
     console.log("New activity added:", newActivity);
-  };
+  }; */
+
+  //------------------------------
 
   const closeButtonFunction = () => {
     toggleFunction();
@@ -123,11 +142,10 @@ function App() {
           }}
           onCopy={(id) => {
             const foundActivity = activities.find((item) => item.id === id)!;
-            const newFoundActivity = {
-              ...foundActivity,
-              id: uniqueId(),
-            };
-            setActivities([...activities, newFoundActivity]);
+            const newId = uniqueId();
+            const newFoundActivity = { ...foundActivity, id: newId };
+            console.log(newFoundActivity);
+            postData(newFoundActivity);
           }}
         />
         <Modal modal={modal} closeButtonFunction={closeButtonFunction}>

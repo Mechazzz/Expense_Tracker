@@ -21,9 +21,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
   schema: Schema,
   payload?: UserSchema
 ): Promise<Response<z.infer<typeof schema>>> => {
-  console.log("first");
   try {
-    console.log("second");
     const response = await fetch(url, {
       method,
       headers: payload
@@ -33,9 +31,8 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
         : {},
       body: payload ? JSON.stringify(payload) : undefined,
     });
-    console.log("third");
     const data = await response.json();
-    console.log(data);
+    console.log(data, "sikeresen szerverrol visszakapott ??");
     if (response.status >= 400)
       return {
         success: false,
@@ -43,8 +40,10 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
         error: data,
       };
     const result = schema.safeParse(data);
-    console.log("fifth");
-    console.log(result);
+    console.log(
+      result,
+      "safeparsolasos result,, sikerült-e sémában parsolni ?"
+    );
     if (!result.success)
       return {
         success: false,

@@ -39,7 +39,6 @@ server.post("/api/expenseData", async (req, res) => {
   const result = expense.safeParse(req.body);
   if (!result.success) return res.status(400).json(result.error);
   const newExpense = result.data;
-  console.log(newExpense);
   const allExpenses = await loadDB("data");
   if (!allExpenses) return res.sendStatus(500);
   const isSuccessful = await saveDB("data", [...allExpenses, newExpense]);
@@ -65,15 +64,17 @@ server.get("/api/allExpenseData", async (req, res) => {
   const allExpenseData = await loadDB("data");
   if (!allExpenseData) return res.sendStatus(500);
   res.json(allExpenseData);
-  console.log("getapiteszt2");
 });
 
 server.patch("/api/modifyExpense/:id", async (req, res) => {
   const decodedID = decodeURIComponent(req.params.id);
   const id = decodedID;
+  console.log(id);
   const result = expense.safeParse(req.body);
+  console.log(result);
   if (!result.success) return res.status(400).json(result.error.issues);
   const newData = result.data;
+  console.log(newData);
   const allExpenseData = await loadDB("data");
   if (!allExpenseData) return res.sendStatus(500);
   const isSuccessful = await saveDB(
@@ -84,6 +85,7 @@ server.patch("/api/modifyExpense/:id", async (req, res) => {
   );
   if (!isSuccessful) return res.sendStatus(500);
   res.json(newData);
+  console.log(newData);
 });
 
 server.listen(5000);
