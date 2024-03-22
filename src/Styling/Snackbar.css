@@ -8,36 +8,28 @@
   height: 90px;
   border-radius: 20px;
   border: none;
+  border-radius: 8px;
+}
+
+.Snackbar_inner {
+  font-size: 30px;
+  padding-left: 2%;
+  padding-right: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
   color: white;
   border-radius: 8px;
 }
 
 .Snackbar_success {
-  font-size: 30px;
-  padding-left: 2%;
-  padding-right: 2%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
   background-color: green;
-  border-radius: 8px;
 }
 
 .Snackbar_error {
-  font-size: 30px;
-  padding-left: 2%;
-  padding-right: 2%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  height: 100%;
-  color: white;
   background-color: red;
-  border-radius: 8px;
 }
 
 .SnackbarButton_success {

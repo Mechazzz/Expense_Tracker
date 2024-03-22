@@ -30,7 +30,7 @@ const Snackbar = ({ message, clearSeenMessage, offset }: SnackbarProps) => {
     <>
       <div className="Snackbar" style={{ top: `${offset}px` }}>
         <div
-          className={`${
+          className={`Snackbar_inner ${
             message.text === "Changes have been made successfully!"
               ? "Snackbar_success"
               : "Snackbar_error"
