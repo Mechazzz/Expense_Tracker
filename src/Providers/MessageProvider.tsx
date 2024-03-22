@@ -53,6 +53,7 @@ const MessageProvider = ({ children }: { children: ReactNode }) => {
         <div>
           {messages.map((message, index) => (
             <Snackbar
+              key={index}
               message={message}
               clearSeenMessage={clearSeenMessage}
               offset={index * 100}
