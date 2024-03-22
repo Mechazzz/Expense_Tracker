@@ -32,7 +32,6 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
       body: payload ? JSON.stringify(payload) : undefined,
     });
     const data = await response.json();
-    console.log(data, "sikeresen szerverrol visszakapott ??");
     if (response.status >= 400)
       return {
         success: false,
@@ -40,10 +39,6 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
         error: data,
       };
     const result = schema.safeParse(data);
-    console.log(
-      result,
-      "safeparsolasos result,, sikerült-e sémában parsolni ?"
-    );
     if (!result.success)
       return {
         success: false,

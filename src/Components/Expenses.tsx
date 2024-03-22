@@ -1,6 +1,6 @@
 import "../Styling/Expenses.css";
 import { useState } from "react";
-import { UserInputType } from "../types/UserInput";
+import { UserInputType } from "../types/UserInputType.tsx";
 import { expenseAmountInUSD, newDate } from "../utils/utils.ts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserInputType } from "../types/UserInput";
+import { UserInputType } from "../types/UserInputType";
 import "../Styling/ErrorMessage.css";
 import "../Styling/Modal.css";
 import { defaultValues } from "../utils/constants";

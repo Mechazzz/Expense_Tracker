@@ -1,4 +1,4 @@
-import { UserInputType } from "../types/UserInput";
+import { UserInputType } from "../types/UserInputType";
 import { EUR, HUF } from "./constants";
 
 export const filterCategory = (state: string, activity: UserInputType) =>

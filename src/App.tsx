@@ -2,17 +2,19 @@ import { useState } from "react";
 import "./Styling/App.css";
 import Expenses from "./Components/Expenses";
 import Modal from "./Components/Modal";
-import { UserInputType } from "./types/UserInput";
-/* import { useLocalStorage } from "./hooks/useLocalStorage"; */
+import { UserInputType } from "./types/UserInputType";
 import UserInput from "./Components/UserInput";
 import { defaultValues } from "./utils/constants";
 import { v4 as uniqueId } from "uuid";
 import { safeFetch } from "./Components/safeFetch";
 import { expense } from "../common/types/expense";
 import { useEffect } from "react";
+import { useMessageSettings } from "./Providers/MessageProvider";
 
 function App() {
   const [activities, setActivities] = useState<UserInputType[]>([]);
+
+  const { createSuccessMessage, createErrorMessage } = useMessageSettings();
 
   const modifyData = async (id: string, activity: UserInputType) => {
     try {
@@ -25,7 +27,7 @@ function App() {
       );
       getTheDataFunction();
     } catch (error) {
-      console.log("Fatal error at modifyData");
+      console.log("Fatal error at deleteData");
     }
   };
 
@@ -36,14 +38,17 @@ function App() {
       expense.array()
     );
     if (response.success) {
-      return response;
+      createSuccessMessage("Changes have been made successfully!");
+      return response.data;
+    } else {
+      createErrorMessage("Changes have been not made, please try again!");
+      throw Error;
     }
-    throw Error();
   };
 
   const getTheDataFunction = () => {
     getData()
-      .then((res) => setActivities(res.data))
+      .then((res) => setActivities(res))
       .catch((err) => console.log("Fatal error at getData", err));
   };
 
@@ -70,11 +75,10 @@ function App() {
       );
       getTheDataFunction();
     } catch (error) {
-      console.log("Fatal error at modifyData");
+      console.log("Fatal error at postData");
     }
   };
 
-  //------------------------------
   const handleFormSubmit = (userInput: UserInputType) => {
     const newActivity = {
       id: uniqueId(),
@@ -91,36 +95,6 @@ function App() {
     console.log("New activity added:", newActivity);
   };
 
-  //------------------------------
-
-  /*   const handleFormSubmit = (userInput: UserInputType) => {
-    const newActivity = {
-      id: uniqueId(),
-      ...userInput,
-    }; */
-
-  /*     setActivities((prevActivities: UserInputType[]) => {
-      const selectedID = selectedActivity.id;
-      const result = selectedActivity.id
-        ? prevActivities.map((activity) =>
-            activity.id === selectedActivity.id
-              ? { ...activity, ...userInput }
-              : activity
-          )
-        : [...prevActivities, newActivity];
-      return result;
-    }); */
-
-  /*     modifyData(selectedActivity.id!, userInput);
-    postData(newActivity);
-    setSelectedActivity(defaultValues);
-    toggleFunction();
-
-    console.log("New activity added:", newActivity);
-  }; */
-
-  //------------------------------
-
   const closeButtonFunction = () => {
     toggleFunction();
     setSelectedActivity(defaultValues);
@@ -133,9 +107,6 @@ function App() {
           getTheDataFunction={getTheDataFunction}
           toggleFunction={toggleFunction}
           activities={activities}
-          /*           onDelete={(id) => {
-            setActivities(activities.filter((item) => item.id !== id));
-          }} */
           onEdit={(id) => {
             setSelectedActivity(activities.find((item) => item.id === id)!);
             toggleFunction();

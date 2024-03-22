@@ -4,7 +4,7 @@ import "../Styling/Dashboard.css";
 import DashboardControls from "./DashboardControls";
 import Card from "./Card";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { UserInputType } from "../types/UserInput";
+import { UserInputType } from "../types/UserInputType.tsx";
 import {
   filterActivitiesByYear,
   filterActivitiesByMonth,

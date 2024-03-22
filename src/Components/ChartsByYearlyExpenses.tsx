@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "../Styling/Charts.css";
-import { UserInputType } from "../types/UserInput.tsx";
+import { UserInputType } from "../types/UserInputType.tsx";
 import { expenseAmountInUSD } from "../utils/utils.ts";
 import { v4 as uniqueId } from "uuid";
 import "../Styling/Dashboard.css";

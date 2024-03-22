@@ -1,0 +1,66 @@
+.Snackbar {
+  position: absolute;
+  left: 50%;
+  top: 10%;
+  margin-top: 70px;
+  transform: translate(-50%, -50%);
+  width: 530px;
+  height: 90px;
+  border-radius: 20px;
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.Snackbar_success {
+  font-size: 30px;
+  padding-left: 2%;
+  padding-right: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: green;
+  border-radius: 8px;
+}
+
+.Snackbar_error {
+  font-size: 30px;
+  padding-left: 2%;
+  padding-right: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  height: 100%;
+  color: white;
+  background-color: red;
+  border-radius: 8px;
+}
+
+.SnackbarButton_success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: green;
+}
+
+.SnackbarButton_error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: red;
+}
+
+.xButton {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
