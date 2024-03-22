@@ -37,7 +37,7 @@ const Snackbar = ({ message, clearSeenMessage, offset }: SnackbarProps) => {
           }`}
         >
           {message.text}
-          <button className="xButton" onClick={handleClick}>
+          <button className="SnackbarButton" onClick={handleClick}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
