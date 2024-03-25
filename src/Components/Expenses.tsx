@@ -16,6 +16,8 @@ interface Props {
   onCopy: (id: string) => void;
   toggleFunction: () => void;
   getTheDataFunction: () => void;
+  createSuccessMessage: (text: string) => void;
+  createErrorMessage: (text: string) => void;
 }
 
 const Expenses = ({
@@ -25,6 +27,8 @@ const Expenses = ({
   onCopy,
   toggleFunction,
   getTheDataFunction,
+  createSuccessMessage,
+  createErrorMessage,
 }: Props) => {
   const deleteData = async (id: string) => {
     try {
@@ -35,8 +39,10 @@ const Expenses = ({
         expense
       );
       getTheDataFunction();
+      createSuccessMessage("Changes have been made successfully!");
     } catch (error) {
       console.log("Fatal error at deleteData");
+      createErrorMessage("Changes have been not made, please try again!");
     }
   };
 

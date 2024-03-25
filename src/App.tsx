@@ -26,8 +26,10 @@ function App() {
         activity
       );
       getTheDataFunction();
+      createSuccessMessage("Changes have been made successfully!");
     } catch (error) {
       console.log("Fatal error at deleteData");
+      createErrorMessage("Changes have been not made, please try again!");
     }
   };
 
@@ -104,6 +106,8 @@ function App() {
     <>
       <div className="app-container">
         <Expenses
+          createSuccessMessage={createSuccessMessage}
+          createErrorMessage={createErrorMessage}
           getTheDataFunction={getTheDataFunction}
           toggleFunction={toggleFunction}
           activities={activities}
