@@ -107,7 +107,9 @@ const Expenses = ({
                       </IconButton>
                       <IconButton
                         variant="copy"
-                        onClick={() => onCopy(activity.id!)}
+                        onClick={() => {
+                          onCopy(activity.id!);
+                        }}
                       >
                         <FontAwesomeIcon icon={faCopy} />
                       </IconButton>

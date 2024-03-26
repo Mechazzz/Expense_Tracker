@@ -47,6 +47,7 @@ function App() {
       modifyData(selectedActivity.id!, userInput)
         .then(() => {
           createSuccessMessage("Changes have been made successfully!");
+          getTheDataFunction();
         })
         .catch((err) => {
           createErrorMessage(err.message);
@@ -55,12 +56,13 @@ function App() {
       postData(newActivity)
         .then(() => {
           createSuccessMessage("Changes have been made successfully!");
+          getTheDataFunction();
         })
         .catch((err) => {
           createErrorMessage(err.message);
         });
     }
-    getTheDataFunction();
+    console.log("sajt");
     setSelectedActivity(defaultValues);
     toggleFunction();
     console.log("New activity added:", newActivity);
@@ -88,7 +90,6 @@ function App() {
             const foundActivity = activities.find((item) => item.id === id)!;
             const newId = uniqueId();
             const newFoundActivity = { ...foundActivity, id: newId };
-            console.log(newFoundActivity);
             postData(newFoundActivity);
           }}
         />
