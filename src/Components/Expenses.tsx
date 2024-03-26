@@ -6,8 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPen, faCopy } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "./IconButton.tsx";
 import Button from "./Button.tsx";
-import { safeFetch } from "./safeFetch.ts";
-import { expense } from "../../common/types/expense.ts";
+import { deleteData } from "../api/expenses.ts";
 
 interface Props {
   activities: UserInputType[];
@@ -30,22 +29,6 @@ const Expenses = ({
   createSuccessMessage,
   createErrorMessage,
 }: Props) => {
-  const deleteData = async (id: string) => {
-    try {
-      const encodedID = encodeURIComponent(id);
-      await safeFetch(
-        "DELETE",
-        `http://localhost:5000/api/expenseData/${encodedID}`,
-        expense
-      );
-      getTheDataFunction();
-      createSuccessMessage("Changes have been made successfully!");
-    } catch (error) {
-      console.log("Fatal error at deleteData");
-      createErrorMessage("Changes have been not made, please try again!");
-    }
-  };
-
   const [categoryState, setCategoryState] = useState("");
   const [currencyState, setCurrencyState] = useState("");
   const filterCategory = (activity: UserInputType) =>
@@ -131,7 +114,16 @@ const Expenses = ({
                       <IconButton
                         variant="delete"
                         onClick={() => {
-                          deleteData(activity.id!);
+                          deleteData(activity.id!)
+                            .then(() => {
+                              createSuccessMessage(
+                                "Changes have been made successfully!"
+                              );
+                              getTheDataFunction();
+                            })
+                            .catch((err) => {
+                              createErrorMessage(err.message);
+                            });
                         }}
                       >
                         <FontAwesomeIcon icon={faTrash} />

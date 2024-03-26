@@ -37,12 +37,15 @@ const saveDB = async (filename: string, data: ExpensesType[]) => {
 
 server.post("/api/expenseData", async (req, res) => {
   const result = expense.safeParse(req.body);
-  if (!result.success) return res.status(400).json(result.error);
+  if (!result.success)
+    return res.status(400).json("Error: Data has been not received correctly");
   const newExpense = result.data;
   const allExpenses = await loadDB("data");
-  if (!allExpenses) return res.sendStatus(500);
+  if (!allExpenses)
+    return res.status(400).json("Error: No valid previously saved data");
   const isSuccessful = await saveDB("data", [...allExpenses, newExpense]);
-  if (!isSuccessful) return res.sendStatus(500);
+  if (!isSuccessful)
+    return res.status(500).json("Error: New data has been not saved");
   res.json(newExpense);
 });
 
@@ -50,42 +53,44 @@ server.delete("/api/expenseData/:id", async (req, res) => {
   const decodedID = decodeURIComponent(req.params.id);
   const id = decodedID;
   const allExpenses = await loadDB("data");
-  if (!allExpenses) return res.sendStatus(500);
+  if (!allExpenses)
+    return res.status(500).json("Error: No valid previously saved data");
   const selectedItem = allExpenses.find((expense) => expense.id === id);
   const isSuccessful = await saveDB(
     "data",
     allExpenses.filter((expense) => expense.id !== id)
   );
-  if (!isSuccessful) return res.sendStatus(500);
+  if (!isSuccessful)
+    return res.status(500).json("Error: Data has been not deleted");
   res.json(selectedItem);
 });
 
 server.get("/api/allExpenseData", async (req, res) => {
   const allExpenseData = await loadDB("data");
-  if (!allExpenseData) return res.sendStatus(500);
+  if (!allExpenseData)
+    return res.status(500).json("No valid previously saved data");
   res.json(allExpenseData);
 });
 
 server.patch("/api/modifyExpense/:id", async (req, res) => {
   const decodedID = decodeURIComponent(req.params.id);
   const id = decodedID;
-  console.log(id);
   const result = expense.safeParse(req.body);
-  console.log(result);
-  if (!result.success) return res.status(400).json(result.error.issues);
+  if (!result.success)
+    return res.status(400).json("Error: Data has been not received correctly");
   const newData = result.data;
-  console.log(newData);
   const allExpenseData = await loadDB("data");
-  if (!allExpenseData) return res.sendStatus(500);
+  if (!allExpenseData)
+    return res.status(500).json("Error: No valid previously saved data");
   const isSuccessful = await saveDB(
     "data",
     allExpenseData.map((theExpense) =>
       theExpense.id !== id ? theExpense : { ...newData, id }
     )
   );
-  if (!isSuccessful) return res.sendStatus(500);
+  if (!isSuccessful)
+    return res.status(500).json("Error: New data has been not saved");
   res.json(newData);
-  console.log(newData);
 });
 
 server.listen(5000);

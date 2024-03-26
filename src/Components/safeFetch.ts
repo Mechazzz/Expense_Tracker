@@ -32,6 +32,7 @@ export const safeFetch = async <Schema extends z.ZodTypeAny>(
       body: payload ? JSON.stringify(payload) : undefined,
     });
     const data = await response.json();
+    /*     console.log(data); */
     if (response.status >= 400)
       return {
         success: false,
