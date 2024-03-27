@@ -62,7 +62,6 @@ function App() {
           createErrorMessage(err.message);
         });
     }
-    console.log("sajt");
     setSelectedActivity(defaultValues);
     toggleFunction();
     console.log("New activity added:", newActivity);
@@ -90,7 +89,14 @@ function App() {
             const foundActivity = activities.find((item) => item.id === id)!;
             const newId = uniqueId();
             const newFoundActivity = { ...foundActivity, id: newId };
-            postData(newFoundActivity);
+            postData(newFoundActivity)
+              .then(() => {
+                createSuccessMessage("Changes have been made successfully!");
+                getTheDataFunction();
+              })
+              .catch((err) => {
+                createErrorMessage(err.message);
+              });
           }}
         />
         <Modal modal={modal} closeButtonFunction={closeButtonFunction}>
