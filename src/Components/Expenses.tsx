@@ -10,7 +10,6 @@ import { deleteData } from "../api/expenses.ts";
 
 interface Props {
   activities: UserInputType[];
-  /*   onDelete: (id: string) => void; */
   onEdit: (id: string) => void;
   onCopy: (id: string) => void;
   toggleFunction: () => void;
@@ -21,7 +20,6 @@ interface Props {
 
 const Expenses = ({
   activities,
-  /*   onDelete, */
   onEdit,
   onCopy,
   toggleFunction,
@@ -31,14 +29,13 @@ const Expenses = ({
 }: Props) => {
   const [categoryState, setCategoryState] = useState("");
   const [currencyState, setCurrencyState] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(20);
   const filterCategory = (activity: UserInputType) =>
     categoryState ? activity.category === categoryState : true;
 
   const currencyCategory = (activity: UserInputType) =>
     currencyState ? activity.currency === currencyState : true;
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
 
   const copiedActivities = [...activities];
 
@@ -54,6 +51,11 @@ const Expenses = ({
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentPageData = filteredActivities.slice(startIndex, endIndex);
+
+  const handleItemsPerPageChange = (value: number) => {
+    setItemsPerPage(value);
+    setCurrentPage(1);
+  };
 
   return (
     <>
@@ -189,6 +191,15 @@ const Expenses = ({
           >
             Next
           </button>
+          <select
+            value={itemsPerPage}
+            onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
+          >
+            <option value={5}>5 items per page</option>
+            <option value={10}>10 items per page</option>
+            <option value={15}>15 items per page</option>
+            <option value={20}>20 items per page</option>
+          </select>
         </div>
       </div>
     </>
