@@ -37,6 +37,24 @@ const Expenses = ({
   const currencyCategory = (activity: UserInputType) =>
     currencyState ? activity.currency === currencyState : true;
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+
+  const copiedActivities = [...activities];
+
+  const filteredActivities = copiedActivities
+    .filter(filterCategory)
+    .filter(currencyCategory);
+  const totalPages = Math.ceil(filteredActivities.length / itemsPerPage);
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentPageData = filteredActivities.slice(startIndex, endIndex);
+
   return (
     <>
       <div className="expenses_container">
@@ -86,53 +104,50 @@ const Expenses = ({
               </tr>
             </thead>
             <tbody>
-              {activities
-                .filter(filterCategory)
-                .filter(currencyCategory)
-                .map((activity) => (
-                  <tr key={activity.id}>
-                    <td className="activityDataTd">{activity.activity}</td>
-                    <td className="categoryDataTd">{activity.category}</td>
-                    <td className="amountDataTd">{activity.amount}</td>
-                    <td className="currencyDataTd">{activity.currency}</td>
-                    {<td className="dateDataTd">{newDate(activity.date!)}</td>}
-                    <td className="ExpenseDivTd">
-                      <IconButton
-                        variant="change"
-                        onClick={() => {
-                          onEdit(activity.id!);
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faPen} />
-                      </IconButton>
-                      <IconButton
-                        variant="copy"
-                        onClick={() => {
-                          onCopy(activity.id!);
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faCopy} />
-                      </IconButton>
-                      <IconButton
-                        variant="delete"
-                        onClick={() => {
-                          deleteData(activity.id!)
-                            .then(() => {
-                              createSuccessMessage(
-                                "Changes have been made successfully!"
-                              );
-                              getTheDataFunction();
-                            })
-                            .catch((err) => {
-                              createErrorMessage(err.message);
-                            });
-                        }}
-                      >
-                        <FontAwesomeIcon icon={faTrash} />
-                      </IconButton>
-                    </td>
-                  </tr>
-                ))}
+              {currentPageData.map((activity) => (
+                <tr key={activity.id}>
+                  <td className="activityDataTd">{activity.activity}</td>
+                  <td className="categoryDataTd">{activity.category}</td>
+                  <td className="amountDataTd">{activity.amount}</td>
+                  <td className="currencyDataTd">{activity.currency}</td>
+                  {<td className="dateDataTd">{newDate(activity.date!)}</td>}
+                  <td className="ExpenseDivTd">
+                    <IconButton
+                      variant="change"
+                      onClick={() => {
+                        onEdit(activity.id!);
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faPen} />
+                    </IconButton>
+                    <IconButton
+                      variant="copy"
+                      onClick={() => {
+                        onCopy(activity.id!);
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faCopy} />
+                    </IconButton>
+                    <IconButton
+                      variant="delete"
+                      onClick={() => {
+                        deleteData(activity.id!)
+                          .then(() => {
+                            createSuccessMessage(
+                              "Changes have been made successfully!"
+                            );
+                            getTheDataFunction();
+                          })
+                          .catch((err) => {
+                            createErrorMessage(err.message);
+                          });
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </IconButton>
+                  </td>
+                </tr>
+              ))}
             </tbody>
             <tfoot>
               <tr>
@@ -149,6 +164,31 @@ const Expenses = ({
               </tr>
             </tfoot>
           </table>
+        </div>
+        <div>
+          <button
+            disabled={currentPage === 1}
+            onClick={() => handlePageChange(currentPage - 1)}
+          >
+            Previous
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              style={{
+                fontWeight: currentPage === index + 1 ? "bold" : "normal",
+              }}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            disabled={currentPage === totalPages}
+            onClick={() => handlePageChange(currentPage + 1)}
+          >
+            Next
+          </button>
         </div>
       </div>
     </>
